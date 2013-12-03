@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<title>{{seo.title}}</title>
+		<meta name="description" content="{{seo.description}}">
+        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+		<meta name="kitgui-page-id" content="{{ kitguiPageID }}">
+		<meta name="robots" content="noindex, nofollow">
+		{% block head %}
+
+		{% endblock %}
+    </head>
+    <body>
+		<div style="text-align:center;font-size:14px;padding:10px;background-color:#000;color:#fff">
+			Development Environment
+		</div>
+		<div class="content clearfix">
+			{% block content %}
+				
+			{% endblock %}
+		</div>
+        {% block foot %}
+
+		{% endblock %}
+    </body>
+</html>
