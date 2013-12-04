@@ -1,0 +1,34 @@
+.dev-env { position:fixed;bottom:0;right:0;text-shadow:1px 1px 3px #000; text-align:left;font-size:16px;padding:10px;color:#fff; }
+#header { background-color:#9f9f9f; height:92px; position:relative;font-size:0; }
+#header .logo { position:absolute; left:60px; top:15px; display:block; width:140px; height:65px; background-color:#f00; }
+#header .menu1 { position:absolute; left:285px; top:35px; }
+#header .menu1 a { display:inline-block; color:#fff; margin-right:30px; font-size:14px; }
+#header .menu2 { position:absolute; right:30px; top:25px; height:40px; white-space:nowrap; vertical-align:middle; }
+#header .menu2 .more-sili {
+	display:inline-block;
+	padding:10px 15px;
+	background-color:#898989;
+	color:#fff;
+	font-size:14px;
+	margin-right:30px;
+}
+#header .menu2 .cart-indicator {
+	display:inline-block;
+	font-size:14px;
+	color:#fff;
+	vertical-align:middle;
+	position:relative;
+	top:-3px;
+}
+#header .menu2 .cart-indicator i {
+	font-size:20px;
+	display:inline-block;
+	position:relative;
+	top:2px;
+	margin-right:3px;
+}
+#header .menu2 .cart-indicator .badge {
+	background-color:#fff;
+	color:#9a9a9a;
+	display:inline-block;
+}

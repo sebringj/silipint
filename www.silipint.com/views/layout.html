@@ -11,19 +11,30 @@
         <link href="/css/main.css" rel="stylesheet">
 		<meta name="kitgui-page-id" content="{{ kitguiPageID }}">
 		<meta name="robots" content="noindex, nofollow">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 		{% block head %}
 
 		{% endblock %}
     </head>
     <body>
-		<div style="text-align:center;font-size:14px;padding:10px;background-color:#000;color:#fff">
+		<div class="dev-env">
 			Development Environment
 		</div>
-		<div class="content clearfix">
-			{% block content %}
-				
-			{% endblock %}
+		<div id="header">
+			<a href="/" class="logo"></a>
+			<div class="menu1">
+				<a href="#/shop">SHOP</a>
+				<a href="#/sili-life">SILI-LIFE</a>
+				<a href="#/customize">CUSTOMIZE</a>
+			</div>
+			<div class="menu2">
+				<a class="more-sili">MORE SILI</a>
+				<a class="cart-indicator"><i class="fa fa-shopping-cart"></i> <span class="badge">2</span></a>
+			</div>
 		</div>
+		{% block content %}
+				
+		{% endblock %}
         {% block foot %}
 
 		{% endblock %}
