@@ -1,44 +1,142 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<title>{{seo.title}}</title>
-		<meta name="description" content="{{seo.description}}">
-        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+		<title>{{ seo.title }}</title>
+		<meta name="description" content="{{ seo.description }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link href='//fonts.googleapis.com/css?family=Carrois+Gothic' rel='stylesheet'>
         <link href="/css/main.css" rel="stylesheet">
 		<meta name="kitgui-page-id" content="{{ kitguiPageID }}">
 		<meta name="robots" content="noindex, nofollow">
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 		{% block head %}
 
 		{% endblock %}
     </head>
     <body>
-		<div class="dev-env">Development Environment</div>
-		<div id="header-extend">
-			
-		</div>
-		<div id="header">
-			<a href="/" class="logo"></a>
-			<a class="menu-label"><i class="fa fa-bars"></i> Menu</a>
-			<div class="menu">
-				<div class="menu1">
-					<a href="#/shop">SHOP</a>
-					<a href="#/sili-life">SILI-LIFE</a>
-					<a href="#/customize">CUSTOMIZE</a>
-				</div>
-				<div class="menu2">
-					<a class="more-sili">MORE SILI</a>
-					<a class="cart-indicator"><i class="fa fa-shopping-cart"></i> <span class="badge">2</span></a>
-				</div>
+		<div id="mobileMenu">
+			<a href="#" class="close"><i></i></a>
+			<div class="nav">
+				<a href="#"><a class="cart-indicator"> <span class="badge">2</span></a></a>
+				<a href="#"><span>Shop</span></a>
+				<a href="#"><span>Sili-Life</span></a>
+				<a href="#"><span>Customize</span></a>
+				<div class="header"><span>Products</span></div>
+				<a href="#"><span>Pints</span></a>
+				<a href="#"><span>Half-Pints</span></a>
+				<a href="#"><span>Shorty's</span></a>
+				<a href="#"><span>Shots</span></a>
+				<a href="#"><span>Lids</span></a>
+				<a href="#"><span>Sets</span></a>
+				<a href="#"><span>Gift Cards</span></a>
+				<div class="header"><span>Accounts</span></div>
+				<a href="#"><span>Sign-in</span></a>
+				<a href="#"><span>Sign-up</span></a>
+				<a href="#"><span>Rep Login</span></a>
+				<a href="#"><span>Pay Invoice</span></a>
+				<a href="#"><span>VIP</span></a>
+				<div class="header"><span>Resources</span></div>
+				<a href="#"><span>About Silipint</span></a>
+				<a href="#"><span>FAQ's</span></a>
+				<a href="#"><span>Find a Retailer</span></a>
+				<div class="header"><span>Contact</span></div>
+				<a href="tel:5416785044"><span>Tel: (541) 678-5044</span></a>
+				<a>&nbsp;</a>
+				<a href="#"><span>Map It</span></a>
+				<a href="#"><span>
+					Centry Center Bend<br>
+					Suite #130<br>
+					Bend, OR 97702
+				</span></a>
 			</div>
 		</div>
-		{% block content %}
+		<div id="bodyWrapper">
+			<div id="headerWrapper">
+				<a id="toggleMobileMenu"><i class="fa fa-bars"></i></a>
+				<div id="pushUpMenu">
+					<div class="set-height">
+						<a class="close"></a>
+						<div class="wrap-snap">
+							<div class="row">
+								<div class="col-xs-3">
+									<div class="menu-column">
+										<div class="header"><span>Products</span></div>
+										<a href="#"><span>Pints</span></a>
+										<a href="#"><span>Half-Pints</span></a>
+										<a href="#"><span>Shorty's</span></a>
+										<a href="#"><span>Shots</span></a>
+										<a href="#"><span>Lids</span></a>
+										<a href="#"><span>Sets</span></a>
+										<a href="#"><span>Gift Cards</span></a>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<div class="menu-column">
+										<div class="header"><span>Accounts</span></div>
+										<a href="#"><span>Sign-in</span></a>
+										<a href="#"><span>Sign-up</span></a>
+										<a href="#"><span>Rep Login</span></a>
+										<a href="#"><span>Pay Invoice</span></a>
+										<a href="#"><span>VIP</span></a>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<div class="menu-column">
+										<div class="header"><span>Resources</span></div>
+										<a href="#"><span>About Silipint</span></a>
+										<a href="#"><span>FAQ's</span></a>
+										<a href="#"><span>Find a Retailer</span></a>
+									</div>
+								</div>
+								<div class="col-xs-3">
+									<div class="menu-column">
+										<div class="header"><span>Contact</span></div>
+										<a href="tel:5416785044"><span>Tel: (541) 678-5044</span></a>
+										<a href="#"><span>Map It</span></a>
+										<br>
+										<a href="#"><span>
+											Centry Center Bend<br>
+											Suite #130<br>
+											Bend, OR 97702
+										</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="wrap-snap">
+					<div id="header">
+						<div class="blob"></div>
+						<a href="/" class="logo"></a>
+						<div class="menu">
+							<div class="menu1">
+								<a href="#/shop">SHOP</a>
+								<a href="#/sili-life">SILI-LIFE</a>
+								<a href="#/customize">CUSTOMIZE</a>
+							</div>
+							<div class="menu2">
+								<a class="more-sili">
+									<i class="fa fa-plus"></i><i class="fa fa-minus"></i> 
+									<span class="more">MORE</span><span class="less">LESS</span> SILI</a>
+								<a class="cart-indicator"> <span class="badge">2</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% block content %}
 				
-		{% endblock %}
+			{% endblock %}
+			<div id="stickyFooter">
+				
+			<div>
+		</div>
+		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+		<script src="/js/main.js"></script>
         {% block foot %}
 
 		{% endblock %}

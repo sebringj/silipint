@@ -1,6 +1,6 @@
 {
   "name": "www.silipint.com",
-  "version": "0.0.0-2",
+  "version": "0.0.0-8",
   "description": "Website for Silipint",
   "main": "app.js",
   "dependencies": {
