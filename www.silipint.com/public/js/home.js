@@ -1,4 +1,5 @@
 // handle desktop > 767 for first viewing
+/*
 (function(){
 	var $w = $(window);
 	if ($w.width() > 767) {
@@ -8,3 +9,4 @@
 		});
 	}
 })();
+*/
