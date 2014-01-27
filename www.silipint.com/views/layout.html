@@ -16,45 +16,12 @@
 		{% endblock %}
     </head>
     <body>
-		<div id="mobileMenu">
-			<a href="#" class="close"><i></i></a>
-			<div class="nav">
-				<a href="#"><a class="cart-indicator"> <span class="badge">2</span></a></a>
-				<a href="#"><span>Shop</span></a>
-				<a href="#"><span>Sili-Life</span></a>
-				<a href="#"><span>Customize</span></a>
-				<div class="header"><span>Products</span></div>
-				<a href="#"><span>Pints</span></a>
-				<a href="#"><span>Half-Pints</span></a>
-				<a href="#"><span>Shorty's</span></a>
-				<a href="#"><span>Shots</span></a>
-				<a href="#"><span>Lids</span></a>
-				<a href="#"><span>Sets</span></a>
-				<a href="#"><span>Gift Cards</span></a>
-				<div class="header"><span>Accounts</span></div>
-				<a href="#"><span>Sign-in</span></a>
-				<a href="#"><span>Sign-up</span></a>
-				<a href="#"><span>Rep Login</span></a>
-				<a href="#"><span>Pay Invoice</span></a>
-				<a href="#"><span>VIP</span></a>
-				<div class="header"><span>Resources</span></div>
-				<a href="#"><span>About Silipint</span></a>
-				<a href="#"><span>FAQ's</span></a>
-				<a href="#"><span>Find a Retailer</span></a>
-				<div class="header"><span>Contact</span></div>
-				<a href="tel:5416785044"><span>Tel: (541) 678-5044</span></a>
-				<a>&nbsp;</a>
-				<a href="#"><span>Map It</span></a>
-				<a href="#"><span>
-					Centry Center Bend<br>
-					Suite #130<br>
-					Bend, OR 97702
-				</span></a>
-			</div>
-		</div>
 		<div id="bodyWrapper">
 			<div id="headerWrapper">
-				<a id="toggleMobileMenu"><i class="fa fa-bars"></i></a>
+				<div id="headerMobile">
+					<a class="cart-indicator"> <span class="badge">2</span></a>
+					<a id="toggleMobileMenu"><i class="fa fa-bars"></i></a>
+				</div>
 				<div id="pushUpMenu">
 					<div class="set-height">
 						<a class="close"></a>
@@ -104,6 +71,11 @@
 									</div>
 								</div>
 							</div>
+							<div class="save-more">
+								<div class="save-more-left"></div>
+								<div class="save-more-middle"><span>FREE SHIPPING ON ALL ORDERS OVER $50</span></div>
+								<div class="save-more-right"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -131,8 +103,44 @@
 				
 			{% endblock %}
 			<div id="stickyFooter">
-				
-			<div>
+				<div class="text">Welcome to Silipint. Unbreakable Silicon Drinkwear that's tons of fun.</div>
+				<div class="arrow"></div>
+			</div>
+		</div>
+		<div id="mobileMenu">
+			<a href="#" class="close"><i></i></a>
+			<div class="nav">
+				<a href="#"><span>Shop</span></a>
+				<a href="#"><span>Sili-Life</span></a>
+				<a href="#"><span>Customize</span></a>
+				<div class="header"><span>Products</span></div>
+				<a href="#"><span>Pints</span></a>
+				<a href="#"><span>Half-Pints</span></a>
+				<a href="#"><span>Shorty's</span></a>
+				<a href="#"><span>Shots</span></a>
+				<a href="#"><span>Lids</span></a>
+				<a href="#"><span>Sets</span></a>
+				<a href="#"><span>Gift Cards</span></a>
+				<div class="header"><span>Accounts</span></div>
+				<a href="#"><span>Sign-in</span></a>
+				<a href="#"><span>Sign-up</span></a>
+				<a href="#"><span>Rep Login</span></a>
+				<a href="#"><span>Pay Invoice</span></a>
+				<a href="#"><span>VIP</span></a>
+				<div class="header"><span>Resources</span></div>
+				<a href="#"><span>About Silipint</span></a>
+				<a href="#"><span>FAQ's</span></a>
+				<a href="#"><span>Find a Retailer</span></a>
+				<div class="header"><span>Contact</span></div>
+				<a href="tel:5416785044"><span>Tel: (541) 678-5044</span></a>
+				<a>&nbsp;</a>
+				<a href="#"><span>Map It</span></a>
+				<a href="#"><span>
+					Centry Center Bend<br>
+					Suite #130<br>
+					Bend, OR 97702
+				</span></a>
+			</div>
 		</div>
 		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>

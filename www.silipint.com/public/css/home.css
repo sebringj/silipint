@@ -1,4 +1,10 @@
-img.promo {
+.promo {
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/home-hero-color-me-sili.jpg);
+	background-size:cover;
+	background-position:center center;
+	background-repeat:no-repeat;
+}
+.promo img {
 	width:100%;
 	height:auto;
 }
