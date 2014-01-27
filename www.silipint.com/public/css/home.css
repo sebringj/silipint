@@ -54,15 +54,51 @@
 	}
 }
 .featured-products {
-	height:600px;
-	background-color:#ccc;
+
 }
 .featured-products .bar {
 	height:62px;
+	font-size:0;
+}
+.featured-products .bar .get-sili {
+	width:40%;
+	height:62px;
+	text-align:right;
+	float:left;
+	background: #eaeaea; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eaeaea 0%, #cccccc 29%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeaea), color-stop(29%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+.featured-products .bar .navi {
+	width:60%;
+	height:62px;
+	text-align:left;
+	float:left;
+	background: #eaeaea; /* Old browsers */
+	background: -moz-linear-gradient(top,  #eaeaea 0%, #ffffff 29%, #e5e5e5 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeaea), color-stop(29%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
+}
+.featured-products .bar .navi a {
+	display:inline-block;
+	padding:0 10px;
+}
+.featured-products .products-slider {
+	height:535px;
+	background-color:#fff;
 }
 .boxes {
-	background-color:#efefef;
-	height:150px;
+	min-height:406px;
+	background-color:#00aeef;
 }
 .cups {
 	height:635px;
