@@ -4,6 +4,11 @@ body {
 	padding-top:93px;
 	height:100%;
 	background-color:#fff;
+	transition: padding-top 0.8s ease;
+	-webkit-transition: padding-top 0.8s ease;
+}
+body.scrolled {
+	padding-top:75px;
 }
 #mobileMenu {
 	display:none;
@@ -141,8 +146,10 @@ body.menuOpen #pushUpMenu {
 	font-family: 'Carrois Gothic', sans-serif; 
 	position:relative;
 	margin:0 auto;
+	transition: height 0.8s ease;
+	-webkit-transition: height 0.8s ease; 
 }
-#header.scrolled {
+body.scrolled #header{
 	height:75px;
 }
 @media (max-width:1200px) {
@@ -161,7 +168,7 @@ body.menuOpen #pushUpMenu {
 	transition: left 0.8s ease;
 	-webkit-transition: left 0.8s ease;
 }
-#header.scrolled .blob {
+body.scrolled #header .blob {
 	left:-10000px;
 }
 #header .logo { 
@@ -174,7 +181,7 @@ body.menuOpen #pushUpMenu {
 	transition: left 0.8s ease;
 	-webkit-transition: left 0.8s ease;
 }
-#header.scrolled .logo { 
+body.scrolled #header .logo { 
 	left:-10000px;
 }
 #header .life-better-sili {
@@ -187,20 +194,29 @@ body.menuOpen #pushUpMenu {
 	font-family: 'Carrois Gothic', sans-serif; 
 	font-size:17px;
 }
-#header.scrolled .life-better-sili {
-	left:20px;
+body.scrolled #header .life-better-sili {
+	left:40px;
 }
 #header .menu1 { 
 	position:absolute; 
 	left:365px; 
 	top:35px;
-	transition: left 0.8s ease;
-	-webkit-transition: left 0.8s ease; 
+	transition: left 0.8s easem, top 0.8s ease;
+	-webkit-transition: left 0.8s ease, top 0.8s ease; 
 }
-#header.scrolled .menu1 { top:25px; }
+body.scrolled #header .menu1 { top:25px; }
 #header .menu1 a { display:inline-block; color:#fff; margin-right:30px; font-size:17px; }
-#header .menu2 { position:absolute; right:30px; top:25px; height:40px; white-space:nowrap; vertical-align:middle; }
-#header.scrolled .menu2 { top:15px; }
+#header .menu2 { 
+	position:absolute; 
+	right:30px; 
+	top:25px; 
+	height:40px; 
+	white-space:nowrap; 
+	vertical-align:middle; 
+	transition: top 0.8s ease;
+	-webkit-transition: top 0.8s ease; 
+}
+body.scrolled #header .menu2 { top:15px; }
 #header .menu2 .more-sili {
 	display:inline-block;
 	padding:10px 15px;
@@ -274,8 +290,8 @@ body.menuOpen #header .menu2 .more-sili .more {
 	body { padding-top:51px; }
 	#pushUpMenu { display:none; }
 	#header .blob { bottom:-20px; left:-100px; }
-	#header, #header.scrolled { height:50px; }
-	#header.scrolled .life-better-sili { top:15px; }
+	#header, body.scrolled #header { height:50px; }
+	body.scrolled #header .life-better-sili { top:15px; }
 	#header .logo { 
 		top:5px; 
 		width:142px; height:53px; 
@@ -382,6 +398,5 @@ body.menuOpen #header .menu2 .more-sili .more {
 }
 
 @media (max-width:320px) {
-
 	#header .blob {  }
 }

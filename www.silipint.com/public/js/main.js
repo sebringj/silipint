@@ -35,9 +35,9 @@
 	// handle header scroll
 	$w.on('scroll resize', function(){
 		if ($w.scrollTop() > 20) {
-			$('#header').addClass('scrolled');
+			$('body').addClass('scrolled');
 		} else {
-			$('#header').removeClass('scrolled');
+			$('body').removeClass('scrolled');
 		}
 	});
 })($(window));

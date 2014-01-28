@@ -53,18 +53,17 @@
 		display:none;
 	}
 }
-.featured-products {
-
-}
+.featured-products {}
 .featured-products .bar {
 	height:62px;
 	font-size:0;
 }
 .featured-products .bar .get-sili {
-	width:40%;
+	width:30%;
 	height:62px;
 	text-align:right;
 	float:left;
+	padding-left:-20px;
 	background: #eaeaea; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eaeaea 0%, #cccccc 29%, #e5e5e5 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeaea), color-stop(29%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
@@ -74,10 +73,20 @@
 	background: linear-gradient(to bottom,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 }
+.featured-products .bar .get-sili img {
+	margin-right:20px;
+	margin-top:15px;
+	width:100%;
+	max-width:100px;
+	height:auto;
+}
 .featured-products .bar .navi {
-	width:60%;
+	width:70%;
 	height:62px;
 	text-align:left;
+	padding-left:20px;
+	white-space:nowrap;
+	overflow:hidden;
 	float:left;
 	background: #eaeaea; /* Old browsers */
 	background: -moz-linear-gradient(top,  #eaeaea 0%, #ffffff 29%, #e5e5e5 100%); /* FF3.6+ */
@@ -88,13 +97,32 @@
 	background: linear-gradient(to bottom,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 }
+@media (max-width:1060px) {
+	.featured-products .bar .get-sili {
+		width:20%;
+	}
+	.featured-products .bar .navi {
+		width:80%;
+	}
+}
 .featured-products .bar .navi a {
 	display:inline-block;
-	padding:0 10px;
+	padding:0 20px;
+	font-size:14px;
+	position:relative;
+	top:22px;
+	color:#999;
 }
 .featured-products .products-slider {
 	height:535px;
 	background-color:#fff;
+	position:relative;
+}
+.featured-products .products-slider .l-arrow {
+	
+}
+.featured-products .products-slider .r-arrow {
+	
 }
 .boxes {
 	min-height:406px;
@@ -107,4 +135,27 @@
 .sili-times {
 	height:432px;
 	background-color:#999;
+}
+@media (max-width:910px) {
+	.featured-products .bar {
+		padding-left:100px;
+	}
+	.featured-products .bar .get-sili {
+		width:120px;
+		margin-left:-120px;
+	}
+	.featured-products .bar .get-sili img {
+		margin:0 auto;
+		position:relative;
+		top:15px;
+		left:-9px;
+		width:70%;
+	}
+	.featured-products .bar .navi {
+		width:100%;
+		text-align:center;
+	}
+	.featured-products .bar .navi a {
+		padding:0 15px;
+	}
 }
