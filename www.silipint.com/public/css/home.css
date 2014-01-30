@@ -5,10 +5,14 @@
 	background-repeat:no-repeat;
 	position:relative;
 	box-shadow:0 1px 5px #333;
+	min-height:250px;
 }
 .promo img {
 	width:100%;
 	height:auto;
+}
+@media (max-width:684px) {
+	.promo img { display:none; }
 }
 .promo .bar {
 	position:absolute;
