@@ -40,4 +40,18 @@
 			$('body').removeClass('scrolled');
 		}
 	});
+	
+	(function($input){
+		var ph = $input.prop('placeholder');
+		$w.on('resize', function(){
+			var ww = $w.width();
+			if (ww < 980) {
+				$input.prop('placeholder','Enter your email address.');
+			} else {
+				$input.prop('placeholder', ph);
+			}
+		}).trigger('resize');
+	})($('#stickyFooter input'));
+	
+	$('#copyrightYear').text((new Date()).getFullYear());
 })($(window));
