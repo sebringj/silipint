@@ -31,62 +31,16 @@
 			<a href="#" class="arrow l-arrow"></a>
 		</div>
 		<div class="products">
+		{% for product in products %}
 			<div class="product">
-				<div class="img"></div>
+				<div class="img">{{ product.index }}</div>
 				<div class="text">
 					<div class="text1">9 oz. SHORTY</div>
 					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
 					<div class="text3">$9.95</div>
 				</div>
 			</div>
-			<div class="product">
-				<div class="img"></div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="img"></div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="img"></div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="img"></div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="img"></div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-			<div class="product">
-				<div class="img"></div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
+		{% endfor%}
 		</div>
 		<div class="arrow-back r-arrow-back">
 			<a href="#" class="arrow r-arrow"></a>
@@ -120,8 +74,8 @@
 		<div class="text"></div>
 	</div>
 </div>
-<div class="cups">
-	<div class="wrap-snap">
+<div class="cups clearfix">
+	<div class="wrap-snap clearfix">
 		<div class="text text1">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis a mi at sollicitudin. Phasellus vel leo vel nisl ultrices tincidunt sed eget tellus. Vestibulum ante ipsum primis in faucibus orci 
 			luctus et ultrices posuere cubilia Curae; Morbi egestas quis nunc nec porttitor.
@@ -129,12 +83,13 @@
 			luctus et ultrices posuere cubilia Curae; Morbi egestas quis nunc nec porttitor.
 		</div>
 		<div class="img"></div>
-		<div class="text text2">
-			<div class="l">
-				
+		<div class="text text2 clearfix">
+			<div class="l clearfix">
+				<div class="flourish"></div>
+				<div class="words">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
 			</div>
-			<div class="r">
-				
+			<div class="r clearfix">
+				<input name="email" placeholder="Enter Email Address"><button>Sign-Up</button>
 			</div>
 		</div>
 	</div>

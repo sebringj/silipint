@@ -133,8 +133,8 @@
 }
 .featured-products .products-slider .products {
 	width:100%;
-	padding:0 20px;
 	overflow:hidden;
+	margin:0 auto;
 }
 .featured-products .products-slider .product {
 	height:535px;
@@ -149,6 +149,9 @@
 	margin-top:90px;
 	background-position:center center;
 	background-repeat:no-repeat;
+	font-size:50px;
+	text-align:center;
+	line-height:100px;
 }
 .featured-products .products-slider .product .text {
 	text-align:center;
@@ -235,10 +238,12 @@
 	background-color:#0054a6;
 }
 .cups {
-	height:635px;
 	background-color:#ffba11;
 	border-top:1px solid #fff;
 	border-bottom:1px solid #fff;
+}
+.cups .wrap-snap {
+	padding:0 40px;
 }
 .cups .text1 {
 	margin:92px auto 62px auto;
@@ -253,13 +258,66 @@
 	height:228px;
 }
 .cups .text2 {
-	margin:70px 0 80px 0;
+	margin:70px 20px 80px 20px;
+	max-width:1026px;
+	font-size:0;
 }
 .cups .text2 .l {
-	
+	width:59.99%%;
+	height:76px;
+	display:inline-block;
+	vertical-align:middle;
+	color:#fff;
+	font-size:14px;
+}
+.cups .text2 .l .flourish {
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/newsletter-flurry.png);
+	background-position:left center;
+	background-repeat:no-repeat;
+	width:102px;
+	height:76px;
+	vertical-align:middle;
+	display:inline-block;
+}
+.cups .text2 .l .words {
+	vertical-align:middle;
+	display:inline-block;
+	font-size:14px;
+	font-weight:400;
 }
 .cups .text2 .r {
-	
+	width:39.99%;
+	display:inline-block;
+	vertical-align:middle;
+	padding-right:100px;
+}
+.cups .text2 .r input {
+	display:inline-block;
+	border:none;
+	vertical-align:middle;
+	background-color:#ffcb4a;
+	padding:10px 20px;
+	min-width:200px;
+	font-size:12px;
+	text-transform:uppercase;
+	width:100%;
+}
+.cups .text2 .r input::-webkit-input-placeholder { color: #fff;font-weight:400; }
+.cups .text2 .r input:-moz-placeholder { color:#fff;font-weight:400; }
+.cups .text2 .r input::-moz-placeholder { color:#fff;font-weight:400; }
+.cups .text2 .r input:-ms-input-placeholder { color: #fff;font-weight:400; }
+.cups .text2 .r button {
+	background-color:#fff;
+	border:none;
+	color:#ffba11;
+	font-size:12px;
+	font-weight:400;
+	text-transform:uppercase;
+	padding:10px 20px;
+	display:inline-block;
+	vertical-align:middle;
+	width:100px;
+	margin-right:-100px;
 }
 .sili-times {
 	height:432px;

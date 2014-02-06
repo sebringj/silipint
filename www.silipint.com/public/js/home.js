@@ -15,7 +15,6 @@ $('.products-slider').on('click','.arrow', function(ev){
 	var $this = $(this), $slider = $this.closest('.products-slider'),
 	$productsContainer = $slider.find('.products'),
 	$products = $slider.find('.product');
-	console.log($slider.width());
 	var pw = 0;
 	$products.each(function(){
 		pw += $(this).width();
@@ -29,11 +28,11 @@ $('.products-slider').on('click','.arrow', function(ev){
 	if ($this.hasClass('r-arrow')) {
 		onRight = (pw - onLeft - sw) - s;
 		if (onRight < u/2) {
-			s += u;
+			s = (pw - onLeft - sw);
 		}
 	} else {
 		if (onLeft - s < u/2) {
-			s += u;
+			s = onLeft;
 		}
 	}
 	$productsContainer.stop(true,true).animate({ 
