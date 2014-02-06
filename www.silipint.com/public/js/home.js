@@ -25,9 +25,18 @@ $('.products-slider').on('click','.arrow', function(ev){
 	m = Math.floor( (sw/pw) * $products.length ),
 	u = (pw / $products.length),
 	sign = $this.hasClass('l-arrow') ? '-=' : '+=';
-	console.log(sign + (u * m));
-	console.log(m);
+	var s = (u * m), onLeft = $productsContainer.scrollLeft(), onRight = 0;
+	if ($this.hasClass('r-arrow')) {
+		onRight = (pw - onLeft - sw) - s;
+		if (onRight < u/2) {
+			s += u;
+		}
+	} else {
+		if (onLeft - s < u/2) {
+			s += u;
+		}
+	}
 	$productsContainer.stop(true,true).animate({ 
-		scrollLeft : sign + (u * m)
+		scrollLeft : sign + s
 	},500);
 });
