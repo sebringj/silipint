@@ -24,6 +24,7 @@ $('.products-slider').on('click','.arrow', function(ev){
 	m = Math.floor( (sw/pw) * $products.length ),
 	u = (pw / $products.length),
 	sign = $this.hasClass('l-arrow') ? '-=' : '+=';
+	if (m < 1) { m = 1; }
 	var s = (u * m), onLeft = $productsContainer.scrollLeft(), onRight = 0;
 	if ($this.hasClass('r-arrow')) {
 		onRight = (pw - onLeft - sw) - s;

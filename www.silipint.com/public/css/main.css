@@ -8,6 +8,7 @@ body {
 	margin:0;
 	padding:0;
 	padding-top:93px;
+	padding-bottom:40px;
 	height:100%;
 	background-color:#fff;
 }
@@ -461,6 +462,9 @@ body.menuOpen #header .menu2 .more-sili .more {
 	}
 }
 @media (max-width:692px) {
+	body {
+		padding-bottom:0;
+	}
 	#stickyFooter {
 		height:150px;
 		position:relative;
