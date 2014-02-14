@@ -1,15 +1,24 @@
 var globalContext;
 
 var routes = require('./routes.js');
+var redirects = require('./redirects.js');
 
 var routeHandlers = {};
 
 module.exports.set = function(context) {
 	globalContext = context;
-	var app = context.app, route;
-	for(var i = 0; i < routes.length; i++) {
+	var app = context.app, route, i;
+	for(i = 0; i < routes.length; i++) {
 		route = routes[i];
 		app.get(route.path, routeHandlers[ route.method ]);
+	}
+	for(i = 0; i < redirects.length; i++) {
+		redirect = redirects[i];
+		(function(redirect){
+			app.get(redirect.path, function(req, res){
+				res.redirect(301, redirect.redirect);
+			});
+		})(redirect);
 	}
 	
 	// error pages
@@ -94,7 +103,9 @@ routeHandlers.sililife = function(req, res) {
 };
 
 routeHandlers.content = function(req, res) {
-	res.json({ route: 'content', message : 'undefined' });
+	res.render('content', {
+		
+	});
 };
 
 routeHandlers.contactus = function(req, res) {
