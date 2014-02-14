@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="/css/shop.css">
+{% endblock %}
+
+{% block content %}
+{% include "./partials/shop-nav.html" %}
+<div class="showcase clearfix">
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">New Items</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Pints</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Half Pints</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Shorty's</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Shot's</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Artist Series</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Sets</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Sale</div>
+	</div>
+	<div class="item">
+		<div class="img"></div>
+		<div class="text">Lids</div>
+	</div>
+</div>
+
+{% include "./partials/cups.html" %}
+{% include "./partials/sili-life.html" %}
+{% endblock %}
+
+{% block foot %}
+<script src="/js/shop.js"></script>
+{% endblock %}

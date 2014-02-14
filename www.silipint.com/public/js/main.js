@@ -16,7 +16,7 @@
 		},10));
 	});
 	// handle menu toggle as quick as possible for mobile
-	(function(){ 
+	(function() { 
 		function handleToggle(ev) {
 			ev.preventDefault();
 			if ($('body').hasClass('menuOpen')) {
@@ -40,7 +40,7 @@
 			$('body').removeClass('scrolled');
 		}
 	});
-	
+	// adjust wording on signup sticky footer
 	(function($input){
 		var ph = $input.prop('placeholder');
 		$w.on('resize', function(){
@@ -52,6 +52,19 @@
 			}
 		}).trigger('resize');
 	})($('#stickyFooter input'));
-	
+	// set copyright year
 	$('#copyrightYear').text((new Date()).getFullYear());
+	// set menu state
+	(function(){
+		var pathname = location.pathname;
+		$('a[href]').each(function(){
+			var $this = $(this), href = $this.attr('href');
+			if (href === '/' || pathname === '/') {
+				return;
+			}
+			if (pathname.indexOf(href) === 0) {
+				$this.addClass('selected');
+			}
+		});
+	})();
 })($(window));

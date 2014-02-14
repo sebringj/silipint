@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/products-slider.css">
 {% endblock %}
 
 {% block content %}
@@ -26,26 +27,7 @@
 			<a href="#"><span>SALE</span></a>		
 		</div>
 	</div>
-	<div class="products-slider">
-		<div class="arrow-back l-arrow-back">
-			<a href="#" class="arrow l-arrow"><i class="fa fa-angle-left"></i></a>
-		</div>
-		<div class="products">
-		{% for product in products %}
-			<div class="product">
-				<div class="img">{{ product.index }}</div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-		{% endfor%}
-		</div>
-		<div class="arrow-back r-arrow-back">
-			<a href="#" class="arrow r-arrow"><i class="fa fa-angle-right"></i></a>
-		</div>
-	</div>
+	{% include "./partials/products-slider.html" %}
 	<div class="bar bottom-bar">
 		<div class="get-sili"><img src="//d1niwwqaddyuw4.cloudfront.net/img/get-sili.png"></div>
 		<div class="navi">
@@ -60,7 +42,7 @@
 		</div>
 	</div>
 </div>
-<div class="boxes clearfix">
+<div class="boxes1 clearfix">
 	<div class="box box1">
 		<div class="img"><img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png"></div>
 		<div class="text"></div>
@@ -74,47 +56,11 @@
 		<div class="text"></div>
 	</div>
 </div>
-<div class="cups clearfix">
-	<div class="wrap-snap clearfix">
-		<div class="text text1">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis a mi at sollicitudin. Phasellus vel leo vel nisl ultrices tincidunt sed eget tellus. Vestibulum ante ipsum primis in faucibus orci 
-			luctus et ultrices posuere cubilia Curae; Morbi egestas quis nunc nec porttitor.
-		</div>
-		<div class="img"></div>
-		<div class="text text2 clearfix">
-			<div class="row">
-				<div class="col-sm-7 l">
-					<div class="flourish"></div>
-					<div class="words">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-				</div>
-				<div class="col-sm-5 r">
-					<input name="email" placeholder="Enter Email Address"><button>Sign-Up</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="sili-times">
-	<div class="bar">
-		Sili Times Near &amp; Far
-	</div>
-	<div class="boxes">
-		<div class="box">
-			<img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png">
-		</div>
-		<div class="box">
-			<img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png">
-		</div>		
-		<div class="box">
-			<img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png">
-		</div>
-		<div class="box">
-			<img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png">
-		</div>
-	</div>
-</div>
+{% include "./partials/cups.html" %}
+{% include "./partials/sili-life.html" %}
 {% endblock %}
 
 {% block foot %}
 <script src="/js/home.js"></script>
+<script src="/js/products-slider.js"></script>
 {% endblock %}
