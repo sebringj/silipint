@@ -1,0 +1,121 @@
+.promo {
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/home-hero-color-me-sili.jpg);
+	background-size:cover;
+	background-position:center center;
+	background-repeat:no-repeat;
+	position:relative;
+	box-shadow:0 1px 5px #333;
+	min-height:250px;
+}
+.promo img {
+	width:100%;
+	height:auto;
+}
+@media (max-width:684px) {
+	.promo img { display:none; }
+}
+.unbreakable-bar {
+	width:100%;
+	height:102px;
+	background-color:rgba(0,0,0,0.5);
+	padding-right:150px;
+	position:relative;
+	top:-102px;
+	margin-bottom:-102px;
+}
+.unbreakable-bar .text {
+	color:#fff;
+	text-transform:uppercase;
+	text-align:right;
+	font-weight:600;
+	position:relative;
+	top:40px;
+	font-size:15px;
+}
+.unbreakable-bar .arrow {
+	width:90px;
+	height:102px;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/stick-arrow.png);
+	position:absolute;
+	top:0;
+	right:0;
+	cursor:pointer;
+}
+@media (max-width:768px) {
+	.promo .bar {
+		height:auto;
+		padding-right:10px;
+		padding-left:10px;
+	}
+	.promo .bar .text {
+		padding:10px;
+		top:auto;
+		font-weight:normal;
+		font-size:12px;
+		text-align:left;
+	}
+	.promo .bar .arrow {
+		display:none;
+	}
+}
+.boxes1 {
+	background-color:#00aeef;
+}
+.boxes1 .box {
+	width:33.33333%;
+	float:left;
+}
+.boxes1 .box .img img {
+	height:auto;
+	width:100%;
+	background-color:#ccc;
+	border-right:1px solid #fff;
+}
+.boxes1 .box:last-child .img img {
+	border-right:1px solid transparent;
+}
+.boxes1 .box .text {
+	height:102px;
+	border-top:1px solid #fff;
+}
+.boxes1 .box.box1 .text {
+	background-color:#00aeef;
+}
+.boxes1 .box.box2 .text {
+	background-color:#73c702;
+}
+.boxes1 .box.box3 .text {
+	background-color:#0054a6;
+}
+@media (max-width:768px) {
+	.boxes .box {
+		height:406px;
+		width:100%%;
+		float:left;
+	}
+}
+@media (max-width:768px) {
+	.unbreakable-bar {
+		width:100%;
+		height:auto;
+		background-color:#EAEAEC;
+		padding-right:0;
+		top:auto;
+		margin-bottom:0;
+		border-bottom:2px solid #ccc;
+		margin-top:-20px;
+	}
+	.unbreakable-bar .text {
+		color:#777;
+		font-weight:200;
+		position:relative;
+		top:0;
+		font-size:18px;
+		padding:50px 20px;
+		text-align:center;
+		text-transform:inherit;
+	}
+	.unbreakable-bar .arrow {
+		display:none;
+	}
+}
