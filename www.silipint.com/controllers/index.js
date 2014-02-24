@@ -1,5 +1,6 @@
 var config = require('config'),
-kitgui = require('kitgui');
+kitgui = require('kitgui'),
+utils = require('../lib/utils.js');
 
 var globalContext;
 
@@ -108,13 +109,20 @@ routeHandlers.sililife = function(req, res) {
 	var cacheKey = 'sililife';
 	var pageID = cacheKey;
 	function render() {
+		var products = [];
+		for(var i = 0; i < 40; i++) {
+			products.push({
+				index : (i+1),
+			});
+		}
 		res.render('sili-life', {
 			layout : context.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
 			items : context.cache.home.items,
 			title : context.cache.home.title,
-			description : context.cache.home.description
+			description : context.cache.home.description,
+			products : products
 		});
 	}
 	if (req.cookies.kitgui) {
@@ -143,8 +151,47 @@ routeHandlers.sililife = function(req, res) {
 };
 
 routeHandlers.content = function(req, res) {
-	res.render('content', {
-		
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	function render() {
+		var products = [];
+		for(var i = 0; i < 40; i++) {
+			products.push({
+				index : (i+1),
+			});
+		}
+		res.render('content', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+			products : products
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache.home;
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : pageID + 'Collection', editorType : 'sili-json' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
 	});
 };
 

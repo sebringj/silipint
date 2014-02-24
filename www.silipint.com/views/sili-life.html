@@ -1,12 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block head %}
+	<link rel="stylesheet" href="/css/products-slider.css">
 	<link rel="stylesheet" href="/css/sili-life.css">
 {% endblock %}
 
 {% block content %}
 
-	<div class="clearfix boxes {{ items[pageID + 'Collection'].classNames }}" id="{{ items[pageID + 'Collection'].classNames }}">
+	<div class="clearfix sili-boxes {{ items[pageID + 'Collection'].classNames }}" id="{{ items[pageID + 'Collection'].classNames }}">
 		{% if items[pageID + 'Collection'].content %}
 			{% for item in items[pageID + 'Collection'].content %}
 				<a href="{{ item.href }}" class="box" style="background-image:url({{ item.src }})">
@@ -16,11 +17,12 @@
 			{% endfor %}
 		{% endif %}
 	</div>
-
+	{% include "./partials/products-slider.html" %}
 	{% include "./partials/cups.html" %}
 	{% include "./partials/sili-life.html" %}
 {% endblock %}
 
 {% block foot %}
 	<script src="/js/sili-life.js"></script>
+	<script src="/js/products-slider.js"></script>
 {% endblock %}

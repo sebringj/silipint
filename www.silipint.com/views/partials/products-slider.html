@@ -1,20 +1,48 @@
-<div class="products-slider">
-	<div class="arrow-back l-arrow-back">
-		<a href="#" class="arrow l-arrow"><i class="fa fa-angle-left"></i></a>
-	</div>
-	<div class="products">
-	{% for product in products %}
-		<div class="product">
-			<div class="img">{{ product.index }}</div>
-			<div class="text">
-				<div class="text1">9 oz. SHORTY</div>
-				<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-				<div class="text3">$9.95</div>
-			</div>
+<div class="featured-products">
+	<div class="bar top-bar">
+		<div class="get-sili"><img src="//d1niwwqaddyuw4.cloudfront.net/img/get-sili.png"></div>
+		<div class="navi">
+			<a href="#" class="l"><span>PINTS</span></a>
+			<a href="#" class="checker"><span>HALFPINTS</span></a>
+			<a href="#"><span>SHORTYS</span></a>
+			<a href="#" class="checker"><span>SHOTS</span></a>
+			<a href="#" class="l checker"><span>LIDS</span></a>
+			<a href="#"><span>SETS</a>
+			<a href="#" class="artist checker"><span>ARTISTS SERIES</span></a>	
+			<a href="#"><span>SALE</span></a>		
 		</div>
-	{% endfor%}
 	</div>
-	<div class="arrow-back r-arrow-back">
-		<a href="#" class="arrow r-arrow"><i class="fa fa-angle-right"></i></a>
+	<div class="products-slider">
+		<div class="arrow-back l-arrow-back">
+			<a href="#" class="arrow l-arrow"><i class="fa fa-angle-left"></i></a>
+		</div>
+		<div class="products">
+		{% for product in products %}
+			<div class="product">
+				<div class="img">{{ product.index }}</div>
+				<div class="text">
+					<div class="text1">9 oz. SHORTY</div>
+					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
+					<div class="text3">$9.95</div>
+				</div>
+			</div>
+		{% endfor%}
+		</div>
+		<div class="arrow-back r-arrow-back">
+			<a href="#" class="arrow r-arrow"><i class="fa fa-angle-right"></i></a>
+		</div>
+	</div>
+	<div class="bar bottom-bar">
+		<div class="get-sili"><img src="//d1niwwqaddyuw4.cloudfront.net/img/get-sili.png"></div>
+		<div class="navi">
+			<a href="#"><span>PINTS</span></a>
+			<a href="#" class="checker"><span>HALFPINTS</span></a>
+			<a href="#"><span>SHORTYS</span></a>
+			<a href="#" class="checker"><span>SHOTS</span></a>
+			<a href="#" class="checker"><span>LIDS</span></a>
+			<a href="#"><span>SETS</a>
+			<a href="#" class="artist checker"><span>ARTISTS SERIES</span></a>	
+			<a href="#"><span>SALE</span></a>		
+		</div>
 	</div>
 </div>

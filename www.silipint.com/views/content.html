@@ -1,13 +1,29 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-
+	<link rel="stylesheet" href="/css/products-slider.css">
+	<link rel="stylesheet" href="/css/content.css">
 {% endblock %}
 
 {% block content %}
-<h1>General Content Page</h1>
+
+	<div class="clearfix sili-boxes {{ items[pageID + 'Collection'].classNames }}">
+	{% for item in items[pageID + 'Collection'].content %}
+		<a href="{{ item.url }}" class="clearfix" style="background-image:url('{{ item.imageURL }}')">
+			<span>{{ item.title }}</span>
+			<img class="back" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+			<img class="front" style="background-color:#{{ item.backgroundColor }}" 
+			src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+		</a>
+	{% endfor %}
+	</div>
+	<div class="clearfix"></div>
+	{% include "./partials/products-slider.html" %}
+	{% include "./partials/cups.html" %}
+	{% include "./partials/sili-life.html" %}
 {% endblock %}
 
 {% block foot %}
-
+	<script src="/js/products-slider.js"></script>
+	<script src="/js/content.js"></script>
 {% endblock %}
