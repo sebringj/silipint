@@ -697,12 +697,12 @@ body.menuOpen #header .menu2 .more-sili .more {
 		display:none;
 	}
 	.shop-nav .nav-items {
-		height:0px;
+		height:auto;
+		display:none;
 		overflow:hidden;
-		transition: height 0.3s ease;
 	}
 	.shop-nav.selected .nav-items {
-		height:auto;
+		
 	}
 	.shop-nav a {
 		display:block;

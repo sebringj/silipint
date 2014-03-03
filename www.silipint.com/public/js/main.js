@@ -74,7 +74,9 @@ $('.shop-nav-bar').on('click', function(ev){
 	var $this = $('.shop-nav');
 	if ($this.hasClass('selected')) {
 		$this.removeClass('selected');
+		$this.find('.nav-items').slideUp('fast');
 	} else {
 		$this.addClass('selected');
+		$this.find('.nav-items').slideDown('fast');
 	}
 });
