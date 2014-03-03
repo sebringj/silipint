@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/products-slider.css">
+	<link rel="stylesheet" href="/css/listing.css">
+	<link rel="stylesheet" href="/css/landing.css">
+{% endblock %}
+
+{% block content %}
+	<div class="shop-nav clearfix">
+		<div class="shop-nav-bar">
+			<i class="fa fa-caret-down down"></i>
+			<i class="fa fa-caret-up up"></i>
+			<span class="{{ items[navID + 'SubNavLabel'].classNames }}">
+				{% if items[navID + 'SubNavLabel'].content %}
+					{{ items[navID + 'SubNavLabel'].content }}
+				{% else %}
+					Navigation
+				{% endif %}
+			</span>
+		</div>
+		<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
+			{% for item in items[navID + 'SubNav'].content %}
+				<a href="{{ item.href }}">{{ item.text }}</a>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="clearfix sili-boxes {{ items[pageID + 'Collection'].classNames }}">
+	{% for item in items[pageID + 'Collection'].content %}
+		<a href="{{ item.url }}" class="clearfix" style="background-image:url('{{ item.imageURL }}')">
+			<span>{{ item.title }}</span>
+			<img class="back" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+			<img class="front" style="background-color:#{{ item.backgroundColor }}" 
+			src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+		</a>
+	{% endfor %}
+	</div>
+	<div class="clearfix"></div>
+	{% include "./partials/products-slider.html" %}
+	{% include "./partials/cups.html" %}
+	{% include "./partials/sili-life.html" %}
+{% endblock %}
+
+{% block foot %}
+	<script src="/js/products-slider.js"></script>
+	<script src="/js/listing.js"></script>
+{% endblock %}

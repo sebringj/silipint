@@ -150,9 +150,10 @@ routeHandlers.sililife = function(req, res) {
 	});
 };
 
-routeHandlers.content = function(req, res) {
+routeHandlers.landing = function(req, res) {
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
 	function render() {
 		var products = [];
 		for(var i = 0; i < 40; i++) {
@@ -160,10 +161,11 @@ routeHandlers.content = function(req, res) {
 				index : (i+1),
 			});
 		}
-		res.render('content', {
+		res.render('landing', {
 			layout : context.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
+			navID : navID,
 			items : context.cache[pageID].items,
 			title : context.cache[pageID].title,
 			description : context.cache[pageID].description,
@@ -171,7 +173,7 @@ routeHandlers.content = function(req, res) {
 		});
 	}
 	if (req.cookies.kitgui) {
-		delete context.cache.home;
+		delete context.cache[pageID];
 	}
 	if (context.cache[pageID]) {
 		render();
@@ -183,6 +185,8 @@ routeHandlers.content = function(req, res) {
 		pageID : pageID,
 		url : 'http://' + config.domain + req.path,
 		items : [
+			{ id : navID + 'SubNavLabel', editorType : 'inline' },
+			{ id : navID + 'SubNav', editorType : 'links-json' },
 			{ id : pageID + 'Collection', editorType : 'sili-json' }
 		]
 	}, function(kg){
@@ -193,6 +197,59 @@ routeHandlers.content = function(req, res) {
 		};
 		render();
 	});
+};
+
+routeHandlers.listing = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		var products = [];
+		for(var i = 0; i < 40; i++) {
+			products.push({
+				index : (i+1),
+			});
+		}
+		res.render('listing', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+			products : products
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : navID + 'SubNavLabel', editorType : 'inline' },
+			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'Collection', editorType : 'sili-json' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
+	});
+};
+
+routeHandlers.content = function(req, res) {
+	res.json({ route: 'content', message : 'undefined' });
 };
 
 routeHandlers.contactus = function(req, res) {
@@ -221,4 +278,53 @@ routeHandlers.cart = function(req, res) {
 
 routeHandlers.checkout = function(req, res) {
 	res.json({ route: 'checkout', message : 'undefined' });
+};
+
+routeHandlers.lightbox = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		var products = [];
+		for(var i = 0; i < 40; i++) {
+			products.push({
+				index : (i+1),
+			});
+		}
+		res.render('lightbox', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+			products : products
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : navID + 'SubNavLabel', editorType : 'inline' },
+			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'Collection', editorType : 'lightbox-json' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
+	});
 };

@@ -675,7 +675,7 @@ body.menuOpen #header .menu2 .more-sili .more {
 	padding:15px 0;
 	margin:0 5px;
 }
-.shop-nav a.selected {
+.nav-items a.selected {
 	color:#FFBA11;
 }
 @media (max-width:768px) {
@@ -702,7 +702,7 @@ body.menuOpen #header .menu2 .more-sili .more {
 		transition: height 0.3s ease;
 	}
 	.shop-nav.selected .nav-items {
-		height:155px;
+		height:auto;
 	}
 	.shop-nav a {
 		display:block;
