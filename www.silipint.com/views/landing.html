@@ -3,7 +3,6 @@
 {% block head %}
 	<link rel="stylesheet" href="/css/partials/products-slider.css">
 	<link rel="stylesheet" href="/css/partials/sili-times.css">
-	<link rel="stylesheet" href="/css/listing.css">
 	<link rel="stylesheet" href="/css/landing.css">
 {% endblock %}
 
@@ -29,10 +28,11 @@
 	<div class="clearfix sili-boxes {{ items[pageID + 'Collection'].classNames }}">
 	{% for item in items[pageID + 'Collection'].content %}
 		<a href="{{ item.url }}" class="clearfix" style="background-image:url('{{ item.imageURL }}')">
-			<span>{{ item.title }}</span>
 			<img class="back" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+			<span class="under-text"><span style="background-color:#{{ item.backgroundColor }}"><i class="fa fa-caret-left" style="color:#{{ item.backgroundColor }}"></i>{{ item.title }}<i class="fa fa-caret-right"  style="color:#{{ item.backgroundColor }}"></i></span></span>
 			<img class="front" style="background-color:#{{ item.backgroundColor }}" 
 			src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+			<span class="over-text"><span>{{ item.title }}</span></span>
 		</a>
 	{% endfor %}
 	</div>
