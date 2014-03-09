@@ -1,7 +1,8 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-	<link rel="stylesheet" href="/css/products-slider.css">
+	<link rel="stylesheet" href="/css/partials/products-slider.css">
+	<link rel="stylesheet" href="/css/partials/sili-times.css">
 	<link rel="stylesheet" href="/css/listing.css">
 	<link rel="stylesheet" href="/css/landing.css">
 {% endblock %}
@@ -38,10 +39,11 @@
 	<div class="clearfix"></div>
 	{% include "./partials/products-slider.html" %}
 	{% include "./partials/cups.html" %}
-	{% include "./partials/sili-life.html" %}
+	{% include "./partials/sili-times.html" %}
 {% endblock %}
 
 {% block foot %}
-	<script src="/js/products-slider.js"></script>
+	<script src="/js/partials/products-slider.js"></script>
+	<script src="/js/partials/sili-times.js"></script>
 	<script src="/js/listing.js"></script>
 {% endblock %}

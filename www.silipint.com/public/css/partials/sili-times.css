@@ -1,0 +1,104 @@
+.sili-times {
+	font-size:0;
+}
+.sili-times {
+	background-color:#6d6d6e;
+}
+.sili-times .bar {
+	text-align:center;
+	color:#fff;
+	font-size:14px;
+	text-transform:uppercase;
+	padding:30px 0;
+}
+.sili-times .bar span {
+	display:inline-block;
+	vertical-align:middle;
+	position:relative;
+	top:4px;
+	margin:0 10px;
+}
+.sili-times .bar a {
+	color:#fff;
+	font-size:40px;
+	cursor:pointer;
+	display:inline-block;
+	vertical-align:middle;
+}
+.sili-times .bar a.disabled {
+	cursor:default;
+	opacity:0.2;
+}
+.sili-times .boxes2 {
+	white-space:nowrap;
+	margin-left:-1px;
+	margin-right:-1px;
+	overflow:scroll;
+	-webkit-overflow-scrolling: touch;
+	width:100%;
+}
+.sili-times .box {
+	position:relative;
+	width:25%;
+	display:inline-block;
+	border:1px solid #fff;
+	border-right:none;
+	overflow:hidden;
+	font-size:14px;
+	text-decoration:none;
+}
+.sili-times .back {
+	width:100%;
+	height:auto;
+	background-size:cover;
+	background-position:center center;
+}
+.sili-times .front {
+	position:absolute;
+	width:100%;
+	height:auto;
+	top:0;
+	left:0;
+	opacity:0;
+	background-color:#777;
+}
+.sili-times .caption {
+	display:none;
+}
+.sili-times .box:hover .front {
+	opacity:0.8;
+}
+.sili-times .box:hover .caption {
+	display:block;
+	position:absolute;
+	padding:30% 20px;
+	width:100%;
+	color:#fff;
+	font-size:16px;
+	white-space:normal;
+	top:0;
+	left:0;
+}
+.sili-times .box .caption .instagram {
+	display:block;
+	margin-top:10px;
+	font-size:20px;
+	text-align:center;
+}
+@media (max-width:768px) {
+	.sili-times .box {
+		width:33.3%;
+	}
+}
+@media (max-width:480px) {
+	.sili-times .box {
+		width:50%;
+	}
+}
+@media (max-width:320px) {
+	.sili-times .box {
+		width:100%;
+		border-left:0;
+		border-right:0;
+	}
+}

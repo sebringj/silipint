@@ -12,6 +12,7 @@ body {
 	height:100%;
 	background-color:#fff;
 }
+h1 { font-family: 'Oswald', sans-serif; }
 body.scrolled {
 	padding-top:75px;
 }
@@ -602,28 +603,6 @@ body.menuOpen #header .menu2 .more-sili .more {
 	width:19.99%;
 	height:35px;
 	overflow:hidden;
-}
-.sili-times {
-	background-color:#6d6d6e;
-}
-.sili-times .bar {
-	text-align:center;
-	color:#fff;
-	font-size:14px;
-	text-transform:uppercase;
-	padding:30px 0;
-	border-bottom:1px solid #fff;
-}
-.sili-times .box {
-	width:25%;
-	float:left;
-}
-.sili-times .box img {
-	border-right:1px solid #fff;
-	width:100%;
-	height:auto;
-	background-color:#efefef;
-	margin:0 auto;
 }
 @media (max-width:570px) {
 	.cups .wrap-snap {

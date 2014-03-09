@@ -1,7 +1,7 @@
 var http = require("http"),
 	https = require("https");
 
-exports.getJSON = function(options, onResult, onError) {
+module.exports = function(options, onResult, onError) {
 
     var prot = options.port == 443 ? https : http;
     var req = prot.request(options, function(res) {

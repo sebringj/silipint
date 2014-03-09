@@ -1,0 +1,21 @@
+{% if layout && layout.instagram %}
+<div class="sili-times">
+	<div class="bar">
+		<a class="l-arrow arrow disabled"><i class="fa fa-angle-left"></i></a>
+		<span>Sili Times Near &amp; Far</span>
+		<a class="r-arrow arrow"><i class="fa fa-angle-right"></i></a>
+	</div>
+	<div class="boxes2">
+		{% for item in layout.instagram.data %}
+			<a class="box" href="{{ item.link }}">
+				<img class="back" style="background-image:url({{ item.images.low_resolution.url }})" src="//d1niwwqaddyuw4.cloudfront.net/img/transparent-square.gif">
+				<img class="front" src="//d1niwwqaddyuw4.cloudfront.net/img/transparent-square.gif">
+				<span class="caption">
+					{{ item.caption.text }}
+					<span class="instagram"><i class="fa fa-instagram"></i></span>
+				</span>
+			</a>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}

@@ -61,7 +61,8 @@ routeHandlers.home = function(req, res) {
 	res.render('index', {
 		pageID : 'home',
 		kitguiAccountKey : config.kitgui.accountKey,
-		products : products
+		products : products,
+		layout : globalContext.cache.layout
 	});
 };
 
@@ -293,6 +294,7 @@ routeHandlers.lightbox = function(req, res) {
 		}
 		res.render('lightbox', {
 			layout : context.cache.layout,
+			path : 'http://' + config.domain + req.path,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
 			navID : navID,
@@ -317,7 +319,9 @@ routeHandlers.lightbox = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
-			{ id : pageID + 'Collection', editorType : 'lightbox-json' }
+			{ id : pageID + 'Images', editorType : 'bootstrap-carousel-json' },
+			{ id : pageID + 'Title', editorType : 'inline' },
+			{ id : pageID + 'Html', editorType : 'inline' }
 		]
 	}, function(kg){
 		context.cache[pageID] = {
