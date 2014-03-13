@@ -18,15 +18,15 @@
 		</div>
 		<div class="products">
 		{% for product in products %}
-			<div class="product">
-				<div class="img">{{ product.index }}</div>
-				<div class="text">
-					<div class="text1">9 oz. SHORTY</div>
-					<div class="text2">"DESERT WONDERS, by S. UCEDA"</div>
-					<div class="text3">$9.95</div>
-				</div>
-			</div>
-		{% endfor%}
+			<a class="product" href="{{ product.productURL }}">
+				<span class="img" style="background-image:url({{ product.images[0] }})"></span>
+				<span class="text">
+					<span class="text1">{{ product.description[2] }}</span>
+					<span class="text2">{{ product.description[3] }}</span>
+					<span class="text3">${{ product.unitPrice.toFixed() }}</span>
+				</span>
+			</a>
+		{% endfor %}
 		</div>
 		<div class="arrow-back r-arrow-back">
 			<a href="#" class="arrow r-arrow"><i class="fa fa-angle-right"></i></a>

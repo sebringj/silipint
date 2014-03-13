@@ -1,8 +1,9 @@
 module.exports = [
 	{ path : '/', method : 'home' },
+	{ path : /-lb$/, method : 'lightbox' },
+	{ path : /-detail$/, method : 'detail' },
 	{ path : '/faq', method : 'content' },
 	{ path : '/contact-us', method : 'contactus' },
-	{ path : /-lb$/, method : 'lightbox' },
 	{ path : '/customize', method : 'landing' },
 	{ path : '/customize/:page', method : 'listing' },
 	{ path : '/sell-silipint', method : 'content' },

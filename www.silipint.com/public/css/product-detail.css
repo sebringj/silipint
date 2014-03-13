@@ -1,0 +1,72 @@
+.product-detail .section1 {
+	width:40%;
+	float:left;
+	overflow:hidden;
+	border-right:2px solid #efefef;
+	margin-top:60px;
+}
+.product-detail .section1 .main {
+	
+}
+.product-detail .section2 {
+	width:45%;
+	overflow:hidden;
+	float:right;
+	margin-top:60px;
+	color:#999;
+	font-family:'Oswald',sans-serif;
+	margin-right:10%;
+}
+.product-detail .section2 h1 { font-size:30px; }
+.product-detail .section2 h2 { font-size:20px; }
+.product-detail .section3 {
+	overflow:hidden;
+	margin-top:40px;
+	background-color:#f2f2f2;
+	padding:20px;
+}
+.product-detail .section3,
+.product-detail .section4,
+.product-detail .section5, 
+.product-detail .section6 { 
+	float:right; 
+	width:45%;
+	margin-right:10%;
+	overflow:hidden;
+	margin-top:40px;
+}
+.product-detail .section7 {
+	width:40%;
+	float:left;
+	overflow:hidden;
+	border-top:2px solid #efefef;
+	border-right:2px solid #efefef;
+	padding-top:40px;
+}
+.product-tabs .tab-tabs {
+	margin-right:-1px;
+	font-size:0;
+}
+.product-tabs .top-tabs a {
+	display:block;
+	width:33.3%;
+	border-right:1px solid #fff;
+	background-color:#ccc;
+	color:#fff;
+	font-size:12px;
+	padding:10px;
+	float:left;
+	text-transform:uppercase;
+	cursor:pointer;
+}
+.product-tabs .top-tabs a.selected {
+	color:#555;
+	background-color:#efefef;
+}
+.product-tabs .tab-content {
+	display:none;
+	padding:20px;
+	background-color:#efefef;
+	border-top:1px solid #fff;
+	min-height:400px;
+}

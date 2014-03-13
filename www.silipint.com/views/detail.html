@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/product-detail.css">
+{% endblock %}
+
+{% block content %}
+	<div class="product-detail clearfix wrap-snap">
+		<div class="section1">
+			<img class="main img-responsive" src="{{ product.images[0] }}">
+			<div class="thumbs">
+				{% for img in product.images %}
+					{% if img %}
+						<a class="thumb" style="background-image:url('{{ img }}')"></a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<div class="section2">
+			<h1>{{ product.descriptions[2] | striptags }}</h1>
+			<h2>{{ product.descriptions[3] | striptags }}</h2>	
+			<div>{{ product.descriptions[0] | striptags }}</div>
+		</div>
+		<div class="section3">
+			{% if product.sizes && product.sizes.length %}
+				{% if product.sizes[0].unitPrice < product.sizes[0].msrp %}
+					<span class="msrp">{{ product.sizes[0].msrp }}</span>
+					<span class="sale">On Sale</span>
+				{% endif %}
+				<span class="unitprice">{{ product.sizes[0].unitPrice }}</span>
+				{% if product.inStock %}
+					<span class="stock">In Stock</span>
+				{% else %}
+					<span class="stock out-of-stock">Out of Stock</span>
+				{% endif %}
+			{% endif %}
+			<span class="lbl">Quantity</span>
+			<input name="qty" data-quantifier>
+			<button data-add-to-cart>add to cart</button>
+			<span class="lbl">Colors</span>
+			<div class="colors">
+				
+			</div>
+		</div>
+		<div class="section4">
+			<span class="lbl">Share</span>
+		</div>
+		<div class="section5">
+			<span class="lbl">Email a Friend</span>
+		</div>
+		<div class="section6 product-tabs">
+			<div class="top-tabs clearfix">
+				<a class="selected" data-index="0">Details</a>
+				<a data-index="1">Specifications</a>
+				<a data-index="2">Other</a>
+			</div>
+			<div class="tab-content-container">
+				<div class="tab-content" style="display:block">
+					{{ product.descriptions[4] | safe }}
+				</div>
+				<div class="tab-content">
+					{{ product.descriptions[5] | safe }}
+				</div>
+				<div class="tab-content">
+					{{ product.descriptions[6] | safe }}
+				</div>
+			</div>
+		</div>
+		<div class="section7">
+			<div class="title">SIMILAR</div>
+			{% for item in product.relatedProducts %}
+			
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block foot %}
+	<script src="/js/product-detail.js"></script>
+{% endblock %}

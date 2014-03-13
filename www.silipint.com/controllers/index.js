@@ -1,6 +1,8 @@
 var config = require('config'),
 kitgui = require('kitgui'),
-utils = require('../lib/utils.js');
+utils = require('../lib/utils.js'),
+async = require('async'),
+getJSON = require('../lib/getJSON.js');
 
 var globalContext;
 
@@ -52,19 +54,122 @@ module.exports.set = function(context) {
 };
 
 routeHandlers.home = function(req, res) {
-	var products = [];
-	for(var i = 0; i < 40; i++) {
-		products.push({
-			index : (i+1),
+	var pageID = 'home';
+
+	function render() {
+		res.render('index', {
+			layout : globalContext.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+			products : context.cache[pageID].products
 		});
 	}
-	res.render('index', {
-		pageID : 'home',
-		kitguiAccountKey : config.kitgui.accountKey,
-		products : products,
-		layout : globalContext.cache.layout
-	});
+	
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		return render();
+	} else {
+		context.cache[pageID] = {};
+	}
+	async.parallel([
+		function(cb) {
+			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?tags=frontpage&extras=1'}, function(status, data) {
+				if (data && data.products) {
+					context.cache[pageID].products = data.products;
+				}
+				cb();
+			}, function() {
+				cb();
+			});
+		},
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path,
+				items : [
+					{ id : pageID + 'Collection', editorType : 'sili-json' }
+				]
+			}, function(kg){
+				context.cache[pageID].items = kg.items;
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	], function(err){
+		render();
+	});	
 };
+
+routeHandlers.detail = function(req, res) {
+	var pageID = utils.getPageId(req.path);
+
+	function render() {
+		var renderObj = {
+			layout : globalContext.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			items : context.cache[pageID].items,
+			product : context.cache[pageID].product
+		};
+		renderObj.title = context.cache[pageID].product.pageTitle;
+		renderObj.description = context.cache[pageID].metaDescription;
+		
+		if (context.cache[pageID].kgTitle) {
+			renderObj.title = context.cache[pageID].kgTitle;
+		}
+		if (context.cache[pageID].kgDescription) {
+			renderObj.title = context.cache[pageID].kgDescription;
+		}
+		res.render('detail', renderObj);
+	}
+	
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		return render();
+	} else {
+		context.cache[pageID] = {};
+	}
+	async.parallel([
+		function(cb) {
+			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?productURL=' + req.path }, function(status, data) {
+				if (data && data.product) {
+					context.cache[pageID].product = data.product;
+				} else {
+					context.cache[pageID].product = {};
+				}
+				cb();
+			}, function() {
+				cb();
+			});
+		},
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path,
+				items : []
+			}, function(kg){
+				context.cache[pageID].items = kg.items;
+				context.cache[pageID].kgTitle = kg.seo.title;
+				context.cache[pageID].kgDescription = kg.seo.description;
+				cb();
+			});
+		}
+	], function(err){
+		render();
+	});
+}
 
 routeHandlers.shop = function(req, res) {
 	res.render('shop', {
@@ -103,51 +208,6 @@ routeHandlers.collection = function(req, res) {
 	res.render('collection', {
 		products : products,
 		pages : pages
-	});
-};
-
-routeHandlers.sililife = function(req, res) {
-	var cacheKey = 'sililife';
-	var pageID = cacheKey;
-	function render() {
-		var products = [];
-		for(var i = 0; i < 40; i++) {
-			products.push({
-				index : (i+1),
-			});
-		}
-		res.render('sili-life', {
-			layout : context.cache.layout,
-			kitguiAccountKey : config.kitgui.accountKey,
-			pageID : pageID,
-			items : context.cache.home.items,
-			title : context.cache.home.title,
-			description : context.cache.home.description,
-			products : products
-		});
-	}
-	if (req.cookies.kitgui) {
-		delete context.cache.home;
-	}
-	if (context.cache.home) {
-		render();
-		return;
-	}
-	kitgui.getContents({
-		basePath : config.kitgui.basePath,
-		host : config.kitgui.host,
-		pageID : pageID,
-		url : 'http://' + config.domain + req.path,
-		items : [
-			{ id : pageID + 'Collection', editorType : 'collection-json' }
-		]
-	}, function(kg){
-		context.cache.home = {
-			items : kg.items,
-			title : kg.seo.title,
-			description : kg.seo.description
-		};
-		render();
 	});
 };
 

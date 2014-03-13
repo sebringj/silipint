@@ -1,40 +1,34 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-<link rel="stylesheet" href="/css/home.css">
-<link rel="stylesheet" href="/css/partials/sili-times.css">
-<link rel="stylesheet" href="/css/partials/products-slider.css">
+	<link rel="stylesheet" href="/css/home.css">
+	<link rel="stylesheet" href="/css/partials/sili-times.css">
+	<link rel="stylesheet" href="/css/partials/products-slider.css">
 {% endblock %}
 
 {% block content %}
-<div class="promo">
-	<img src="//d1niwwqaddyuw4.cloudfront.net/img/home-hero-color-me-sili.jpg">
-</div>
-<div class="unbreakable-bar">
-	<div class="text">Welcome to Silipint. Unbreakable Silicon Drinkwear that's tons of fun.</div>
-	<div class="arrow"></div>
-</div>
-{% include "./partials/products-slider.html" %}
-<div class="boxes1 clearfix">
-	<div class="box box1">
-		<div class="img"><img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png"></div>
-		<div class="text"></div>
+	<div class="promo">
+		<img src="//d1niwwqaddyuw4.cloudfront.net/img/home-hero-color-me-sili.jpg">
 	</div>
-	<div class="box box2">
-		<div class="img"><img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png"></div>
-		<div class="text"></div>
+	<div class="unbreakable-bar">
+		<div class="text">Welcome to Silipint. Unbreakable Silicon Drinkwear that's tons of fun.</div>
+		<div class="arrow"></div>
 	</div>
-	<div class="box box3">
-		<div class="img"><img src="//d1niwwqaddyuw4.cloudfront.net/img/square.png"></div>
-		<div class="text"></div>
+	{% include "./partials/products-slider.html" %}
+	<div class="clearfix boxes1 {{ items[pageID + 'Collection'].classNames }}">
+		{% for item in items[pageID + 'Collection'].content %}
+			<div class="box">
+				<div class="img" style="background-image:url('{{ item.imageURL }}')"><img src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif"></div>
+				<div class="text" style="background-color:#{{ item.backgroundColor }}">{{ item.title }}</div>
+			</div>
+		{% endfor %}
 	</div>
-</div>
-{% include "./partials/cups.html" %}
-{% include "./partials/sili-times.html" %}
+	{% include "./partials/cups.html" %}
+	{% include "./partials/sili-times.html" %}
 {% endblock %}
 
 {% block foot %}
-<script src="/js/home.js"></script>
-<script src="/js/partials/products-slider.js"></script>
-<script src="/js/partials/sili-times.js"></script>
+	<script src="/js/home.js"></script>
+	<script src="/js/partials/products-slider.js"></script>
+	<script src="/js/partials/sili-times.js"></script>
 {% endblock %}

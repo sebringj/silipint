@@ -82,6 +82,8 @@
 	height:535px;
 	width:320px;
 	display:inline-block;
+	border:none;
+	text-decoration:none;
 }
 .featured-products .products-slider .product .img {
 	width:90%;
@@ -94,6 +96,8 @@
 	font-size:50px;
 	text-align:center;
 	line-height:100px;
+	background-size:cover;
+	display:block;
 }
 .featured-products .products-slider .product .text {
 	text-align:center;
@@ -102,10 +106,11 @@
 	font-size:14px;
 	line-height:18px;
 	margin-top:20px;
+	display:block;
 }
-.featured-products .products-slider .product .text1 { margin-bottom:5px; }
-.featured-products .products-slider .product .text2 { margin-bottom:5px; }
-.featured-products .products-slider .product .text3 { font-weight:300; color:#777; }
+.featured-products .products-slider .product .text1 { display:block; margin-bottom:5px; }
+.featured-products .products-slider .product .text2 { display:block; margin-bottom:5px; }
+.featured-products .products-slider .product .text3 { display:block; font-weight:300; color:#777; }
 .featured-products .products-slider .l-arrow-back,
 .featured-products .products-slider .r-arrow-back {
 	width:80px;
