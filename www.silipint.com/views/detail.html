@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-	<link rel="stylesheet" href="/css/product-detail.css">
+	<link rel="stylesheet" href="/css/product-detail.css" data-lightbox>
 {% endblock %}
 
 {% block content %}
-	<div class="product-detail clearfix wrap-snap">
+	<div class="product-detail clearfix wrap-snap" data-lightbox>
 		<div class="section1">
 			<img class="main img-responsive" src="{{ product.images[0] }}">
 			<div class="thumbs">
@@ -76,5 +76,5 @@
 {% endblock %}
 
 {% block foot %}
-	<script src="/js/product-detail.js"></script>
+	<script src="/js/product-detail.js" data-lightbox></script>
 {% endblock %}

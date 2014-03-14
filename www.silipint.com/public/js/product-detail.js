@@ -1,4 +1,5 @@
-$('.top-tabs').on('click','a', function(ev){
+console.log('product detail lightbox')
+$('body').off('.lightbox').on('click.lightbox','.top-tabs a', function(ev){
 	ev.preventDefault();
 	$('.top-tabs a').removeClass('selected');
 	$(this).addClass('selected');

@@ -18,7 +18,7 @@
 		</div>
 		<div class="products">
 		{% for product in products %}
-			<a class="product" href="{{ product.productURL }}">
+			<a class="product" href="{{ product.productURL }}" data-lightbox>
 				<span class="img" style="background-image:url({{ product.images[0] }})"></span>
 				<span class="text">
 					<span class="text1">{{ product.description[2] }}</span>

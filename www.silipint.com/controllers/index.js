@@ -117,17 +117,19 @@ routeHandlers.detail = function(req, res) {
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
 			items : context.cache[pageID].items,
-			product : context.cache[pageID].product
+			product : context.cache[pageID].product,
+			seo : {}
 		};
-		renderObj.title = context.cache[pageID].product.pageTitle;
-		renderObj.description = context.cache[pageID].metaDescription;
 		
-		if (context.cache[pageID].kgTitle) {
-			renderObj.title = context.cache[pageID].kgTitle;
+		if (!context.cache[pageID].seo.title) {
+			renderObj.seo.title = context.cache[pageID].product.pageTitle;
 		}
-		if (context.cache[pageID].kgDescription) {
-			renderObj.title = context.cache[pageID].kgDescription;
+		if (!context.cache[pageID].seo.description) {
+			renderObj.seo.description = context.cache[pageID].metaDescription;
 		}
+		
+		if (!renderObj.seo.title) {  renderObj.seo.title = '[fill in]'; }
+		
 		res.render('detail', renderObj);
 	}
 	
@@ -161,8 +163,7 @@ routeHandlers.detail = function(req, res) {
 				items : []
 			}, function(kg){
 				context.cache[pageID].items = kg.items;
-				context.cache[pageID].kgTitle = kg.seo.title;
-				context.cache[pageID].kgDescription = kg.seo.description;
+				context.cache[pageID].seo = kg.seo;
 				cb();
 			});
 		}
