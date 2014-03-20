@@ -1,6 +1,7 @@
 var kitguiAccountKey = '4aceedcf3de04167a836e1053d9f7f54';
 module.exports = {
 	domain : 'www.silipint.com',
+	cdn : 'd1niwwqaddyuw4.cloudfront.net',
 	kitgui : {
 		host : 's3.amazonaws.com',
 		basePath : '/kitgui/clients/' + kitguiAccountKey,

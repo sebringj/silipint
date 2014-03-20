@@ -1,44 +1,98 @@
-.product-detail .section1 {
-	width:40%;
-	float:left;
+.product-detail {
+	margin:60px 20px;
+}
+#lightbox .product-detail {
+	margin:0;
+	padding:60px 0;
+}
+.product-detail .sl {
+	float:left; 
+	width:50%;
 	overflow:hidden;
 	border-right:2px solid #efefef;
-	margin-top:60px;
+}
+.product-detail .sr {
+	width:50%;
+	float:right;
+	overflow:hidden;
+	padding:0 0 0 20px;
+	clear:right;
+	border-left:2px solid #efefef;
+	position:relative;
+	left:-2px;
+}
+.product-detail .section1 {
+
 }
 .product-detail .section1 .main {
-	
+	min-width:50%;
+	min-height:50px;
+	width:100%;
+	height:auto;
 }
 .product-detail .section2 {
-	width:45%;
-	overflow:hidden;
-	float:right;
-	margin-top:60px;
 	color:#999;
 	font-family:'Oswald',sans-serif;
-	margin-right:10%;
 }
 .product-detail .section2 h1 { font-size:30px; }
 .product-detail .section2 h2 { font-size:20px; }
 .product-detail .section3 {
 	overflow:hidden;
 	margin-top:40px;
-	background-color:#f2f2f2;
-	padding:20px;
 }
-.product-detail .section3,
-.product-detail .section4,
-.product-detail .section5, 
-.product-detail .section6 { 
-	float:right; 
-	width:45%;
-	margin-right:10%;
+.product-detail .sr .row-spacer {
+	margin-bottom:20px;
+}
+.product-detail .section3 .bg {
+	background-color:#efefef;
+	padding:10px;
+}
+.product-detail .section3 button {
+	background-color:#000;
+	color:#FFBA12;
+	border:none;
+	padding:5px 10px;
+	font-size:14px;
+	text-transform:uppercase;
+	height:40px;
+}
+.product-detail .sr .lbl {
+	display:inline-block;
+	width:60px;
+}
+.product-detail .section3 input {
+	background-color:#d9d9d9;
+	border:none;
+	width:35px;
+	height:40px;
+	text-align:center;
+	display:inline-block;
+	margin-right:5px;
+}
+.product-detail .section4 {
+	padding:40px 20px 40px 30px;
+}
+.product-detail .section4 iframe {
+	width:65px;
+	height:25px;
+	display:inline-block;
 	overflow:hidden;
-	margin-top:40px;
+	border:none;
+	vertical-align:middle;
+	margin-right:10px;
+}
+.product-detail .section4 a {
+	width:65px;
+	height:25px;
+	display:inline-block;
+}
+.section4 iframe.facebook-share {
+	width:95px;
+}
+.section4 iframe.twitter-share {
+	width:95px;
 }
 .product-detail .section7 {
-	width:40%;
-	float:left;
-	overflow:hidden;
 	border-top:2px solid #efefef;
 	border-right:2px solid #efefef;
 	padding-top:40px;

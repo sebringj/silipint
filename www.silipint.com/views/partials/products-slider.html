@@ -17,7 +17,7 @@
 			<a href="#" class="arrow l-arrow"><i class="fa fa-angle-left"></i></a>
 		</div>
 		<div class="products">
-		{% for product in products %}
+		{% for product in layout.sliderProducts %}
 			<a class="product" href="{{ product.productURL }}" data-lightbox>
 				<span class="img" style="background-image:url({{ product.images[0] }})"></span>
 				<span class="text">

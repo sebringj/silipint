@@ -3,7 +3,7 @@
 {% block head %}
 	<link rel="stylesheet" href="/css/listing.css">
 	<link rel="stylesheet" href="/css/landing.css">
-	<link rel="stylesheet" href="/css/lightbox.css">
+	<link rel="stylesheet" href="/css/lightbox.css" data-lightbox>
 {% endblock %}
 
 {% block content %}
@@ -25,7 +25,7 @@
 			{% endfor %}
 		</div>
 	</div>
-	<div class="lightbox">
+	<div class="lb" data-lightbox>
 		<div class="wrap-snap">
 			<div class="row">
 				<div class="col-sm-6">
@@ -36,8 +36,8 @@
 					</div>
 				</div>
 				<div class="col-sm-5 col-sm-offset-1">
-					<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content }}</h1>
-					<div class="html {{ items[pageID + 'Html'].classNames }}">{{ items[pageID + 'Html'].content | safe }}</div>
+					<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
+					<div class="html {{ items[pageID + 'HTML1'].classNames }}">{{ items[pageID + 'HTML1'].content | safe }}</div>
 					<div class="social-icons">
 						<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{ path | url_encode }}" style="width:130px; height:20px;"></iframe>
 						<iframe src="//www.facebook.com/plugins/like.php?href={{ path | url_encode }}&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=232223003621871" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>

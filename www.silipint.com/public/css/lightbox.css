@@ -1,4 +1,10 @@
-.lightbox { background-color:#000; color:#fff; min-height:1200px; color:#fff; }
-.lightbox h1 { color:#00aeed; }
-.lightbox iframe { margin-bottom:20px; display:block; }
-.lightbox .html { margin:20px 0;}
+.lb { background-color:#000; color:#fff; min-height:1200px; color:#fff; }
+.lb h1 { color:#00aeed; }
+.lb iframe { margin-bottom:20px; display:block; }
+.lb .html { padding:20px 0;}
+#lightbox .lightbox-content {
+	background-color:#000;
+}
+#lightbox .wrap-snap .lb {
+		padding-top:100px;
+}

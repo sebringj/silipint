@@ -707,7 +707,7 @@ body.menuOpen #header .menu2 .more-sili .more {
 }
 
 /* lightbox */
-#contentWrapper.lightboxed {
+body.lightboxed #contentWrapper {
 	position:fixed;
 	top:75px;
 	left:0;
@@ -740,10 +740,12 @@ body.menuOpen #header .menu2 .more-sili .more {
 #lightbox .lightbox-nav {
 	width:82px;
 	height:82px;
-	top:100px;
-	position:fixed;
+	top:220px;
+	position:absolute;
 	background-color:rgba(255,255,255,0.5);
-	z-index:500;
+	z-index:1000;
+	display:block;
+	cursor:pointer;
 }
 #lightbox .lightbox-left {
 	left:-82px;
@@ -754,8 +756,10 @@ body.menuOpen #header .menu2 .more-sili .more {
 #lightbox .lightbox-close {
 	width:60px;
 	height:60px;
-	top:0;
+	top:100px;
 	right:0;
 	position:absolute;
-	background-color:rgba(255,255,255,0.5);
+	background-color:rgba(125,125,125,0.5);
+	z-index:2000;
+	cursor:pointer;
 }

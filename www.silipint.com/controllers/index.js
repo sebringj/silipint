@@ -63,8 +63,7 @@ routeHandlers.home = function(req, res) {
 			pageID : pageID,
 			items : context.cache[pageID].items,
 			title : context.cache[pageID].title,
-			description : context.cache[pageID].description,
-			products : context.cache[pageID].products
+			description : context.cache[pageID].description
 		});
 	}
 	
@@ -78,22 +77,13 @@ routeHandlers.home = function(req, res) {
 	}
 	async.parallel([
 		function(cb) {
-			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?tags=frontpage&extras=1'}, function(status, data) {
-				if (data && data.products) {
-					context.cache[pageID].products = data.products;
-				}
-				cb();
-			}, function() {
-				cb();
-			});
-		},
-		function(cb) {
 			kitgui.getContents({
 				basePath : config.kitgui.basePath,
 				host : config.kitgui.host,
 				pageID : pageID,
 				url : 'http://' + config.domain + req.path,
 				items : [
+					{ id : pageID + 'Slider', editorType : 'bootstrap-carousel-json' },
 					{ id : pageID + 'Collection', editorType : 'sili-json' }
 				]
 			}, function(kg){
@@ -145,6 +135,7 @@ routeHandlers.detail = function(req, res) {
 		function(cb) {
 			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?productURL=' + req.path }, function(status, data) {
 				if (data && data.product) {
+					data.product.productURL = 'http://' + config.domain + data.product.productURL;
 					context.cache[pageID].product = data.product;
 				} else {
 					context.cache[pageID].product = {};
@@ -231,7 +222,8 @@ routeHandlers.landing = function(req, res) {
 			items : context.cache[pageID].items,
 			title : context.cache[pageID].title,
 			description : context.cache[pageID].description,
-			products : products
+			products : products,
+			lightbox : ( (req.path === '/customize') ? 'data-lightbox' : '' )
 		});
 	}
 	if (req.cookies.kitgui) {
@@ -382,7 +374,7 @@ routeHandlers.lightbox = function(req, res) {
 			{ id : navID + 'SubNav', editorType : 'links-json' },
 			{ id : pageID + 'Images', editorType : 'bootstrap-carousel-json' },
 			{ id : pageID + 'Title', editorType : 'inline' },
-			{ id : pageID + 'Html', editorType : 'inline' }
+			{ id : pageID + 'HTML1', editorType : 'html' }
 		]
 	}, function(kg){
 		context.cache[pageID] = {

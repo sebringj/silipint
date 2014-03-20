@@ -88,6 +88,32 @@
 	padding-top:30px;
 	padding-right:30px;
 }
+.carousel-caption {
+	padding-bottom:0;
+	left:auto;
+	font-size:20px;
+	right:20%;
+	bottom:30px;
+	color:#efefef;
+}
+.carousel-indicators {
+	left:auto;
+	right:10%;
+	width:auto;
+	text-align:left;
+	bottom:23px;
+}
+.carousel-indicators li {
+	width:7px; height:7px;
+	border-radius:7px;
+}
+.carousel-indicators li.active {
+	background-color:#ffba11;
+	border-color:#ffba11;
+	width:7px; height:7px;
+	border-radius:7px;
+}
+.carousel-inner>.item>img,.carousel-inner>.item>a>img { width:100%;max-width:auto; }
 @media (max-width:768px) {
 	.unbreakable-bar {
 		width:100%;

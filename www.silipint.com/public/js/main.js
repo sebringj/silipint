@@ -84,10 +84,17 @@ $('.shop-nav-bar').on('click', function(ev){
 // lightbox
 if (history.pushState) {
 	(function(){
+		var stateBeforeLightBox = {
+			path : location.pathname,
+			title : document.title
+		};
+		var suppressStateChange = false;
+		var scrollTopBeforeLightBox;
+		var $el = null;
 		var scriptsExecuted = {};
 		var stylesLoaded = {};
 		var methods = {
-			openLightBox : function(options) {
+			openLightBox : function(options, cb) {
 				if (!$('#lightbox').length) {
 					$('body')
 					.append($('<div id="lightbox-back">'))
@@ -101,7 +108,11 @@ if (history.pushState) {
 							)
 					);
 				}
-				$('#contentWrapper').addClass('lightboxed').scrollTop($(window).scrollTop());
+				if (!$('#lightbox:visible').length) {
+					scrollTopBeforeLightBox = $(window).scrollTop();
+				}
+				$('body').addClass('lightboxed');
+				$('#contentWrapper').scrollTop(scrollTopBeforeLightBox);
 				$.get(options.path, function(html){
 					function loadBody() {
 						dependancyCount--;
@@ -110,10 +121,53 @@ if (history.pushState) {
 							.replace(/<script[^>]*>/gi,'<!--')
 							.replace(/<\/script>/gi,'-->');
 						var $div = $('<div>').html(cleanedBody);
-						$('#lightbox .lightbox-content').append($div.find('[data-lightbox]'));
-						$('#lightbox').fadeIn('fast');
-						window.scrollTo(0,0);
+						if (!options.animation) {
+							$('#lightbox .lightbox-content')
+								.find('[data-lightbox]').remove().end()
+								.append($div.find('[data-lightbox]'));
+							$('#lightbox').fadeIn('fast', function(){
+								window.scrollTo(0,0);
+							});							
+						} else if (options.animation) {
+							(function(){
+								var $old = $('#lightbox .lightbox-content:first');
+								var pos = $old.offset();
+								var top = $old.position().top;
+								var width = $old.outerWidth();
+								var space = 500;
+								var x1 = pos.left - width - space;
+								var x2 = pos.left;
+								var x3 = pos.left + width + space;
+								var oldMoveX;
+								var animationTime = 1000;
+								var $newDiv = $('<div>').append(
+									$('<div class="lightbox-content wrap-snap">')
+										.append($('<div class="lightbox-close">'))
+										.append($('<a class="lightbox-left lightbox-nav">'))
+										.append($('<a class="lightbox-right lightbox-nav">'))
+										.append($div.find('[data-lightbox]'))
+								);
+								$old.css({ position: 'absolute', left : x2, top: top, width: width });
+								if (options.animation === 'left') {
+									$newDiv.find('.lightbox-content').css({ position: 'absolute', left : x1, top: top, width: width });
+									oldMoveX = x3;
+								} else {
+									$newDiv.find('.lightbox-content').css({ position: 'absolute', left: x3, top: top, width: width  });
+									oldMoveX = x1;
+								}
+								$('#lightbox').append($newDiv.find('.lightbox-content'));
+								var $new = $('#lightbox .lightbox-content:last');
+								$new.animate({ left : x2 }, animationTime, 'swing', function(){
+									$new.css({ left : 'auto', top: 'auto', position: 'relative', width: 'auto' });
+								});
+								$old.animate({ left : oldMoveX }, animationTime, 'swing', function(){
+									$old.remove();
+								});
+							})();
+						}
+						if (cb) { cb(title, options.path); }
 					}
+					
 					var dependancyCount = 0;
 					var title = (/(?:<title[^>]*>)([^<]*)(?:<\/title>)/i).exec(html);
 					if (title && title.length === 2) {
@@ -126,6 +180,13 @@ if (history.pushState) {
 					var scripts = html.match(/<script[^>]*data-lightbox[^>]*><\/script>/mi);
 					if (scripts && scripts.length) {
 						dependancyCount += scripts.length;
+					}
+					var style = html.match(/<link[^>]*data-lightbox[^>]*>/mi);
+					if (style && style.length) {
+						dependancyCount += style.length;
+					}
+					
+					if (scripts && scripts.length) {
 						$.each(scripts, function(i,v){
 							var src = /src="([^"]+)"/i.exec(v);
 							if (scriptsExecuted[src[1]]) { loadBody(); return; }
@@ -137,9 +198,8 @@ if (history.pushState) {
 							}
 						});
 					}
-					var style = html.match(/<link[^>]*data-lightbox[^>]*>/mi);
+					
 					if (style && style.length) {
-						dependancyCount += style.length;
 						$.each(style, function(i,v){
 							var href = /href="([^"]+)"/i.exec(v);
 							if (stylesLoaded[href[1]]) { loadBody(); return; }
@@ -152,36 +212,96 @@ if (history.pushState) {
 							}
 						});
 					}
+
 				}, 'text');
 			},
-			closeLightBox : function() {
+			closeLightBox : function(callback) {
 				if ($('#lightbox').length) {
 					$('#lightbox').fadeOut('fast',function(){
 						$('#lightbox').remove();
-						$('#contentWrapper').removeClass('lightboxed');
+						$('body').removeClass('lightboxed');
+						
+						window.scrollTo(0,scrollTopBeforeLightBox);
 					});
 					$('#lightbox-back').fadeOut('fast', function(){
 						$('#lightbox-back').remove();
-					})
+					});
+				}
+				if ($.isFunction(callback)) {
+					callback();
 				}
 			}
 		};
 		
-		console.log(navigator.userAgent);
-		
-		$(window).on('popstate', function(ev){
-			/*console.log('popstate');
-			if (ev.state && ev.state.method) {
-				ev.state.options.popstate = true;
-				methods[ev.state.method](ev.state.options);
-			}*/
+		History.replaceState({ 
+				method : 'closeLightBox', 
+				path : location.path, 
+				title : document.title 
+			}, 
+			document.title, 
+			location.path
+		);
+		History.Adapter.bind(window, 'statechange', function(){
+			var state = History.getState();
+			if (!suppressStateChange && state) {
+				/*if (state.data.animation) {
+					switch (state.data.animation) {
+						case 'left' : state.data.animation = 'right'; break;
+						case 'right' : state.data..animation = 'left'; break;  
+					}
+				}*/
+				methods[state.data.method](state.data);
+			}
+			suppressStateChange = false;
 		});
-		//history.replaceState({}, document.title, location.path);
-		
+					
 		$('body').on('click','a[data-lightbox][href]', function(ev){
 			ev.preventDefault();
+			pathBeforeLightBox = document.location.path;
+			$el = $(this);
 			methods.openLightBox({
 				path : $(this).attr('href')
+			}, function(title, path){
+				suppressStateChange = true;
+				History.pushState({ method : 'openLightBox', path : path, title : title }, title, path);
+			});
+		}).on('click','#lightbox .lightbox-content', function(ev){
+			ev.stopImmediatePropagation();
+			ev.stopPropagation();
+		}).on('click','#lightbox', function(){
+			History.pushState({ method : 'closeLightBox', title : stateBeforeLightBox.title, path : stateBeforeLightBox.path }, 
+			stateBeforeLightBox.title, stateBeforeLightBox.path);
+		}).on('click', '#lightbox .lightbox-content .lightbox-close', function(){
+			methods.closeLightBox(function(title, path){
+				suppressStateChange = true;
+				History.pushState({ method : 'closeLightBox', title : stateBeforeLightBox.title, path : stateBeforeLightBox.path }, 
+				stateBeforeLightBox.title, stateBeforeLightBox.path);
+				$el = null;
+			});
+		}).on('click', '#lightbox .lightbox-content .lightbox-nav', function(ev){
+			ev.preventDefault();
+			var newIndex = -1;
+			var animation = 'left';
+			if ($(this).hasClass('lightbox-right')) {
+				newIndex = $el.index() + 1;
+				if ($el.parent().find('[data-lightbox]:last').index() === newIndex) {
+					return;
+				}
+				animation = 'right';
+			} else {
+				if ($el.index() === 0) {
+					return;
+				}
+				newIndex = $el.index() - 1;
+			}
+			$el = $el.parent().find('[data-lightbox]:eq('+ newIndex +')');
+			methods.openLightBox({
+				path : $el.attr('href'),
+				animation : animation
+			}, function(title, path){
+				suppressStateChange = true;
+				if (animation === 'left') { animation = 'right'; } else { animation = 'left'; }
+				History.pushState({ method : 'openLightBox', path : path, title : title }, title, path);
 			});
 		});
 	})();

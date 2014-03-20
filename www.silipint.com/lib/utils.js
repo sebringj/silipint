@@ -1,7 +1,10 @@
+var config = require('config');
+
 module.exports = {
 	getLayoutData : getLayoutData,
 	getPageId : getPageId,
-	getNavId : getNavId
+	getNavId : getNavId,
+	fixForCDN : fixForCDN
 };
 
 function getPageId(path) {
@@ -15,4 +18,11 @@ function getLayoutData(req) {
 	return {
 		year : (new DateTime().getFullYear())
 	};
+}
+
+function fixForCDN(url) {
+	if (url.indexOf('//') < 0) { return url; }
+	var parts = url.split('//')[1].split('/');
+	parts.splice(0,2);
+	return '//' + config.cdn + '/' + parts.join('/');
 }

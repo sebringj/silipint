@@ -7,13 +7,35 @@
 {% endblock %}
 
 {% block content %}
-	<div class="promo">
-		<img src="//d1niwwqaddyuw4.cloudfront.net/img/home-hero-color-me-sili.jpg">
+	<div id="homeslider" class="carousel slide {{ items[pageID + 'Slider'].classNames }}" data-ride="carousel">
+		{% if items.homeSlider.content %}
+			<ol class="carousel-indicators">
+				{% for item in items.homeSlider.content %}
+				   {% if loop.first %}
+					<li data-target="#homeslider" class="active"></li>
+				   {% else %}
+				   	<li data-target="#homeslider"></li>
+				   {% endif %}
+				{% endfor %}
+			</ol>
+			<div class="carousel-inner">
+				{% for item in items[pageID + 'Slider'].content %}
+					   {% if loop.first %}
+	   				    <div class="item active">
+	   				      <img src="{{ item.src }}" alt="{{ item.alt }}">
+	   				      <div class="carousel-caption">{{ item.caption }}</div>
+	   				    </div>
+					   {% else %}
+	   				    <div class="item">
+	   				      <img src="{{ item.src }}" alt="{{ item.alt }}">
+	   				      <div class="carousel-caption">{{ item.caption }}</div>
+	   				    </div>
+					   {% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
 	</div>
-	<div class="unbreakable-bar">
-		<div class="text">Welcome to Silipint. Unbreakable Silicon Drinkwear that's tons of fun.</div>
-		<div class="arrow"></div>
-	</div>
+	<div class="unbreakable-bar"></div>
 	{% include "./partials/products-slider.html" %}
 	<div class="clearfix boxes1 {{ items[pageID + 'Collection'].classNames }}">
 		{% for item in items[pageID + 'Collection'].content %}
