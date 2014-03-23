@@ -7,7 +7,7 @@ var express = require('express'),
 	http = require('http'),
 	path = require('path'),
 	cons = require('consolidate'),
-	swig = require('swig'),
+	nunjucks = require('./lib/nunjucks.js'),
 	cache = {},
 	mcapi = require('mailchimp-api'),
 	middleware = require('./controllers/middleware.js')
@@ -17,10 +17,8 @@ var express = require('express'),
 		mailchimp : (new mcapi.Mailchimp(config.mailchimp.apikey))
 	};
 	
-app.engine('.html', cons.swig);
-app.set('view engine', 'html');
-app.set('view cache', false);
-app.set('views', __dirname + '/views');
+nunjucks.set(app);
+
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());

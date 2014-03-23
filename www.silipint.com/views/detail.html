@@ -26,10 +26,10 @@
 			<div class="bg">
 				{% if product.sizes && product.sizes.length %}
 					{% if product.sizes[0].unitPrice < product.sizes[0].msrp %}
-						<span class="msrp">${{ product.sizes[0].msrp }}</span>
+						<span class="msrp">${{ product.sizes[0].msrp | cur }}</span>
 						<span class="sale">On Sale</span>
 					{% endif %}
-					<span class="unitprice">${{ product.sizes[0].unitPrice }}</span>
+					<span class="unitprice">${{ product.sizes[0].unitPrice | cur }}</span>
 					{% if product.inStock %}
 						<span class="stock">In Stock</span>
 					{% else %}

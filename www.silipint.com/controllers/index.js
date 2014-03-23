@@ -57,7 +57,7 @@ routeHandlers.home = function(req, res) {
 	var pageID = 'home';
 
 	function render() {
-		res.render('index', {
+		res.render('index.html', {
 			layout : globalContext.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
@@ -120,7 +120,7 @@ routeHandlers.detail = function(req, res) {
 		
 		if (!renderObj.seo.title) {  renderObj.seo.title = '[fill in]'; }
 		
-		res.render('detail', renderObj);
+		res.render('detail.html', renderObj);
 	}
 	
 	if (req.cookies.kitgui || req.query.refresh) {
@@ -164,9 +164,44 @@ routeHandlers.detail = function(req, res) {
 }
 
 routeHandlers.shop = function(req, res) {
-	res.render('shop', {
-		pageID : 'shop',
-		kitguiAccountKey : config.kitgui.accountKey
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		res.render('landing', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : navID + 'SubNavLabel', editorType : 'inline' },
+			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'Collection', editorType : 'sili-json' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
 	});
 };
 
@@ -197,7 +232,7 @@ routeHandlers.collection = function(req, res) {
 			href : href
 		});
 	}
-	res.render('collection', {
+	res.render('collection.html', {
 		products : products,
 		pages : pages
 	});
@@ -264,7 +299,7 @@ routeHandlers.listing = function(req, res) {
 				index : (i+1),
 			});
 		}
-		res.render('listing', {
+		res.render('listing.html', {
 			layout : context.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
@@ -345,7 +380,7 @@ routeHandlers.lightbox = function(req, res) {
 				index : (i+1),
 			});
 		}
-		res.render('lightbox', {
+		res.render('lightbox.html', {
 			layout : context.cache.layout,
 			path : 'http://' + config.domain + req.path,
 			kitguiAccountKey : config.kitgui.accountKey,
