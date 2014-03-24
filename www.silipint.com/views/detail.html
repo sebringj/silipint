@@ -18,18 +18,18 @@
 			</div>
 		</div>
 		<div class="section2 sr">
-			<h1>{{ product.descriptions[2] | striptags }}</h1>
-			<h2>{{ product.descriptions[3] | striptags }}</h2>	
-			<div>{{ product.descriptions[0] | striptags }}</div>
+			<h1>{{ product.descriptions[2] }}</h1>
+			<h2>{{ product.descriptions[3] }}</h2>	
+			<div>{{ product.descriptions[0] }}</div>
 		</div>
 		<div class="section3 sr">
 			<div class="bg">
-				{% if product.sizes && product.sizes.length %}
+				{% if product.sizes and product.sizes.length %}
 					{% if product.sizes[0].unitPrice < product.sizes[0].msrp %}
-						<span class="msrp">${{ product.sizes[0].msrp | cur }}</span>
+						<span class="msrp">{{ product.sizes[0].msrp | cur }}</span>
 						<span class="sale">On Sale</span>
 					{% endif %}
-					<span class="unitprice">${{ product.sizes[0].unitPrice | cur }}</span>
+					<span class="unitprice">{{ product.sizes[0].unitPrice | cur }}</span>
 					{% if product.inStock %}
 						<span class="stock">In Stock</span>
 					{% else %}
@@ -39,7 +39,7 @@
 				<div class="row-spacer"></div>		
 				<span class="lbl">Quantity</span>
 				<input name="qty" data-quantifier value="1">
-				<button data-add-to-cart>add to cart</button>
+				<button data-add-to-cart data-sku="{{ product.sizes[0].sku }}">add to cart</button>
 				<div class="row-spacer"></div>	
 				<span class="lbl">Colors</span>
 				<div class="colors"></div>
@@ -47,11 +47,11 @@
 		</div>
 		<div class="section4 sr">
 			<span class="lbl">Share</span>
-			<iframe src="//www.facebook.com/plugins/like.php?href={{ product.productURL | url_encode }}&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=65&amp;appId=632600213433235" 
+			<iframe src="//www.facebook.com/plugins/like.php?href={{ product.productURL | urlencode }}&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=65&amp;appId=632600213433235" 
 				scrolling="no" frameborder="0" class="facebook-share" allowTransparency="true"></iframe>
 			<iframe class="twitter-share" allowtransparency="true" frameborder="0" scrolling="no"
-				src="https://platform.twitter.com/widgets/tweet_button.html?url={{ product.productURL | url_encode }}"></iframe>	
-			<a class="pinit" href="http://pinterest.com/pin/create/button/?url={{ product.productURL | url_encode }}&amp;media={{ product.images[0] | url_encode }}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>				
+				src="https://platform.twitter.com/widgets/tweet_button.html?url={{ product.productURL | urlencode }}"></iframe>	
+			<a class="pinit" href="http://pinterest.com/pin/create/button/?url={{ product.productURL | urlencode }}&amp;media={{ product.images[0] | urlencode }}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>				
 			<div class="row-spacer"></div>
 			<span>Email a Friend</span>
 		</div>

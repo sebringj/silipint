@@ -1,25 +1,42 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-<link rel="stylesheet" href="/css/partials/sili-life.css">
+<link rel="stylesheet" href="/css/partials/sili-times.css">
 <link rel="stylesheet" href="/css/collection.css">
 {% endblock %}
 
 {% block content %}
-{% include "./partials/shop-nav.html" %}
-
+<div class="shop-nav clearfix">
+	<div class="shop-nav-bar">
+		<i class="fa fa-caret-down down"></i>
+		<i class="fa fa-caret-up up"></i>
+		<span class="{{ items[navID + 'SubNavLabel'].classNames }}">
+			{% if items[navID + 'SubNavLabel'].content %}
+				{{ items[navID + 'SubNavLabel'].content }}
+			{% else %}
+				Navigation
+			{% endif %}
+		</span>
+	</div>
+	<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
+		{% for item in items[navID + 'SubNav'].content %}
+			<a href="{{ item.href }}">{{ item.text }}</a>
+		{% endfor %}
+	</div>
+</div>
 <div class="products clearfix">
 {% for product in products %}
-	<div class="product">
-		<div class="img"></div>
-		<div class="overlay">
-			<div class="line1">Product Name</div>
-			<div class="line2">A little blurb about the product</div>
-			<div class="price">$0.00</div>
-		</div>
-	</div>
+	<a class="product" href="{{ product.productURL }}" data-lightbox>
+		<img class="img" style="background-image:url('{{ product.images[0] | safe }}')" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+		<span class="overlay">
+			<span class="line1">{{ product.description[2] | safe }}</span>
+			<span class="line2">{{ product.description[3] | safe }}</span>
+			<span class="price">{{ product.sizes[0].unitPrice | cur  }}</span>
+		</span>
+	</a>
 {% endfor %}
 </div>
+{% if pages %}
 <div class="page-bar">
 	<div class="wrap-snap">
 		<div class="next-prev"><a>NEXT</a> <span>|</span> <a>PREV</a></div>
@@ -30,13 +47,14 @@
 		</div>
 	</div>
 </div>
+{% endif %}
 
 {% include "./partials/cups.html" %}
-{% include "./partials/sili-life.html" %}
+{% include "./partials/sili-times.html" %}
 {% endblock %}
 
 {% block foot %}
 <script src="/js/shop.js"></script>
 <script src="/js/collection.js"></script>
-<script src="/js/partials/sili-life.js"></script>
+<script src="/js/partials/sili-times.js"></script>
 {% endblock %}

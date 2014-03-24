@@ -39,10 +39,10 @@
 					<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
 					<div class="html {{ items[pageID + 'HTML1'].classNames }}">{{ items[pageID + 'HTML1'].content | safe }}</div>
 					<div class="social-icons">
-						<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{ path | url_encode }}" style="width:130px; height:20px;"></iframe>
-						<iframe src="//www.facebook.com/plugins/like.php?href={{ path | url_encode }}&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=232223003621871" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-						{% if items[pageID + 'Images'].content &&  items[pageID + 'Images'].content.length > 0 %}
-							<a href="http://www.pinterest.com/pin/create/button/?url={{ path | url_encode }}&amp;media={{ items[pageID + 'Images'].content[0].src }}&amp;description=Next%20stop%3A%20Pinterest"
+						<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{ path | urlencode }}" style="width:130px; height:20px;"></iframe>
+						<iframe src="//www.facebook.com/plugins/like.php?href={{ path | urlencode }}&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=232223003621871" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+						{% if items[pageID + 'Images'].content and  items[pageID + 'Images'].content.length > 0 %}
+							<a href="http://www.pinterest.com/pin/create/button/?url={{ path | urlencode }}&amp;media={{ items[pageID + 'Images'].content[0].src }}&amp;description=Next%20stop%3A%20Pinterest"
 						        data-pin-do="buttonPin"
 						        data-pin-config="above">
 						        <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />

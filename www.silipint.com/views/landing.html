@@ -21,7 +21,7 @@
 		</div>
 		<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
 			{% for item in items[navID + 'SubNav'].content %}
-				<a href="{{ item.href }}">{{ item.text }}</a>
+				<a href="{{ item.href }}">{{ item.text | safe }}</a>
 			{% endfor %}
 		</div>
 	</div>

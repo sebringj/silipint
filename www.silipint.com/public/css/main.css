@@ -508,6 +508,9 @@ body.menuOpen #header .menu2 .more-sili .more {
 		width:100%;
 		text-align:center;
 	}
+	.lightboxed #stickyFooter {
+		display:none;
+	}
 }
 @media (max-width:480px) {
 	#header .life-better-sili {
