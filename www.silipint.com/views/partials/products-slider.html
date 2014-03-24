@@ -23,7 +23,7 @@
 				<span class="text">
 					<span class="text1">{{ product.description[2] }}</span>
 					<span class="text2">{{ product.description[3] }}</span>
-					<span class="text3">${{ product.unitPrice.toFixed() }}</span>
+					<span class="text3">{{ product.sizes[0].unitPrice | cur }}</span>
 				</span>
 			</a>
 		{% endfor %}

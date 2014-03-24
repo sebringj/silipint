@@ -10,12 +10,35 @@
 	cursor:pointer;
 	display:block;
 	text-decoration:none;
+	overflow:hidden;
+	position:relative;
 }
-.showcase .item .img {
+.showcase .item .back {
 	width:100%;
-	height:288px;
+	height:auto;
 	background-color:#fff;
 	display:block;
+}
+.showcase .item .img,
+.showcase .item .img2 {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:auto;
+	background-position:center center;
+	background-size:cover;
+	background-repeat:no-repeat;
+	display:block;
+}
+.showcase .item .img2 {
+	display:none;
+}
+.showcase .item:hover .img2 {
+	display:block;
+}
+.showcase .item:hover .img {
+	display:none;
 }
 .showcase .item .text {
 	text-align:center;

@@ -17,7 +17,7 @@ module.exports = [
 	{ path : '/bike-drinking-glasses-16oz', method : 'collection' },
 	{ path : '/bike-glasses-16oz', method : 'collection' },
 	{ path : '/cart', method : 'cart' },
-	{ path : '/checkout', method : 'checkout' }
+	{ path : '/checkout', method : 'checkout' },
 	{ path : '/colored-drinking-glasses', method : 'collection' },
 	{ path : '/colorful-shot-glasses-1.5oz', method : 'collection' },
 	{ path : '/contact-us', method : 'contactus' },
@@ -27,7 +27,6 @@ module.exports = [
 	{ path : '/desert-wonders-drinking-cup-8oz', method : 'collection' },
 	{ path : '/desert-wonders-drinking-cup-9oz', method : 'collection' },
 	{ path : '/desert-wonders-shot-glasses-1.5oz', method : 'collection' },
-	{ path : /-detail$/, method : 'detail' },
 	{ path : '/drinking-games-pint-glasses-16oz', method : 'collection' },
 	{ path : '/drinks-up-tees-down-golf-shot-glasses-1.5oz', method : 'collection' },
 	{ path : '/faq', method : 'content' },
@@ -84,5 +83,5 @@ module.exports = [
 	{ path : '/sunglass-drinking-glass-16oz', method : 'collection' },
 	{ path : '/wine-bottle-stopper', method : 'collection' },
 	{ path : '/world-map-drinking-glasses-16oz', method : 'collection' },
-
+	{ path : /(oz|lid|pint|-detail)$/, method : 'detail' },
 ];

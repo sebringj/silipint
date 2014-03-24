@@ -16,7 +16,7 @@ module.exports.set = function(context) {
 	var app = context.app, route, i;
 	for(i = 0; i < routes.length; i++) {
 		route = routes[i];
-		app.get(route.path, routeHandlers[ route.method ]);
+		app.get(route.path, routeHandlers[ route.method ]);	
 	}
 	for(i = 0; i < redirects.length; i++) {
 		redirect = redirects[i];
@@ -31,7 +31,7 @@ module.exports.set = function(context) {
 	app.use(function(req, res, next) {
 		res.status(404);
 		if (req.accepts('html')) {
-			res.render('404', {
+			res.render('404.html', {
 				title : '404',
 				description: 'The page you requested could not be found'
 			});
@@ -49,7 +49,7 @@ module.exports.set = function(context) {
 	app.use(function(err, req, res, next){
 		res.status(err.status || 500);
 		console.log(err);
-		res.render('500', { error: err });
+		res.render('500.html', { error: err });
 	});
 };
 
@@ -133,10 +133,17 @@ routeHandlers.detail = function(req, res) {
 	}
 	async.parallel([
 		function(cb) {
-			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?productURL=' + req.path }, function(status, data) {
+			var query = '/api/v1/products?extras=1&tags=' + req.path.substr(1);
+			if (/-detail$/.test(req.path)) {
+				query = '/api/v1/products?productURL=' + req.path;
+			}
+			getJSON({port:443, host:'silipint.hubsoft.ws',path:query }, function(status, data) {
 				if (data && data.product) {
 					data.product.productURL = 'http://' + config.domain + data.product.productURL;
 					context.cache[pageID].product = data.product;
+				} else if(data && data.products && data.products.length) {
+					data.products[0].productURL = 'http://' + config.domain + req.path;
+					context.cache[pageID].product = data.products[0];
 				} else {
 					context.cache[pageID].product = {};
 				}
@@ -165,10 +172,10 @@ routeHandlers.detail = function(req, res) {
 
 routeHandlers.shop = function(req, res) {
 	var cacheKey = utils.getPageId(req.path);
-	var pageID = cacheKey;
-	var navID = utils.getNavId(req.path);
+	var pageID = 'shop';
+	var navID = 'shop';
 	function render() {
-		res.render('landing', {
+		res.render('shop.html', {
 			layout : context.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
@@ -193,7 +200,7 @@ routeHandlers.shop = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
-			{ id : pageID + 'Collection', editorType : 'sili-json' }
+			{ id : pageID + 'Collection', editorType : 'listing-json' }
 		]
 	}, function(kg){
 		context.cache[pageID] = {
@@ -206,35 +213,68 @@ routeHandlers.shop = function(req, res) {
 };
 
 routeHandlers.collection = function(req, res) {
-	var products = [], i, pages = [], page, href;
-	for(i = 0; i < 16; i++) {
-		products.push({
-			index : (i+1),
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'shop';
+	function render() {
+		res.render('collection.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+			products : context.cache[pageID].products
 		});
 	}
-	var path = req.path.split('/');
-	var nextlink = null, prevlink = null;
-	var page = 1;
-	if (path.length > 3) {
-		page = parseInt(path.pop());
-		nextlink		
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
 	}
-	path = path.join('/');
-	for(i = 0; i < 20; i++) {
-		page = (i+1)+'';
-		if (i === 0) {
-			href = path;
-		} else {
-			href = path + '/' + page;
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path,
+				items : [
+					{ id : navID + 'SubNavLabel', editorType : 'inline' },
+					{ id : navID + 'SubNav', editorType : 'links-json' },
+					{ id : pageID + 'Collection', editorType : 'listing-json' }
+				]
+			}, function(kg){
+				context.cache[pageID].items = kg.items;
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		},
+		function(cb) {
+			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?extras=1&tags=' + req.path.substr(1) }, function(status, data) {
+				if (data && data.products) {
+					/*for(var i = 0; i < data.products.length; i++) {
+						if (data.products[i].tags && data.products[i].tags.length) {
+							data.products[i].productURL = data.products[i].tags.pop();
+						}
+					}*/
+					context.cache[pageID].products = data.products;
+				} else {
+					context.cache[pageID].products = {};
+				}
+				cb();
+			}, function() {
+				context.cache[pageID].products = {};
+				cb();
+			});
 		}
-		pages.push({
-			label : page,
-			href : href
-		});
-	}
-	res.render('collection.html', {
-		products : products,
-		pages : pages
+	],function(err){
+		render();
 	});
 };
 
@@ -249,7 +289,7 @@ routeHandlers.landing = function(req, res) {
 				index : (i+1),
 			});
 		}
-		res.render('landing', {
+		res.render('landing.html', {
 			layout : context.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
