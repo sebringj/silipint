@@ -5,7 +5,7 @@
 	background-repeat:no-repeat;
 	position:relative;
 	box-shadow:0 1px 5px #333;
-	min-height:250px;
+	min-height:300px;
 }
 .promo img {
 	width:100%;
@@ -141,6 +141,21 @@
 	}
 	.unbreakable-bar .arrow {
 		display:none;
+	}
+	.carousel-inner {
+		overflow:visible;
+	}
+	.carousel-caption {
+		display:block;
+		width:100%;
+		top:89%;
+		bottom:auto;
+		background-color:#efefef;
+		color:#555;
+		border-bottom:2px solid #ccc;
+		left:0;
+		padding:20px;
+		text-shadow:none;
 	}
 }
 @media (max-width:768px) {
