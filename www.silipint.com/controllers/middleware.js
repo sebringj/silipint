@@ -19,19 +19,16 @@ function setLayoutCache(context) {
 		context.cache.layout = {};
 		async.parallel([
 			function(cb) {
-				cb();
-				/*
 				kitgui.getContents({
 					basePath : config.kitgui.basePath,
 					host : config.kitgui.host,
 					items : [
-						// { id : 'homeNavItem1', editorType : 'inline' }
+						{ id : 'productsSlider', editorType : 'links-json' }
 					]
 				}, function(kg){
 					context.cache.layout.items = kg.items;
 					cb();
 				});
-				*/
 			},
 			function(cb) {
 				getJSON({port:443, host:'api.instagram.com',path:'/v1/users/37417319/media/recent?client_id=4c559d14132d4106812179c7a223840d'}, function(status, data) {

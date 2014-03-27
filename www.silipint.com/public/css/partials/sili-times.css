@@ -15,15 +15,23 @@
 	display:inline-block;
 	vertical-align:middle;
 	position:relative;
-	top:4px;
+	top:2px;
 	margin:0 10px;
 }
 .sili-times .bar a {
-	color:#fff;
-	font-size:40px;
 	cursor:pointer;
 	display:inline-block;
 	vertical-align:middle;
+	width:19px;
+	height:35px;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+.sili-times .bar a.l-arrow {
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/instagram-arrow-left.png?v2);
+}
+.sili-times .bar a.r-arrow {
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/instagram-arrow-right.png?v2);
 }
 .sili-times .bar a.disabled {
 	cursor:default;

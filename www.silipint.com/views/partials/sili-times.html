@@ -1,9 +1,9 @@
 {% if layout and layout.instagram %}
 <div class="sili-times">
 	<div class="bar">
-		<a class="l-arrow arrow disabled"><i class="fa fa-angle-left"></i></a>
+		<a class="l-arrow arrow disabled"></a>
 		<span>Sili Times Near &amp; Far</span>
-		<a class="r-arrow arrow"><i class="fa fa-angle-right"></i></a>
+		<a class="r-arrow arrow"></a>
 	</div>
 	<div class="boxes2">
 		{% for item in layout.instagram.data %}
@@ -12,7 +12,7 @@
 				<img class="front" src="//d1niwwqaddyuw4.cloudfront.net/img/transparent-square.gif">
 				<span class="caption">
 					{{ item.caption.text }}
-					<span class="instagram"><i class="fa fa-instagram"></i></span>
+					<span class="instagram"></span>
 				</span>
 			</a>
 		{% endfor %}

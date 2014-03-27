@@ -85,8 +85,12 @@
 	color:#fff;
 	font-size:20px;
 	text-align:right;
-	padding-top:30px;
-	padding-right:30px;
+	padding-top:35px;
+	padding-right:20%;
+	display:block;
+	background-repeat:no-repeat;
+	background-position:90% center;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/sili-arrow-right.png?v2);
 }
 .carousel-caption {
 	padding-bottom:0;

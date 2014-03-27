@@ -11,13 +11,6 @@
 	float:left;
 	padding-left:-20px;
 	background: #eaeaea; /* Old browsers */
-	background: -moz-linear-gradient(top,  #eaeaea 0%, #cccccc 29%, #e5e5e5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeaea), color-stop(29%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #eaeaea 0%,#cccccc 29%,#e5e5e5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 }
 .featured-products .bar .get-sili img {
 	margin-right:20px;
@@ -35,13 +28,6 @@
 	overflow:hidden;
 	float:left;
 	background: #eaeaea; /* Old browsers */
-	background: -moz-linear-gradient(top,  #eaeaea 0%, #ffffff 29%, #e5e5e5 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeaea), color-stop(29%,#ffffff), color-stop(100%,#e5e5e5)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #eaeaea 0%,#ffffff 29%,#e5e5e5 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeaea', endColorstr='#e5e5e5',GradientType=0 ); /* IE6-9 */
 }
 @media (max-width:1060px) {
 	.featured-products .bar .get-sili {
@@ -113,8 +99,6 @@
 .featured-products .products-slider .product .text3 { display:block; font-weight:300; color:#777; }
 .featured-products .products-slider .l-arrow-back,
 .featured-products .products-slider .r-arrow-back {
-	width:80px;
-	height:535px;
 	position:absolute;
 	top:0;
 	cursor:pointer;
@@ -123,15 +107,12 @@
 .featured-products .products-slider .arrow {
 	background-repeat:no-repeat;
 	background-position:center center;
-	width:80px;
-	height:535px;
 	display:block;
+	width:50px;
+	height:100px;
 	text-decoration:none;
 	border:none;
 	outline: none;
-	color:#ccc;
-	font-size:100px;
-	opacity:0.5;
 	top:170px;
 	position:absolute;
 	background-color:transparent;
@@ -140,17 +121,13 @@
 .featured-products .products-slider .arrow::-moz-focus-inner {
 	border:0;
 }
-.featured-products .products-slider .l-arrow-back {
-	left:0;
-}
 .featured-products .products-slider .l-arrow {
-	/*background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/carousel-left.png?v1);*/
-}
-.featured-products .products-slider .r-arrow-back {
-	right:0;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/carousel-left.png?v2);
+	left:10px;
 }
 .featured-products .products-slider .r-arrow {
-	/*background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/carousel-right.png?v1);*/
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/carousel-right.png?v2);
+	right:10px;
 }
 @media (max-width:910px) {
 	.featured-products .bar {
@@ -173,6 +150,17 @@
 	}
 	.featured-products .bar .navi a {
 		padding:0 15px;
+	}
+}
+@media (max-width:768px) and (min-width:481px) {
+	.featured-products .navi a:nth-child(2n+2) {
+		background-color:#ccc;
+	}
+	.featured-products .navi a:nth-child(2n+6) {
+		background-color:#efefef;
+	}
+	.featured-products .navi a:nth-child(2n+5) {
+		background-color:#ccc;
 	}
 }
 @media (max-width:768px) {
@@ -224,18 +212,21 @@
 	.featured-products .bar .get-sili {
 		display:none;
 	}
-	.featured-products .navi a.checker {
-		background-color:#ccc;
-	}
-	.featured-products .navi a.l {
-		border-left:1px solid transparent;
-	}
-	.featured-products .navi a.checker.l {
-		border-left:1px solid #ccc;
-	}
 	.featured-products .products-slider .products {
 		overflow:scroll;
 		-webkit-overflow-scrolling: touch;
+	}
+}
+@media (max-width:480px) {
+	.featured-products .products-slider .products {
+		overflow:scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+	.featured-products .navi a:nth-child(4n-2),.featured-products .navi a:nth-child(4n-1)  {
+		background-color:#ccc;
+	}
+	.featured-products .bar .navi a {
+		width:50%;
 	}
 }
 @media (max-width:320px) {
