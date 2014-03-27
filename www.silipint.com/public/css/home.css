@@ -1,19 +1,3 @@
-.promo {
-	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/home-hero-color-me-sili.jpg);
-	background-size:cover;
-	background-position:center center;
-	background-repeat:no-repeat;
-	position:relative;
-	box-shadow:0 1px 5px #333;
-	min-height:300px;
-}
-.promo img {
-	width:100%;
-	height:auto;
-}
-@media (max-width:684px) {
-	.promo img { display:none; }
-}
 .unbreakable-bar {
 	width:100%;
 	height:102px;
@@ -40,23 +24,6 @@
 	top:0;
 	right:0;
 	cursor:pointer;
-}
-@media (max-width:768px) {
-	.promo .bar {
-		height:auto;
-		padding-right:10px;
-		padding-left:10px;
-	}
-	.promo .bar .text {
-		padding:10px;
-		top:auto;
-		font-weight:normal;
-		font-size:12px;
-		text-align:left;
-	}
-	.promo .bar .arrow {
-		display:none;
-	}
 }
 .boxes1 {
 	background-color:#00aeef;
@@ -148,7 +115,7 @@
 	.carousel-caption {
 		display:block;
 		width:100%;
-		top:89%;
+		top:90%;
 		bottom:auto;
 		background-color:#efefef;
 		color:#555;
@@ -156,6 +123,9 @@
 		left:0;
 		padding:20px;
 		text-shadow:none;
+		font-size:16px;
+		margin:0;
+		border-top:1px solid #fff;
 	}
 }
 @media (max-width:768px) {
@@ -163,5 +133,13 @@
 		width:100%;
 		border-left:none;
 		border-right:none;
+	}
+	.carousel-caption {
+		
+	}
+}
+@media (max-width:480px) {
+	.carousel-caption { 
+		top:84%;
 	}
 }
