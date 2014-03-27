@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/cart.css">
+{% endblock %}
+
+{% block content %}
+	<div class="container back-to-products">
+	    <a href="/shop">&lt;&lt; Back to Products</a>
+	</div>
+	<div style="clear:both"></div>
+
+	<div id="cartList"></div>
+{% endblock %}
+
+{% block foot %}
+	<script src="/js/cart.js"></script>
+{% endblock %}

@@ -36,6 +36,7 @@
 }
 .showcase .item:hover .img2 {
 	display:block;
+	opacity:0.9;
 }
 .showcase .item:hover .img {
 	display:none;

@@ -2,9 +2,16 @@
 .lb h1 { color:#00aeed; }
 .lb iframe { margin-bottom:20px; display:block; }
 .lb .html { padding:20px 0;}
+#lightbox .lb { background-color:transparent;}
 #lightbox .lightbox-content {
-	background-color:#000;
+	background-color:rgba(0,0,0,0.8);
 }
 #lightbox .wrap-snap .lb {
 	padding:100px 40px;
+}
+#lightbox  .lightbox-nav {
+	background-color:rgba(0,126,165,0.8);
+}
+#lightbox  .lightbox-close {
+	background-color:rgba(135,135,135,0.8);
 }

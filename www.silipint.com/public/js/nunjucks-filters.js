@@ -17,6 +17,14 @@
 				return '$' + num.toFixed(2);
 			},
 			async : false
+		},
+		{
+			name : 'striptags',
+			func : function(str) {
+				if (typeof str !== 'string') { return ''; }
+				return str.replace(/(<([^>]+)>)/ig,'');
+			},
+			async : false
 		}
 	];
 	if (typeof exports === 'undefined') {

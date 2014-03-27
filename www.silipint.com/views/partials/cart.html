@@ -1,0 +1,28 @@
+<table id="cart" class="table table-striped">
+    <tbody>
+        {% for item in items %}
+            <tr class="product-start">
+                <td colspan="5">{{ item.productName }}</td>
+            </tr>
+            <tr class="product-end" data-sku="[%=items[i].sku%]">
+                <td><a href="{{ item.productURL }}"><img class="cart-image" src="{{ item.images[0] }}"></a></td>
+                <td><span class="hidden-phone">{{ item.unitPrice | cur }}</span></td>
+                <td>x{{ item.quantity }}</td>
+                <td class="inline-subtotal">{{ item.unitPrice * item.quantity | cur }}</td>
+                <td class="trash"><button class="btn btn-danger btn-mini btn-close"><i class="icon-remove icon-white"></i></button></td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="4" class="subtotal"><strong>subtotal:</strong>{{ subtotal | cur }}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="checkout"><a href="/checkout"><button class="checkout btn-go btn"><i class="icon-shopping-cart icon-white"></i> Checkout</button></a></td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+<div id="no-items" style="display:none;">
+    No Items in Cart<br/>
+    <a href="/shop">Back to Shop</a>
+</div>

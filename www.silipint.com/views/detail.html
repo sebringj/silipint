@@ -18,9 +18,9 @@
 			</div>
 		</div>
 		<div class="section2 sr">
-			<h1>{{ product.descriptions[2] }}</h1>
-			<h2>{{ product.descriptions[3] }}</h2>	
-			<div>{{ product.descriptions[0] }}</div>
+			<h1>{{ product.descriptions[2] | striptags }}</h1>
+			<h2>{{ product.descriptions[3] | striptags }}</h2>	
+			<div>{{ product.descriptions[0] | striptags }}</div>
 		</div>
 		<div class="section3 sr">
 			<div class="bg">
@@ -53,7 +53,7 @@
 				src="https://platform.twitter.com/widgets/tweet_button.html?url={{ product.productURL | urlencode }}"></iframe>	
 			<a class="pinit" href="http://pinterest.com/pin/create/button/?url={{ product.productURL | urlencode }}&amp;media={{ product.images[0] | urlencode }}" class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>				
 			<div class="row-spacer"></div>
-			<span>Email a Friend</span>
+			<a target="_blank" href="mailto:?subject=check+out+{{ '"' + product.descriptions[2] + ', ' + product.descriptions[3] + '"' | striptags | urlencode }}+from+Silipint&amp;body={{ product.productURL | urlencode }}">Email a Friend</a>
 		</div>
 		<div class="section6 product-tabs sr">
 			<div class="top-tabs clearfix">

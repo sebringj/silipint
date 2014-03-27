@@ -14,9 +14,9 @@ module.exports.set = function(app) {
 	var templates = nunjucks.precompile('views', { 
 		env: env, 
 		include : [
-			/partials\/full-post.html$/,
-			/partials\/mini-post.html$/,
-			/partials\/comment.html$/
+			/partials\/cart.html$/,
+			/partials\/states.html$/,
+			/partials\/provinces.html$/
 		] 
 	});
 	

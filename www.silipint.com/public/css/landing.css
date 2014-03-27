@@ -67,10 +67,10 @@
 .sili-boxes a span.over-text {
 	display:block;
 }
-.sili-boxes a:hover span.under-text {
+/*.sili-boxes a:hover span.under-text {
 	display:block;
 	opacity:0.9;
-}
+}*/
 .sili-boxes a:hover span.over-text {
 	display:none;
 }

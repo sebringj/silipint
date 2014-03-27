@@ -27,7 +27,6 @@ body.scrolled {
 	min-height:1200px;
 }
 .wrap-snap {
-	padding:0 72px;
 	max-width:1200px;
 	margin:0 auto;
 }
@@ -749,12 +748,16 @@ body.lightboxed #contentWrapper {
 	z-index:1000;
 	display:block;
 	cursor:pointer;
+	background-position:center center;
+	background-repeat:no-repeat;
 }
 #lightbox .lightbox-left {
 	left:-82px;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/lightbox-arrow-left.png);
 }
 #lightbox .lightbox-right {
 	right:-82px;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/lightbox-arrow.png);
 }
 #lightbox .lightbox-close {
 	width:60px;
@@ -765,4 +768,7 @@ body.lightboxed #contentWrapper {
 	background-color:rgba(125,125,125,0.5);
 	z-index:2000;
 	cursor:pointer;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/lightbox-close-X.png);
 }

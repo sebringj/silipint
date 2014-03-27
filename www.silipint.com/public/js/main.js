@@ -306,3 +306,34 @@ if (history.pushState) {
 		});
 	})();
 }
+
+// config
+hubsoft.clientid = 'silipint';
+hubsoft.thumbNailImageIndex = 0;
+hubsoft.detailImageIndex = 0;
+hubsoft.global = { googleAnalytics: '' };
+hubsoft.page = { messsages: {} };
+
+hubsoft.cart.updateUI(function () {
+    var cartCount = hubsoft.cart.itemCount();
+    if (cartCount > 0) {
+        $('#cartStatus').find('.count').text(cartCount);
+        $('#cartStatusLi').show();
+    } else {
+        $('#cartStatusLi').hide();
+    }
+});
+hubsoft.cart.triggerUpdateUI();
+
+hubsoft.handleLoginState = function () {
+    $('.loggedin,.loggedout').hide();
+    if (hubsoft.isLoggedIn()) {
+        if (sessionStorage['username']) {
+            $('.loggedin').find('a .username').text(sessionStorage['username']).end().show();
+        }
+        $('.loggedin.signoutlink').show();
+    } else {
+        $('.loggedout').show();
+    }
+};
+hubsoft.handleLoginState();

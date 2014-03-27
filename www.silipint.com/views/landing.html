@@ -32,7 +32,7 @@
 			<span class="under-text"><span style="background-color:#{{ item.backgroundColor }}"><i class="fa fa-caret-left" style="color:#{{ item.backgroundColor }}"></i>{{ item.title }}<i class="fa fa-caret-right"  style="color:#{{ item.backgroundColor }}"></i></span></span>
 			<img class="front" style="background-color:#{{ item.backgroundColor }}" 
 			src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
-			<span class="over-text"><span>{{ item.title }}</span></span>
+			<span class="over-text"><span>{{ item.title | safe }}</span></span>
 		</a>
 	{% endfor %}
 	</div>
