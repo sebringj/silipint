@@ -800,6 +800,9 @@ body.menuOpen #header .menu2 .more-sili .more {
 	overflow:hidden;
 }
 @media (max-width:768px) {
+	.sub-nav .nav-items .menu {
+		min-height:0;
+	}
 	.sub-nav .sub-list-view {
 		display:none;
 	}
