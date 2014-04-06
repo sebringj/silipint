@@ -8,7 +8,7 @@
 }
 .sili-boxes a {
 	display:block;
-	width:33%;
+	width:33.3%;
 	float:left;
 	text-decoration:none;
 	position:relative;
@@ -47,7 +47,8 @@
 .sili-boxes a i.fa-caret-right {
 	right:-35px;
 }
-.sili-boxes a img.back,  .sili-boxes a img.front {
+.sili-boxes a img.back,  
+.sili-boxes a img.front {
 	width:100%;
 	height:auto;
 }
