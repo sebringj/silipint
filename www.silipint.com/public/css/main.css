@@ -656,7 +656,13 @@ body.menuOpen #header .menu2 .more-sili .more {
 	padding:15px 0;
 	margin:0 5px;
 }
-.nav-items a.selected {
+.shop-nav .shop-list-view {
+	background-color:#555;
+}
+.shop-nav .nav-items {
+	background-color:#6a6a6a;
+}
+.shop-nav .nav-items a.selected {
 	color:#FFBA11;
 }
 @media (max-width:768px) {
