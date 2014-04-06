@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="shop-nav clearfix">
 	<div class="shop-nav-bar">
 		<i class="fa fa-caret-down down"></i>
@@ -19,10 +18,16 @@
 			{% endif %}
 		</span>
 	</div>
-	<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
-		{% for item in items[navID + 'SubNav'].content %}
-			<a href="{{ item.href }}">{{ item.text }}</a>
-		{% endfor %}
+	<div class="wrap-snap">
+		<div class="shop-nav-large">
+			<a>List View</a>
+		</div>
+		<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
+			<a class="close"></a>
+			{% for item in items[navID + 'SubNav'].content %}
+				<a class="item" href="{{ item.href }}">{{ item.text }}</a>
+			{% endfor %}
+		</div>
 	</div>
 </div>
 <div class="showcase clearfix {{ items[pageID + 'Collection'].classNames }}">
@@ -36,7 +41,7 @@
 	{% endfor %}
 </div>
 
-{% include "./partials/cups.html" %}
+{% include "./partials/yellow-box.html" %}
 {% include "./partials/sili-times.html" %}
 {% endblock %}
 

@@ -1,6 +1,7 @@
 module.exports = [
 	{ path : '/', method : 'home' },
 	{ path : /-lb$/, method : 'lightbox' },
+	{ path : /-lb2$/, method : 'lightbox2' },
 	{ path : '/about', method : 'content' },
 	{ path : '/about/crew', method : 'content' },
 	{ path : '/about/history', method : 'content' },
@@ -83,5 +84,6 @@ module.exports = [
 	{ path : '/sunglass-drinking-glass-16oz', method : 'collection' },
 	{ path : '/wine-bottle-stopper', method : 'collection' },
 	{ path : '/world-map-drinking-glasses-16oz', method : 'collection' },
+	{ path : '/refresh', method : 'refresh' },
 	{ path : /(oz|lid|pint|-detail)$/, method : 'detail' },
 ];

@@ -80,6 +80,14 @@ $('.shop-nav-bar').on('click', function(ev){
 		$this.find('.nav-items').slideDown('fast');
 	}
 });
+$('.shop-nav .shop-nav-large a').on('click', function(ev){
+	if ($(this).hasClass('selected')) {
+		$(this).removeClass('selected');
+		return $('.shop-nav .nav-items').slideUp('fast');
+	}
+	$('.shop-nav .nav-items').slideDown('fast');
+	$(this).addClass('selected');
+});
 
 // lightbox
 if (history.pushState) {
@@ -316,24 +324,35 @@ hubsoft.page = { messsages: {} };
 
 hubsoft.cart.updateUI(function () {
     var cartCount = hubsoft.cart.itemCount();
-    if (cartCount > 0) {
-        $('#cartStatus').find('.count').text(cartCount);
-        $('#cartStatusLi').show();
-    } else {
-        $('#cartStatusLi').hide();
-    }
+    $('.cart-indicator span').text(cartCount);
 });
 hubsoft.cart.triggerUpdateUI();
 
 hubsoft.handleLoginState = function () {
-    $('.loggedin,.loggedout').hide();
-    if (hubsoft.isLoggedIn()) {
-        if (sessionStorage['username']) {
-            $('.loggedin').find('a .username').text(sessionStorage['username']).end().show();
-        }
-        $('.loggedin.signoutlink').show();
-    } else {
-        $('.loggedout').show();
-    }
+
 };
 hubsoft.handleLoginState();
+
+$('body').on('click','[data-add-to-cart]', function(){
+	var $this = $(this);
+	var sku = $this.data('sku');
+	console.log(sku);
+	var $container = $this.closest('[data-container]')
+	var quantity = parseInt( $container.find('[data-quantifier]').val() );
+	console.log(quantity);
+	hubsoft.cart.snapshot();
+	hubsoft.cart.set(sku,quantity);
+	$container.find('[data-status]').css({opacity:0});
+	hubsoft.ready(function(){
+		hubsoft.validateCart(function(data){
+			if (!data.success) {
+				hubsoft.cart.undo();
+				$container.find('[data-status]').text('out of stock').addClass('error');
+			} else {
+				$container.find('[data-status]').text('added to cart').removeClass('error');
+			}
+			$container.find('[data-status]').stop(true,true).animate({ opacity: 1},500)
+			.delay(1500).stop(true,true).animate({ opacity: 0},200);
+		});
+	});
+});

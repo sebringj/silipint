@@ -53,6 +53,15 @@ module.exports.set = function(context) {
 	});
 };
 
+routeHandlers.refresh = function(req, res) {
+	for(var i in context.cache) {
+		if (context.cache.hasOwnProperty(i)) {
+			delete context.cache[i];
+		}
+	}
+	res.end('cleared cache');
+}
+
 routeHandlers.home = function(req, res) {
 	var pageID = 'home';
 
@@ -84,7 +93,9 @@ routeHandlers.home = function(req, res) {
 				url : 'http://' + config.domain + req.path,
 				items : [
 					{ id : pageID + 'Slider', editorType : 'bootstrap-carousel-json' },
-					{ id : pageID + 'Collection', editorType : 'sili-json' }
+					{ id : pageID + 'Collection', editorType : 'sili-json' },
+					{ id : pageID + 'CupsTop', editorType : 'inline' },
+					{ id : pageID + 'CupsBottom', editorType : 'inline' }
 				]
 			}, function(kg){
 				context.cache[pageID].items = kg.items;
@@ -158,7 +169,7 @@ routeHandlers.detail = function(req, res) {
 				host : config.kitgui.host,
 				pageID : pageID,
 				url : 'http://' + config.domain + req.path,
-				items : []
+				items : [ { id : pageID + 'YellowBox', editorType : 'html' } ]
 			}, function(kg){
 				context.cache[pageID].items = kg.items;
 				context.cache[pageID].seo = kg.seo;
@@ -200,7 +211,8 @@ routeHandlers.shop = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
-			{ id : pageID + 'Collection', editorType : 'listing-json' }
+			{ id : pageID + 'Collection', editorType : 'listing-json' },
+			{ id : pageID + 'YellowBox', editorType : 'html' }
 		]
 	}, function(kg){
 		context.cache[pageID] = {
@@ -246,7 +258,8 @@ routeHandlers.collection = function(req, res) {
 				items : [
 					{ id : navID + 'SubNavLabel', editorType : 'inline' },
 					{ id : navID + 'SubNav', editorType : 'links-json' },
-					{ id : pageID + 'Collection', editorType : 'listing-json' }
+					{ id : pageID + 'Collection', editorType : 'listing-json' },
+					{ id : pageID + 'YellowBox', editorType : 'html' }
 				]
 			}, function(kg){
 				context.cache[pageID].items = kg.items;
@@ -316,7 +329,8 @@ routeHandlers.landing = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
-			{ id : pageID + 'Collection', editorType : 'sili-json' }
+			{ id : pageID + 'Collection', editorType : 'sili-json' },
+			{ id : pageID + 'YellowBox', editorType : 'html' }
 		]
 	}, function(kg){
 		context.cache[pageID] = {
@@ -365,7 +379,8 @@ routeHandlers.listing = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
-			{ id : pageID + 'Collection', editorType : 'sili-json' }
+			{ id : pageID + 'Collection', editorType : 'sili-json' },
+			{ id : pageID + 'YellowBox', editorType : 'html' }
 		]
 	}, function(kg){
 		context.cache[pageID] = {
@@ -402,7 +417,9 @@ routeHandlers.customize = function(req, res) {
 };
 
 routeHandlers.cart = function(req, res) {
-	res.json({ route: 'cart', message : 'undefined' });
+	res.render('cart.html', {
+		
+	});
 };
 
 routeHandlers.checkout = function(req, res) {
@@ -414,12 +431,6 @@ routeHandlers.lightbox = function(req, res) {
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
 	function render() {
-		var products = [];
-		for(var i = 0; i < 40; i++) {
-			products.push({
-				index : (i+1),
-			});
-		}
 		res.render('lightbox.html', {
 			layout : context.cache.layout,
 			path : 'http://' + config.domain + req.path,
@@ -428,8 +439,7 @@ routeHandlers.lightbox = function(req, res) {
 			navID : navID,
 			items : context.cache[pageID].items,
 			title : context.cache[pageID].title,
-			description : context.cache[pageID].description,
-			products : products
+			description : context.cache[pageID].description
 		});
 	}
 	if (req.cookies.kitgui) {
@@ -448,6 +458,50 @@ routeHandlers.lightbox = function(req, res) {
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
 			{ id : pageID + 'Images', editorType : 'bootstrap-carousel-json' },
+			{ id : pageID + 'Title', editorType : 'inline' },
+			{ id : pageID + 'HTML1', editorType : 'html' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
+	});
+};
+
+routeHandlers.lightbox2 = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		res.render('lightbox2.html', {
+			layout : context.cache.layout,
+			path : 'http://' + config.domain + req.path,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : navID + 'SubNavLabel', editorType : 'inline' },
+			{ id : navID + 'SubNav', editorType : 'links-json' },
 			{ id : pageID + 'Title', editorType : 'inline' },
 			{ id : pageID + 'HTML1', editorType : 'html' }
 		]
