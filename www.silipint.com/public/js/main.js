@@ -69,7 +69,7 @@
 	})();
 })($(window));
 
-$('.sub-nav .sub-nav-bar,.sub-nav .sub-list-view a, .sub-nav a.close').on('click', function(ev){
+$('.sub-nav .sub-nav-bar,.sub-nav .sub-list-view a.lv, .sub-nav a.close').on('click', function(ev){
 	ev.preventDefault();
 	var $this = $('.sub-nav');
 	if ($this.hasClass('selected')) {
@@ -80,6 +80,9 @@ $('.sub-nav .sub-nav-bar,.sub-nav .sub-list-view a, .sub-nav a.close').on('click
 		$this.find('.nav-items').slideDown('fast');
 	}
 });
+if (location.pathname.indexOf('/sili-life') > -1) {
+	$('.sub-nav .sub-list-view a.share-sili').show();
+}
 
 // lightbox
 if (history.pushState) {
@@ -353,7 +356,72 @@ $('body').on('click','[data-add-to-cart]', function(){
 				$container.find('[data-status]').text('added to cart').removeClass('error');
 			}
 			$container.find('[data-status]').stop(true,true).animate({ opacity: 1},500)
-			.delay(1500).stop(true,true).animate({ opacity: 0},200);
+			.delay(1500).animate({ opacity: 0},200);
 		});
 	});
 });
+
+window.silipint = window.silipint || {}; 
+silipint.regexs = {
+	email : /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+	twitter : /^@?([a-z0-9_]{1,15})$/i,
+	phone : /(.*\d.*){10,}/
+};
+silipint.doForm = function(options, callback) {
+	$(options.formSelector).submit(function(ev){
+		if (options.preventDefault) { ev.preventDefault(); }
+		var $form = $(this);
+		var valid = true;
+		$form.find('.alert').slideUp('fast');
+		$form.find('input,textarea,select').removeClass('error').each(function(){
+			var $this = $(this);
+			var thisValid = true;
+			var val = $.trim($this.val());
+			var isRequired = ($this.filter('[required]').length === 1);
+			var isBlank = (val === '');
+			if (isRequired && isBlank) {
+				valid = false;
+				thisValid = false;
+			} else if (!isBlank) {
+				if ($this.attr('type') && $this.attr('type') === 'email') {
+					if (!silipint.regexs.email.test(val)) {
+						valid = false;
+						thisValid = false;
+					}
+				}
+				if ($this.attr('match')) {
+					if (val !== $($this.attr('match')).val()) {
+						valid = false;
+						thisValid = false;
+					}
+				}
+				if ($this.attr('pattern')) {
+					if (!silipint.regexs[$this.attr('pattern')].test(val)) {
+						valid = false;
+						thisValid = false;
+					}
+				}			
+			}
+			if (!thisValid) {
+				$this.addClass('error');
+			}	
+		});	
+		if (!valid) {
+			return $form.find('.alert').text(options.requiredErrorMessage).slideDown('fast');
+		}
+		$.post(options.url, $form.serialize(), function(json){
+			if (json.err) {
+				$form.find('.alert').text(options.serverErrorMessage).slideDown('fast');
+				return callback({ err : options.serverErrorMessage });
+			}
+			$form.slideUp('fast');
+			$(options.successSelector).text(options.successMessage).slideDown('fast');
+			return callback({});
+		}).fail(function(){
+			$form.find('.alert').text(options.connectErrorMessage).slideDown('fast');
+			return callback({ err : options.connectErrorMessage });
+		});
+	}).on('focus','input,textarea,select', function(ev){
+		$(this).removeClass('error').closest('form').find('.alert').slideUp('fast');
+	});
+};

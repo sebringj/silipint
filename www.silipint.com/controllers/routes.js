@@ -2,6 +2,8 @@ module.exports = [
 	{ path : '/', method : 'home' },
 	{ path : /-lb$/, method : 'lightbox' },
 	{ path : /-lb2$/, method : 'lightbox2' },
+	{ path : '/share-sili', method : 'shareSili' },
+	{ path : '/share-sili', method : 'getSiliShare', verb : 'post' },
 	{ path : '/about', method : 'content' },
 	{ path : '/about/crew', method : 'content' },
 	{ path : '/about/history', method : 'content' },

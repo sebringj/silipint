@@ -14,5 +14,11 @@ module.exports = {
 		apikey : '[ FILL IN ]-us3',
 		url : 'https://us3.api.mailchimp.com/2.0/',
 		listID : '[ FILL IN ]'
+	},
+	email : {
+        user: 'noreply@emeraldcode.com',
+		to: 'mail@jasonsebring.com',	
+        pass: 'Abc123!~!',
+		from: 'noreply@emeraldcode.com'
 	}
 };

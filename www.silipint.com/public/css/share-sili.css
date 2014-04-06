@@ -1,0 +1,9 @@
+.share-sili {
+	padding:20px;
+}
+.share-sili form {
+	margin:20px 0;
+}
+.share-sili form textarea {
+	min-height:150px;
+}

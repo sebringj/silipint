@@ -711,12 +711,21 @@ body.menuOpen #header .menu2 .more-sili .more {
 .sub-nav .sub-list-view {
 	background-color:#555;
 }
-.sub-nav .sub-list-view a {
+.sub-nav .sub-list-view a.lv {
 	color:#fff;
 	font-size:12px;
 	text-transform:uppercase;
 	display:inline-block;
 	padding:15px 0;
+}
+.sub-nav .sub-list-view a.share-sili {
+	display:inline-block;
+	font-weight:12px;
+	margin-left:40px;
+	position:relative;
+	top:1px;
+	color:#fff;
+	display:none;
 }
 .sub-nav .sub-list-view .wrap-snap {
 	padding-left:288px;
@@ -775,7 +784,7 @@ body.menuOpen #header .menu2 .more-sili .more {
 		padding-left:246px;
 	}
 }
-.sub-nav.selected .sub-list-view a {
+.sub-nav.selected .sub-list-view a.lv {
 	color:#FFBA11;
 }
 .sub-nav .nav-items a.selected {
@@ -915,4 +924,10 @@ body.lightboxed #contentWrapper {
 	background-position:center center;
 	background-repeat:no-repeat;
 	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/lightbox-close-X.png);
+}
+form[role=form] input.error,
+form[role=form] textarea.error,
+form[role=form] select.error {
+	color:#f00;
+	border-color:#f00;
 }
