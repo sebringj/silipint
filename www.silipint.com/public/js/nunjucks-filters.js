@@ -32,7 +32,8 @@
 		for(var i = 0; i < filters.length; i++) {
 			env.addFilter(filters[i].name, filters[i].func, filters[i].async);
 		}
-		zipstory.nunjucks = env;
+		window.silipint = window.silipint || {}; 
+		silipint.nunjucks = env;
 	} else {
 		module.exports = filters;
 	}

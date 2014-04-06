@@ -17,18 +17,18 @@ output += "\"><img class=\"cart-image\" src=\"";
 output += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_4),"images", env.autoesc)),0, env.autoesc), env.autoesc);
 output += "\"></a></td>\n                <td><span class=\"hidden-phone\">";
 output += runtime.suppressValue(env.getFilter("cur").call(context, runtime.memberLookup((t_4),"unitPrice", env.autoesc)), env.autoesc);
-output += "</span></td>\n                <td>x";
+output += "</span></td>\n                <td>x<input class=\"qty\" type=\"text\" value=\"";
 output += runtime.suppressValue(runtime.memberLookup((t_4),"quantity", env.autoesc), env.autoesc);
-output += "</td>\n                <td class=\"inline-subtotal\">";
-output += runtime.suppressValue(runtime.memberLookup((t_4),"unitPrice", env.autoesc) * env.getFilter("cur").call(context, runtime.memberLookup((t_4),"quantity", env.autoesc)), env.autoesc);
-output += "</td>\n                <td class=\"trash\"><button class=\"btn btn-danger btn-mini btn-close\"><i class=\"icon-remove icon-white\"></i></button></td>\n            </tr>\n        ";
+output += "\" name=\"qty\"></td>\n                <td class=\"inline-subtotal\">";
+output += runtime.suppressValue(env.getFilter("cur").call(context, (runtime.memberLookup((t_4),"unitPrice", env.autoesc) * runtime.memberLookup((t_4),"quantity", env.autoesc))), env.autoesc);
+output += "</td>\n                <td class=\"trash\"><button class=\"btn-close\"><i class=\"fa fa-trash-o\"></i></button></td>\n            </tr>\n        ";
 ;
 }
 }
 frame = frame.pop();
-output += "\n        <tr>\n            <td colspan=\"4\" class=\"subtotal\"><strong>subtotal:</strong>";
+output += "\n        <tr class=\"subtotal\">\n            <td colspan=\"4\" class=\"subtotal\"><strong>subtotal:</strong>";
 output += runtime.suppressValue(env.getFilter("cur").call(context, runtime.contextOrFrameLookup(context, frame, "subtotal")), env.autoesc);
-output += "</td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr>\n            <td colspan=\"4\" class=\"checkout\"><a href=\"/checkout\"><button class=\"checkout btn-go btn\"><i class=\"icon-shopping-cart icon-white\"></i> Checkout</button></a></td>\n            <td>&nbsp;</td>\n        </tr>\n    </tbody>\n</table>\n<div id=\"no-items\" style=\"display:none;\">\n    No Items in Cart<br/>\n    <a href=\"/shop\">Back to Shop</a>\n</div>";
+output += "</td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr>\n            <td colspan=\"4\" class=\"checkout\"><a href=\"/checkout\"><button class=\"checkout\">Checkout</button></a></td>\n            <td>&nbsp;</td>\n        </tr>\n    </tbody>\n</table>\n<div id=\"no-items\" style=\"display:none;\">\n    No Items in Cart\n</div>";
 cb(null, output);
 ;
 } catch (e) {

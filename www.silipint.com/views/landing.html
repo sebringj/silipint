@@ -19,6 +19,10 @@
 				{% endif %}
 			</span>
 		</div>
+		<div class="shop-nav-large">
+			<a>List View</a>
+		</div>
+		<a class="close"></a>
 		<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
 			{% for item in items[navID + 'SubNav'].content %}
 				<a href="{{ item.href }}">{{ item.text | safe }}</a>
@@ -38,7 +42,7 @@
 	</div>
 	<div class="clearfix"></div>
 	{% include "./partials/products-slider.html" %}
-	{% include "./partials/cups.html" %}
+	{% include "./partials/yellow-box.html" %}
 	{% include "./partials/sili-times.html" %}
 {% endblock %}
 

@@ -56,6 +56,16 @@
 	text-transform:uppercase;
 	height:40px;
 }
+.product-detail .section3 div.status {
+	display:inline-block;
+	opacity:0;
+	color:#000;
+	font-size:14px;
+	margin-left:10px;
+}
+.product-detail .section3 div.status.error {
+	color:#f00;
+}
 .product-detail .sr .lbl {
 	display:inline-block;
 	width:60px;

@@ -8,11 +8,11 @@
                     item = data.items[i];
                     data.subtotal += (item.unitPrice * item.quantity);
                 }
-                html = new EJS({ element: 'cartTemplate' }).render(data);
+                html = silipint.nunjucks.render('partials/cart.html',data);
                 $('#cartList').html(html);
             }
             if (!data.items || data.items == null || hubsoft.cart.items.length === 0) {
-                $('#cartList').html(new EJS({ element: 'cartTemplate' }).render({ subtotal: 0, items: [] }));
+                $('#cartList').html(silipint.nunjucks.render('partials/cart.html',{ items: [] }));
                 $('#cart').fadeOut('fast', function () {
                     $('#no-items').fadeIn('fast');
                 });

@@ -1,0 +1,17 @@
+.lb2 { background-color:#000; color:#fff; min-height:1200px; color:#fff;padding:20px; }
+.lb2 h1 { color:#00aeed; font-size:25px; }
+.lb2 iframe { margin-bottom:20px; display:block; }
+.lb2 .html { padding:20px 0;}
+#lightbox .lb2 { background-color:transparent;}
+#lightbox .wrap-snap .lb2 {
+	padding:100px 40px 100px 0;
+}
+#lightbox .wrap-snap .lb2 .html {
+	padding:20px 0;
+}
+#lightbox  .lightbox-nav {
+	background-color:rgba(0,126,165,0.8);
+}
+#lightbox  .lightbox-close {
+	background-color:rgba(135,135,135,0.8);
+}

@@ -1,15 +1,14 @@
 <div class="cups clearfix">
 	<div class="wrap-snap clearfix">
-		<div class="text text1">
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis a mi at sollicitudin. Phasellus vel leo vel nisl ultrices tincidunt sed eget tellus. Vestibulum ante ipsum primis in faucibus orci 
-			luctus et ultrices posuere cubilia Curae; Morbi egestas quis nunc nec porttitor.
+		<div class="text text1 {{ items[pageID + 'CupsTop'].classNames }}">
+			{{ items[pageID + 'CupsTop'].content | safe }}
 		</div>
 		<div class="img"></div>
 		<div class="text text2 clearfix">
 			<div class="row">
 				<div class="col-sm-7 l">
 					<div class="flourish"></div>
-					<div class="words">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+					<div class="words {{ items[pageID + 'CupsBottom'].classNames }}">{{ items[pageID + 'CupsBottom'].content | safe }}</div>
 				</div>
 				<div class="col-sm-5 r">
 					<input name="email" placeholder="Enter Email Address"><button>Sign-Up</button>

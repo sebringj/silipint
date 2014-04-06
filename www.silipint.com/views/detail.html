@@ -23,7 +23,7 @@
 			<div>{{ product.descriptions[0] | striptags }}</div>
 		</div>
 		<div class="section3 sr">
-			<div class="bg">
+			<div class="bg" data-container>
 				{% if product.sizes and product.sizes.length %}
 					{% if product.sizes[0].unitPrice < product.sizes[0].msrp %}
 						<span class="msrp">{{ product.sizes[0].msrp | cur }}</span>
@@ -40,6 +40,7 @@
 				<span class="lbl">Quantity</span>
 				<input name="qty" data-quantifier value="1">
 				<button data-add-to-cart data-sku="{{ product.sizes[0].sku }}">add to cart</button>
+				<div class="status" data-status></div>
 				<div class="row-spacer"></div>	
 				<span class="lbl">Colors</span>
 				<div class="colors"></div>
