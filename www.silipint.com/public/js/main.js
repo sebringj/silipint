@@ -292,19 +292,21 @@ if (history.pushState) {
 			});
 		}).on('click', '#lightbox .lightbox-content .lightbox-nav', function(ev){
 			ev.preventDefault();
+			console.log('here');
 			var newIndex = -1;
 			var animation = 'left';
 			if ($(this).hasClass('lightbox-right')) {
 				newIndex = $el.index() + 1;
-				if ($el.parent().find('[data-lightbox]:last').index() === newIndex) {
-					return;
+				if ($el.parent().find('[data-lightbox]:last').index() <= newIndex) {
+					newIndex = 0;
 				}
 				animation = 'right';
 			} else {
 				if ($el.index() === 0) {
-					return;
+					newIndex = ($el.parent().find('[data-lightbox]:last').index());				
+				} else {
+					newIndex = $el.index() - 1;
 				}
-				newIndex = $el.index() - 1;
 			}
 			$el = $el.parent().find('[data-lightbox]:eq('+ newIndex +')');
 			methods.openLightBox({
