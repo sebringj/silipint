@@ -166,6 +166,15 @@ if (history.pushState) {
 							})();
 						}
 						if (cb) { cb(title, options.path); }
+						
+						$('#lightbox').find('iframe').each(function(){
+							if ($(this).attr('src').indexOf('youtube') > -1) {
+								$(this).removeAttr('width').removeAttr('height').css({
+									width: '100%',
+									height: '300px'
+								});
+							}
+						});	
 					}
 					
 					var dependancyCount = 0;
