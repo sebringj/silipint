@@ -1,0 +1,28 @@
+<div class="sub-nav clearfix">
+	<div class="sub-nav-bar">
+		<i class="fa fa-caret-down down"></i>
+		<i class="fa fa-caret-up up"></i>
+		<span class="{{ items[navID + 'SubNavLabel'].classNames }}">
+			{% if items[navID + 'SubNavLabel'].content %}
+				{{ items[navID + 'SubNavLabel'].content }}
+			{% else %}
+				Navigation
+			{% endif %}
+		</span>
+	</div>
+	<div class="sub-list-view">
+		<div class="wrap-snap">
+			<a>List View</a>
+		</div>
+	</div>
+	<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
+		<div class="wrap-snap">
+			<a class="close">need x</a>
+			<div class="menu clearfix">
+			{% for item in items[navID + 'SubNav'].content %}
+				<a href="{{ item.href }}">{{ item.text }}</a>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

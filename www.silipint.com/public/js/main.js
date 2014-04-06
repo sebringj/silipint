@@ -69,9 +69,9 @@
 	})();
 })($(window));
 
-$('.shop-nav-bar').on('click', function(ev){
+$('.sub-nav .sub-nav-bar,.sub-nav .sub-list-view a, .sub-nav a.close').on('click', function(ev){
 	ev.preventDefault();
-	var $this = $('.shop-nav');
+	var $this = $('.sub-nav');
 	if ($this.hasClass('selected')) {
 		$this.removeClass('selected');
 		$this.find('.nav-items').slideUp('fast');
@@ -79,14 +79,6 @@ $('.shop-nav-bar').on('click', function(ev){
 		$this.addClass('selected');
 		$this.find('.nav-items').slideDown('fast');
 	}
-});
-$('.shop-nav .shop-nav-large a').on('click', function(ev){
-	if ($(this).hasClass('selected')) {
-		$(this).removeClass('selected');
-		return $('.shop-nav .nav-items').slideUp('fast');
-	}
-	$('.shop-nav .nav-items').slideDown('fast');
-	$(this).addClass('selected');
 });
 
 // lightbox

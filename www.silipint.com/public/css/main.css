@@ -656,91 +656,145 @@ body.menuOpen #header .menu2 .more-sili .more {
 
 
 /* shop nav */
-.shop-nav {
+<div class="shop-nav clearfix">
+	<div class="shop-nav-bar">
+		<i class="fa fa-caret-down down"></i>
+		<i class="fa fa-caret-up up"></i>
+		<span class="{{ items[navID + 'SubNavLabel'].classNames }}">
+			{% if items[navID + 'SubNavLabel'].content %}
+				{{ items[navID + 'SubNavLabel'].content }}
+			{% else %}
+				Navigation
+			{% endif %}
+		</span>
+	</div>
+	<div class="shop-list-view">
+		<div class="wrap-snap">
+			<a>List View</a>
+		</div>
+	</div>
+	<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
+		<div class="wrap-snap">
+			<div class="">
+			{% for item in items[navID + 'SubNav'].content %}
+				<a href="{{ item.href }}">{{ item.text }}</a>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+/* shop nav */
+.sub-nav {
 	background-color:#555;
 	text-align:center;
 }
-.shop-nav .shop-nav-bar {
+.sub-nav-bar {
 	display:none;
 }
-.shop-nav .nav-items {
-	display:none;
+.sub-nav .menu {
+	padding:25px 0 20px 0;
 }
-.shop-nav .shop-nav-large { 
-	display:block; 
-	cursor:pointer;
-	position:relative;
-	max-width:1056px;
-	text-align:left;
-	margin:0 auto;
-}
-.shop-nav .shop-nav-large a {
+.sub-nav .menu a {
 	color:#fff;
 	font-size:12px;
 	text-transform:uppercase;
 	display:block;
-	padding:15px 0;
-	margin:0 5px;
-	margin-left:294px;
+	padding:0;
+	margin-bottom:5px;
+	width:25%;
+	float:left;
+	overflow:hidden;
 }
-.shop-nav .shop-nav-large a.selected {
-	color:#ffba11;
+.sub-nav .sub-list-view {
+	background-color:#555;
 }
-@media (max-width:1200px) {
-	.shop-nav .shop-nav-large a {
-		margin-left:365px;
-	}
-}
-@media (max-width:992px) {
-	.shop-nav .shop-nav-large a {
-		margin-left:250px;
-	}
-}
-
-.shop-nav .nav-items {
-	max-width:1056px;
-	text-align:left;
-	margin:0 auto;
-	margin-left:362px;
-	background-color:#f00;
-}
-@media (max-width:1200px) {
-	.shop-nav .nav-items {
-		
-	}
-}
-
-.shop-nav a.close { display:none; }	
-.shop-nav a.item {
+.sub-nav .sub-list-view a {
 	color:#fff;
 	font-size:12px;
 	text-transform:uppercase;
 	display:inline-block;
 	padding:15px 0;
-	margin:0 5px;
 }
-.shop-nav .shop-list-view {
-	background-color:#555;
+.sub-nav .sub-list-view .wrap-snap {
+	padding-left:288px;
 }
-.shop-nav .nav-items {
+.sub-nav .nav-items .menu {
+	min-height:120px;
+}
+.sub-nav .nav-items .wrap-snap {
+	position:relative;
+}
+.sub-nav .nav-items .close {
+	display:block;
+	position:absolute;
+	left:90px;
+	top:28px;
+	width:58px;
+	height:58px;
+	border:1px solid #fff;
+	color:#fff;
+	font-size:10px;
+	opacity:1;
+	font-weight:normal;
+}
+@media (max-width:1200px) {
+	.sub-nav .sub-list-view .wrap-snap {
+		padding-left:360px;
+	}
+	.sub-nav .nav-items .close {
+		left:170px;
+	}
+}
+@media (max-width:990px) {
+	.sub-nav .sub-list-view .wrap-snap {
+		padding-left:246px;
+	}
+	.sub-nav .nav-items .close {
+		left:60px;
+	}
+}
+.sub-nav .sub-list-view .wrap-snap a {
+	cursor:pointer;
+}
+.sub-nav .nav-items {
 	background-color:#6a6a6a;
 }
-.shop-nav .nav-items a.selected {
-
-@media (max-width:768px) {
-	
+.sub-nav .nav-items .wrap-snap {
+	padding-left:288px;
 }
-.nav-items a.selected {
+@media (max-width:1200px) {
+	.sub-nav .nav-items .wrap-snap {
+		padding-left:360px;
+	}
+}
+@media (max-width:990px) {
+	.sub-nav .nav-items .wrap-snap {
+		padding-left:246px;
+	}
+}
+.sub-nav.selected .sub-list-view a {
 	color:#FFBA11;
 }
+.sub-nav .nav-items a.selected {
+	color:#FFBA11;
+}
+.sub-nav .wrap-snap {
+	max-width:1056px;
+	margin:0 auto;
+}
+.sub-nav .nav-items {
+	height:auto;
+	display:none;
+	overflow:hidden;
+}
 @media (max-width:768px) {
-	.shop-nav .shop-nav-large {
+	.sub-nav .sub-list-view {
 		display:none;
 	}
-	.shop-nav .close {
-		display:none;
-	}
-	.shop-nav .shop-nav-bar {
+	.sub-nav .sub-nav-bar {
 		display:block;
 		background-color:#000;
 		color:#fff;
@@ -749,23 +803,31 @@ body.menuOpen #header .menu2 .more-sili .more {
 		font-size:14px;
 		cursor:pointer;
 	}
-	.shop-nav .shop-nav-bar i {
+	.sub-nav .sub-nav-bar i {
 		display:inline-block;
 		font-size:20px;
 		margin-right:20px;
 	}
-	.shop-nav .shop-nav-bar i.up {
+	.sub-nav .sub-nav-bar i.up {
 		display:none;
 	}
-	.shop-nav .nav-items {
-		height:auto;
+	.sub-nav .nav-items .close {
 		display:none;
-		overflow:hidden;
 	}
-	.shop-nav.selected .nav-items {
-		
+	.sub-nav .nav-items .wrap-snap {
+		padding:0;
 	}
-	.shop-nav a.item {
+	.sub-nav .sub-list-view a {
+		display:inline-block;
+		float:none;
+		margin:0;
+		padding:;
+	}
+	.sub-nav .menu {
+		padding:0;
+	}
+	.sub-nav .menu a {
+		text-align:center;
 		display:block;
 		width:33.33%;
 		float:left;
@@ -776,14 +838,16 @@ body.menuOpen #header .menu2 .more-sili .more {
 		font-size:14px;
 		border-left:2px solid #000;
 		border-bottom:2px solid #000;
+		padding:15px 0;
+		margin:0;
 	}
-	.shop-nav.selected .shop-nav-bar {
+	.sub-nav.selected .sub-nav-bar {
 		color:#FFBA11;
 	}
-	.shop-nav.selected .shop-nav-bar i.down {
+	.sub-nav.selected .sub-nav-bar i.down {
 		display:none;
 	}
-	.shop-nav.selected .shop-nav-bar i.up {
+	.sub-nav.selected .sub-nav-bar i.up {
 		display:inline-block;
 	}
 }

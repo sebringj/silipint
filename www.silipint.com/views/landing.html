@@ -7,28 +7,7 @@
 {% endblock %}
 
 {% block content %}
-	<div class="shop-nav clearfix">
-		<div class="shop-nav-bar">
-			<i class="fa fa-caret-down down"></i>
-			<i class="fa fa-caret-up up"></i>
-			<span class="{{ items[navID + 'SubNavLabel'].classNames }}">
-				{% if items[navID + 'SubNavLabel'].content %}
-					{{ items[navID + 'SubNavLabel'].content }}
-				{% else %}
-					Navigation
-				{% endif %}
-			</span>
-		</div>
-		<div class="shop-nav-large">
-			<a>List View</a>
-		</div>
-		<a class="close"></a>
-		<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">
-			{% for item in items[navID + 'SubNav'].content %}
-				<a href="{{ item.href }}">{{ item.text | safe }}</a>
-			{% endfor %}
-		</div>
-	</div>
+	{% include "./partials/sub-nav.html" %}
 	<div class="clearfix sili-boxes {{ items[pageID + 'Collection'].classNames }}">
 	{% for item in items[pageID + 'Collection'].content %}
 		<a href="{{ item.url }}" {{ lightbox }} class="clearfix" style="background-image:url('{{ item.imageURL }}')">
