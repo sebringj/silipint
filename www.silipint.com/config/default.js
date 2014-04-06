@@ -17,7 +17,7 @@ module.exports = {
 	},
 	email : {
         user: 'noreply@emeraldcode.com',
-		to: 'mail@jasonsebring.com',	
+		to: 'info@silipint.com',	
         pass: 'Abc123!~!',
 		from: 'noreply@emeraldcode.com'
 	}
