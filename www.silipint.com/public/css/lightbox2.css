@@ -2,7 +2,10 @@
 .lb2 h1 { color:#00aeed; font-size:25px; }
 .lb2 iframe { margin-bottom:20px; display:block; }
 .lb2 .html { padding:20px 0;}
-#lightbox .lb2 { background-color:#000; }
+#lightbox .lb2 { background-color:transparent;}
+#lightbox .lightbox-content {
+	background-color:rgba(0,0,0,0.8);
+}
 #lightbox .wrap-snap .lb2 {
 	padding:100px 40px 100px 40px;
 }

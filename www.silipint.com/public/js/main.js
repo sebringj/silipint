@@ -368,11 +368,16 @@ silipint.regexs = {
 	phone : /(.*\d.*){10,}/
 };
 silipint.doForm = function(options, callback) {
+	var blockForm = false;
+	console.log(options.formSelector)
 	$(options.formSelector).submit(function(ev){
 		if (options.preventDefault) { ev.preventDefault(); }
+		if (blockForm) { return; }
+		blockForm = true;
 		var $form = $(this);
 		var valid = true;
 		$form.find('.alert').slideUp('fast');
+		$form.find('button[type=submit]').prop('disabled',true);
 		$form.find('input,textarea,select').removeClass('error').each(function(){
 			var $this = $(this);
 			var thisValid = true;
@@ -407,18 +412,26 @@ silipint.doForm = function(options, callback) {
 			}	
 		});	
 		if (!valid) {
-			return $form.find('.alert').text(options.requiredErrorMessage).slideDown('fast');
+			blockForm = false;
+			$form.find('button[type=submit]').prop('disabled',false);
+			return $form.find('.alert.alert-danger').text(options.requiredErrorMessage).slideDown('fast');
 		}
+		$form.find('.alert.alert-warning').slideDown('fast');
 		$.post(options.url, $form.serialize(), function(json){
+			$form.find('.alert.alert-warning').slideUp('fast');
 			if (json.err) {
-				$form.find('.alert').text(options.serverErrorMessage).slideDown('fast');
+				blockForm = false;
+				$form.find('.alert.alert-danger').text(options.serverErrorMessage).slideDown('fast');
 				return callback({ err : options.serverErrorMessage });
 			}
 			$form.slideUp('fast');
 			$(options.successSelector).text(options.successMessage).slideDown('fast');
 			return callback({});
 		}).fail(function(){
-			$form.find('.alert').text(options.connectErrorMessage).slideDown('fast');
+			$form.find('.alert.alert-warning').slideUp('fast');
+			blockForm = false;
+			$form.find('button[type=submit]').prop('disabled',false);
+			$form.find('.alert.alert-danger').text(options.connectErrorMessage).slideDown('fast');
 			return callback({ err : options.connectErrorMessage });
 		});
 	}).on('focus','input,textarea,select', function(ev){

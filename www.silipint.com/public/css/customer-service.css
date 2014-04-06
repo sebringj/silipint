@@ -1,0 +1,9 @@
+.customer-service {
+	padding:20px;
+}
+.customer-service form {
+	margin:20px 0;
+}
+.customer-service form textarea {
+	min-height:150px;
+}

@@ -559,7 +559,7 @@ routeHandlers.shareSili = function(req, res) {
 	});
 };
 
-routeHandlers.getSiliShare = function(req, res) {
+routeHandlers.postSiliShare = function(req, res) {
 	var i, entries = [];
 	entries.push('<h1>Sili Experience Submission</h1>');
 	for(i in req.body) {
@@ -569,11 +569,72 @@ routeHandlers.getSiliShare = function(req, res) {
 			entries.push('<div style="margin-bottom:10px">'+ htmlEncode(req.body[i]) +'</div>');
 		}
 	}
-	console.log(req.body);
 	emailer.send({
 		to : config.email.to,
 		from : config.email.from,
 		subject : 'Sili Experience Submission',
+		email : config.email.to,
+		html : entries.join('')
+	}, function(data){
+		res.json(data);
+	});
+}
+
+routeHandlers.customerService = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		res.render('customer-service.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : pageID + 'Title', editorType : 'inline' },
+			{ id : pageID + 'Description', editorType : 'html' },
+			{ id : pageID + 'YellowBox', editorType : 'html' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
+	});
+};
+
+routeHandlers.postCustomerService = function(req, res) {
+	var i, entries = [];
+	entries.push('<h1>Customer Webform Inquery</h1>');
+	for(i in req.body) {
+		if (req.body.hasOwnProperty(i)) {
+			entries.push('<strong>'+ htmlEncode(i.substr(2)) +'</strong>');
+			entries.push('<div style="margin-bottom:10px">'+ htmlEncode(req.body[i]) +'</div>');
+		}
+	}
+	emailer.send({
+		to : config.email.to,
+		from : config.email.from,
+		subject : 'Customer Webform Inquery',
 		email : config.email.to,
 		html : entries.join('')
 	}, function(data){

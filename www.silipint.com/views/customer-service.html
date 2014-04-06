@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-	<link rel="stylesheet" href="/css/share-sili.css">
+	<link rel="stylesheet" href="/css/customer-service.css">
 	<link rel="stylesheet" href="/css/partials/sili-times.css">
 {% endblock %}
 
 {% block content %}
-	<div class="wrap-snap share-sili">
+	<div class="wrap-snap customer-service">
 		<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
 		<p class="{{ items[pageID + 'Description'].classNames }}">
 			{{ items[pageID + 'Description'].content | safe }}
@@ -18,11 +18,13 @@
 				    <label for="f_subject">Subject *</label>
 				    <select required name="f_subject" id="f_subject" class="form-control">
 						<option value="">Choose Subject</option>
-						<option value="sili-use">Sili-Use</option>
-						<option value="philos-sili">Philos-sili</option>
-						<option value="videos">Videos</option>
-						<option value="review">Review</option>
-						<option value="artist-series">Artist Series</option>
+						<option value="online order">Online Order</option>
+						<option value="custom order">Custom Order</option>
+						<option value="wholesale">Wholesale</option>
+						<option value="rep or distributer">Rep or Distributer</option>
+						<option value="international">International</option>
+						<option value="press">Press</option>
+						<option value="other">Other</option>
 					</select>
 				  </div>
 				  <div class="form-group">
@@ -44,18 +46,17 @@
 					class="form-control" name="f_phone" id="f_phone" placeholder="Enter Phone">
 				  </div>
 				  <div class="form-group">
-				    <label for="f_url">Blog or Website</label>
-				    <input type="text" class="form-control" name="f_url" id="f_url" placeholder="http://">
+				    <label for="f_company">Company</label>
+				    <input type="text" class="form-control" name="f_company" id="f_company" placeholder="Enter Company">
 				  </div>
 				  <div class="form-group">
-				    <label for="f_twitter">Twitter username</label>
-				    <input type="text" pattern="twitter" 
-					class="form-control" name="f_twitter" id="f_twitter" placeholder="@yourtwitter">
+				    <label for="f_url">Website</label>
+				    <input type="text" class="form-control" name="f_website" id="f_website" placeholder="http://">
 				  </div>
 				  <div class="form-group">
 				    <label for="f_message">Message *</label>
 				    <textarea required class="form-control" name="f_message" id="f_message" 
-					placeholder="Tell us about your experience"></textarea>
+					placeholder="What can we help you with?"></textarea>
 				  </div>
 				  <div class="alert alert-danger" style="display:none"></div>
 				  <div class="alert alert-warning" style="display:none">Sending...</div>
@@ -82,5 +83,5 @@
 
 {% block foot %}
 	<script src="/js/partials/sili-times.js"></script>
-	<script src="/js/share-sili.js"></script>
+	<script src="/js/customer-service.js"></script>
 {% endblock %}
