@@ -82,6 +82,8 @@ $('.sub-nav .sub-nav-bar,.sub-nav .sub-list-view a.lv, .sub-nav a.close').on('cl
 });
 if (location.pathname.indexOf('/sili-life') > -1) {
 	$('.sub-nav .sub-list-view a.share-sili').show();
+} else if (location.pathname.indexOf('/customize') > -1) {
+	$('.sub-nav .sub-list-view a.customer-service').show();
 }
 
 // lightbox

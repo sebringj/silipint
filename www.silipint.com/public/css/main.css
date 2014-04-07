@@ -718,12 +718,13 @@ body.menuOpen #header .menu2 .more-sili .more {
 	display:inline-block;
 	padding:15px 0;
 }
-.sub-nav .sub-list-view a.share-sili {
+.sub-nav .sub-list-view a.share-sili,
+.sub-nav .sub-list-view a.customer-service {
 	display:inline-block;
-	font-weight:12px;
+	font-size:13px;
 	margin-left:40px;
 	position:relative;
-	top:1px;
+	top:0;
 	color:#fff;
 	display:none;
 }
