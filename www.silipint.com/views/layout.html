@@ -108,13 +108,13 @@
 					<div class="row sub-row sub-row{{ link }} {{ layout.items[link].classNames }}">
 						{% for item in layout.items[link].content %}
 							{% if loop.index == 1 %}{% else %}
-							<div class="col-xs-6"><a href="{{ item.href }}"><span>{{ item.text }}</span></a></div>
+							<div class="col-xs-6"><a href="{{ item.href }}"><span>{{ item.text | safe }}</span></a></div>
 							{% endif %}
 						{% endfor %}
 					</div>
 					{% if link == 'topNavContactLinks' %}
 						<div class="row sub-row sub-row{{ link }}  {{ layout.items.topNavContactText.classNames }}">
-							{{ layout.items.topNavContactText.content }}
+							{{ layout.items.topNavContactText.content | safe }}
 						</div>
 					{% endif %}
 				{% endfor %}
