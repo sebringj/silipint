@@ -479,13 +479,19 @@ body.menuOpen #header .menu2 .more-sili .more {
 	#mobileMenu .nav .header span.state { 
 		position:absolute;
 		display:block;
-		right:10px;
-		top:15px;
+		right:0;
 		color:#000;
 		cursor:pointer;
+		top:0;
+		height:45px;
+		width:45px;
 	}
 	#mobileMenu .nav .header span.state i {
+		display:block;
+		position:absolute;
 		opacity:0.5;
+		top:14px;
+		right:14px;
 	}
 	#mobileMenu .nav .header .state i.fa-plus { display:block; }
 	#mobileMenu .nav .header .state i.fa-minus { display:none; }
@@ -747,6 +753,7 @@ body.menuOpen #header .menu2 .more-sili .more {
 }
 .sub-nav .sub-list-view .wrap-snap {
 	padding-left:288px;
+	text-align:left;
 }
 .sub-nav .nav-items .menu {
 	min-height:120px;
@@ -761,7 +768,10 @@ body.menuOpen #header .menu2 .more-sili .more {
 	top:28px;
 	width:58px;
 	height:58px;
-	border:1px solid #fff;
+	border:1px solid transparent;
+	background-image:url(/img/subnav-close-X.svg);
+	background-repeat:no-repeat;
+	background-position:center center;
 	color:#fff;
 	font-size:10px;
 	opacity:1;
@@ -791,6 +801,7 @@ body.menuOpen #header .menu2 .more-sili .more {
 }
 .sub-nav .nav-items .wrap-snap {
 	padding-left:288px;
+	text-align:left;
 }
 @media (max-width:1200px) {
 	.sub-nav .nav-items .wrap-snap {

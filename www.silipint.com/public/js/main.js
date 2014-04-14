@@ -1,3 +1,9 @@
+this.app = {};
+if ('ontouchstart' in document.documentElement) {
+	app.quickClick = 'touchstart';
+} else {
+	app.quickClick = 'click';
+}
 (function($w){
 	// enable popout menu
 	$w.resize(function(){
@@ -26,11 +32,7 @@
 			}
 		}
 		var $els = $('#header .more-sili, #toggleMobileMenu, #pushUpMenu .close, #mobileMenu .close');
-		if ('ontouchstart' in document.documentElement) {
-			$els.on('touchstart', handleToggle);
-		} else {
-			$els.on('click', handleToggle);
-		}
+		$els.on(app.quickClick, handleToggle);
 	})();
 	// handle header scroll
 	$w.on('scroll resize', function(){
@@ -68,6 +70,8 @@
 		});
 	})();
 })($(window));
+
+
 
 $('.sub-nav .sub-nav-bar,.sub-nav .sub-list-view a.lv, .sub-nav a.close').on('click', function(ev){
 	ev.preventDefault();
@@ -363,7 +367,7 @@ $('body').on('click','[data-add-to-cart]', function(){
 			.delay(1500).animate({ opacity: 0},200);
 		});
 	});
-}).on('click','#mobileMenu .header .state',function(ev) {
+}).on(app.quickClick,'#mobileMenu .header .state',function(ev) {
 	console.log('mobileMenu header state click');
 	var $this = $(this), $header = $this.closest('.header'), $a = $header.find('a');
 	if ($header.hasClass('opn')) {
