@@ -23,10 +23,29 @@ function setLayoutCache(context) {
 					basePath : config.kitgui.basePath,
 					host : config.kitgui.host,
 					items : [
+						{ id : 'topNavFreeShippingMessage', editorType : 'inline' },
+						{ id : 'topNavProductsLinks', editorType : 'links-json' },
+						{ id : 'topNavSililifeLinks', editorType : 'links-json' },
+						{ id : 'topNavCustomizeLinks', editorType : 'links-json' },						
+						{ id : 'topNavAccountsLinks', editorType : 'links-json' },
+						{ id : 'topNavResourcesLinks', editorType : 'links-json' },
+						{ id : 'topNavContactLinks', editorType : 'links-json' },
+						{ id : 'topNavContactText', editorType : 'inline' },
 						{ id : 'productsSlider', editorType : 'links-json' }
 					]
 				}, function(kg){
 					context.cache.layout.items = kg.items;
+					context.cache.layout.topNav = [
+						{ key : 'topNavProductsLinks', icon : 'header-products-CUP.svg' }, 
+						{ key : 'topNavAccountsLinks', icon : 'header-accounts-PROFILE.svg' },
+						{ key : 'topNavResourcesLinks', icon : 'header-resources-LINES.svg' },
+						{ key : 'topNavContactLinks', icon : 'header-contact-SPEECH.svg' }
+					];
+					context.cache.layout.bottomNav = [
+						'topNavProductsLinks', 'topNavSililifeLinks', 
+						'topNavCustomizeLinks', 'topNavAccountsLinks',
+						'topNavResourcesLinks', 'topNavContactLinks'	
+					];
 					cb();
 				});
 			},

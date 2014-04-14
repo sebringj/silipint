@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>test graphics</title>
+		<style>
+		img {
+			display:inline-block;
+			margin:0 0 5px 5px;
+		}
+		.white,
+		.black {
+			background-color:#000;
+			padding:20px;
+		}
+		.white {
+			background-color:#fff;
+		}
+		.flip {
+		    -webkit-transform: rotate(180deg);     /* Chrome and other webkit browsers */
+		    -moz-transform: rotate(180deg);        /* FF */
+		    -o-transform: rotate(180deg);          /* Opera */
+		    -ms-transform: rotate(180deg);         /* IE9 */
+		    transform: rotate(180deg); 
+			filter: progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, DX=0, DY=0, SizingMethod='auto expand');
+		}	
+		</style>
+	</head>
+	<body>
+		<div class="black">
+			<img src="./header-accounts-PROFILE.svg">
+			<img src="./header-contact-SPEECH.svg">
+			<img src="./header-products-CUP.svg">
+			<img src="./header-resources-LINES.svg">
+			<img src="./header-shopping-CART.svg">
+			<img src="./life-headingbox-long.svg">
+			<img src="./silipint-tagline.svg">
+			<img src="./social-icon-FACEBOOK.svg">
+			<img src="./social-icon-INSTAGRAM.svg">
+			<img src="./social-icon-PINTREST.svg">
+			<img src="./social-iconYOUTUBE.svg">
+		</div>
+		<div class="white">
+			<img src="./header-close-X.svg">
+			<img src="./home-body-GET-SILI.svg">
+			<img src="./lightbox-arrow.svg">
+			<img class="flip" src="./lightbox-arrow.svg">
+			<img src="./lightbox-close-X.svg">
+		</div>
+	</body>
+</html>

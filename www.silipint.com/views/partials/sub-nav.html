@@ -12,9 +12,20 @@
 	</div>
 	<div class="sub-list-view">
 		<div class="wrap-snap">
-			<a class="lv">List View</a> 
-			<a href="/customer-service" class="customer-service">INQUIRE</a>
-			<a href="/share-sili" class="share-sili">Share your own Sili experience!</a>
+			<span class="nav-lbl {{ items[pageID + 'SubNavText2'].classNames }}">{{ items[pageID + 'SubNavText2'].content }}</span>
+			{% if items[pageID + 'SubNavText2'].content %}<span class="xtr-space"></span>{% endif %}
+			<a class="lv {{ items[pageID + 'SubNavLabel2'].classNames }}">
+				{% if items[pageID + 'SubNavLabel2'].content %}
+					{{ items[pageID + 'SubNavLabel2'].content }}
+				{% else %}
+					List View
+				{% endif %}
+			</a> 
+			<div class="ctas {{ items[pageID + 'SubNavCTAS'].classNames }}">
+			{% for item in items[pageID + 'SubNavCTAS'].content %}
+				<a href="{{ item.href }}">{{ item.text }}</a>
+			{% endfor %}
+			</div>
 		</div>
 	</div>
 	<div class="clearfix nav-items {{ items[navID + 'SubNav'].classNames }}">

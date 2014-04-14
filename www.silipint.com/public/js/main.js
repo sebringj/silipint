@@ -363,6 +363,16 @@ $('body').on('click','[data-add-to-cart]', function(){
 			.delay(1500).animate({ opacity: 0},200);
 		});
 	});
+}).on('click','#mobileMenu .header .state',function(ev) {
+	console.log('mobileMenu header state click');
+	var $this = $(this), $header = $this.closest('.header'), $a = $header.find('a');
+	if ($header.hasClass('opn')) {
+		$header.removeClass('opn');
+		$('.sub-row' + $a.data('subnavs') ).stop(true,true).slideUp('fast');
+	} else {
+		$header.addClass('opn');
+		$('.sub-row' + $a.data('subnavs') ).stop(true,true).slideDown('fast');
+	}
 });
 
 window.silipint = window.silipint || {}; 

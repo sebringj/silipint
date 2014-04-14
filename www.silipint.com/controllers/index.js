@@ -260,6 +260,9 @@ routeHandlers.collection = function(req, res) {
 				items : [
 					{ id : navID + 'SubNavLabel', editorType : 'inline' },
 					{ id : navID + 'SubNav', editorType : 'links-json' },
+					{ id : pageID + 'SubNavText2', editorType : 'inline' },
+					{ id : pageID + 'SubNavLabel2', editorType : 'inline' },
+					{ id : pageID + 'SubNavCTAS', editorType : 'links-json' },
 					{ id : pageID + 'Collection', editorType : 'listing-json' },
 					{ id : pageID + 'YellowBox', editorType : 'html' }
 				]
@@ -331,6 +334,9 @@ routeHandlers.landing = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'SubNavText2', editorType : 'inline' },
+			{ id : pageID + 'SubNavLabel2', editorType : 'inline' },
+			{ id : pageID + 'SubNavCTAS', editorType : 'links-json' },
 			{ id : pageID + 'Collection', editorType : 'sili-json' },
 			{ id : pageID + 'YellowBox', editorType : 'html' }
 		]
@@ -381,6 +387,9 @@ routeHandlers.listing = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'SubNavText2', editorType : 'inline' },
+			{ id : pageID + 'SubNavLabel2', editorType : 'inline' },
+			{ id : pageID + 'SubNavCTAS', editorType : 'links-json' },
 			{ id : pageID + 'Collection', editorType : 'sili-json' },
 			{ id : pageID + 'YellowBox', editorType : 'html' }
 		]
@@ -459,6 +468,9 @@ routeHandlers.lightbox = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'SubNavText2', editorType : 'inline' },
+			{ id : pageID + 'SubNavLabel2', editorType : 'inline' },
+			{ id : pageID + 'SubNavCTAS', editorType : 'links-json' },
 			{ id : pageID + 'Images', editorType : 'bootstrap-carousel-json' },
 			{ id : pageID + 'Title', editorType : 'inline' },
 			{ id : pageID + 'HTML1', editorType : 'html' }
@@ -504,6 +516,9 @@ routeHandlers.lightbox2 = function(req, res) {
 		items : [
 			{ id : navID + 'SubNavLabel', editorType : 'inline' },
 			{ id : navID + 'SubNav', editorType : 'links-json' },
+			{ id : pageID + 'SubNavText2', editorType : 'inline' },
+			{ id : pageID + 'SubNavLabel2', editorType : 'inline' },
+			{ id : pageID + 'SubNavCTAS', editorType : 'links-json' },
 			{ id : pageID + 'Title', editorType : 'inline' },
 			{ id : pageID + 'HTML1', editorType : 'html' }
 		]

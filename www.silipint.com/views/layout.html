@@ -39,53 +39,32 @@
 						<a class="close"></a>
 						<div class="wrap-snap">
 							<div class="row">
+								{% for link in layout.topNav %}
 								<div class="col-xs-3">
 									<div class="menu-column">
-										<div class="header"><span>Products</span></div>
-										<a href="/pint-glasses"><span>Pints</span></a>
-										<a href="/half-pints"><span>Half-Pints</span></a>
-										<a href="/shorty-cups"><span>Shorty's</span></a>
-										<a href="/shot-glasses"><span>Shots</span></a>
-										<a href="/lids"><span>Lids</span></a>
-										<a href="/silipint-sets"><span>Sets</span></a>
-										<a href="/gif-cards"><span>Gift Cards</span></a>
+										<div class="header"><a href="{{ layout.items[link.key].content[0].href }}">
+											{{ layout.items[link.key].content[0].text  | safe }}
+											<span style="background-image:url('/img/{{ link.icon }}')"></span>
+										</a></div>
+										<div class="{{ layout.items[link.key].classNames }}">
+										{% for item in layout.items[link.key].content %}
+											{% if loop.index == 1 %}{% else %}
+											<a class="subitem" href="{{ item.href }}"><span>{{ item.text  | safe }}</span></a>
+											{% endif %}
+										{% endfor %}
+										</div>										
+										{% if link.key == 'topNavContactLinks' %}
+											<div class="{{ layout.items.topNavContactText.classNames }}">
+												{{ layout.items.topNavContactText.content | safe }}
+											</div>
+										{% endif %}
 									</div>
 								</div>
-								<div class="col-xs-3">
-									<div class="menu-column">
-										<div class="header"><span>Accounts</span></div>
-										<a href="/account"><span>Sign-in</span></a>
-										<a href="/account"><span>Sign-up</span></a>
-										<a href="https://silipint.hubsoft.com"><span>Rep Login</span></a>
-										<a href="https://silipint.hubsoft.com"><span>Pay Invoice</span></a>
-										<a href="/account"><span>VIP</span></a>
-									</div>
-								</div>
-								<div class="col-xs-3">
-									<div class="menu-column">
-										<div class="header"><span>Resources</span></div>
-										<a href="/about"><span>About Silipint</span></a>
-										<a href="/faq"><span>FAQ's</span></a>
-										<a href="/find-a-retailer"><span>Find a Retailer</span></a>
-									</div>
-								</div>
-								<div class="col-xs-3">
-									<div class="menu-column">
-										<div class="header"><span>Contact</span></div>
-										<a href="tel:5416785044"><span>Tel: (541) 678-5044</span></a>
-										<a href="#"><span>Map It</span></a>
-										<br>
-										<a href="#"><span>
-											Centry Center Bend<br>
-											Suite #130<br>
-											Bend, OR 97702
-										</span></a>
-									</div>
-								</div>
+								{% endfor %}							
 							</div>
 							<div class="save-more">
 								<div class="save-more-left"></div>
-								<div class="save-more-middle"><span>FREE SHIPPING ON ALL ORDERS OVER $50</span></div>
+								<div class="save-more-middle"><span class="{{ layout.items.topNavFreeShippingMessage.classNames }}">{{ layout.items.topNavFreeShippingMessage.content }}</span></div>
 								<div class="save-more-right"></div>
 							</div>
 						</div>
@@ -121,61 +100,24 @@
 		<div id="mobileMenu">
 			<a href="#" class="close"><i></i></a>
 			<div class="nav">
-				<div class="header"><span>Shop</span></div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/pint-glasses"><span>PINTS</span></a></div>
-					<div class="col-xs-6"><a href="/new-silipint-products"><span>NEW ITEMS</span></a></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/half-pints"><span>HALF-PINTS</span></a></div>
-					<div class="col-xs-6"><a href="/artist-series"><span>ARTISTS SERIES</span></a></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/shorty-cups"><span>SHORTY'S</span></a></div>
-					<div class="col-xs-6"><a href="/lids"><span>LIDS</span></a></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/shot-glasses"><span>SHOTS</span></a></div>
-					<div class="col-xs-6"><a href="/silipint-sets"><span>SETS</span></a></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6">&nbsp;</div>
-					<div class="col-xs-6"><a href="/sale"><span>SALE</span></a></div>
-				</div>
-				<div class="header"><span>SILI-LIFE</span></div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/sili-users"><span>SILI-USES</span></a></div>
-					<div class="col-xs-6"><a href="/sili-isms"><span>SILI-ISMS</span></a></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/artist-series"><span>ARTISTS SERIES</span></a></div>
-					<div class="col-xs-6"><a href="/videos"><span>VIDEOS</span></a></div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6"><a href="/sili-ambassadors"><span>SILI-AMBASSADORS</span></a></div>
-					<div class="col-xs-6"><a href="/news-press"><span>NEWS &amp; PRESS</span></a></div>
-				</div>
-				<div class="header"><span>CUSTOMIZE</span></div>
-				<div class="header"><span>Accounts</span></div>
-				<a href="/account"><span>Sign-in</span></a>
-				<a href="/account"><span>Sign-up</span></a>
-				<a href="https://sililife.hubsoft.com"><span>Rep Login</span></a>
-				<a href="https://sililife.hubsoft.com"><span>Pay Invoice</span></a>
-				<a href="/account"><span>VIP</span></a>
-				<div class="header"><span>Resources</span></div>
-				<a href="/gift-cards"><span>Gift Cards</span></a>
-				<a href="/about"><span>About Silipint</span></a>
-				<a href="/faq"><span>FAQ's</span></a>
-				<a href="/find-a-retailer"><span>Find a Retailer</span></a>
-				<div class="header"><span>Contact</span></div>
-				<a href="tel:5416785044"><span>Tel: (541) 678-5044</span></a>
-				<a>&nbsp;</a>
-				<a href="#"><span>Map It</span></a>
-				<a href="#"><span>
-					Centry Center Bend<br>
-					Suite #130<br>
-					Bend, OR 97702
-				</span></a>
+				{% for link in layout.bottomNav %}
+					<div class="header"><a href="{{ layout.items[link].content[0].href }}" 
+						data-subnavs="{{ link }}">{{ layout.items[link].content[0].text }}</a>
+						<span class="state"><i class="fa fa-plus"></i><i class="fa fa-minus"></i></span>
+					</div>
+					<div class="row sub-row sub-row{{ link }} {{ layout.items[link].classNames }}">
+						{% for item in layout.items[link].content %}
+							{% if loop.index == 1 %}{% else %}
+							<div class="col-xs-6"><a href="{{ item.href }}"><span>{{ item.text }}</span></a></div>
+							{% endif %}
+						{% endfor %}
+					</div>
+					{% if link == 'topNavContactLinks' %}
+						<div class="row sub-row sub-row{{ link }}  {{ layout.items.topNavContactText.classNames }}">
+							{{ layout.items.topNavContactText.content }}
+						</div>
+					{% endif %}
+				{% endfor %}
 			</div>
 		</div>
 		<div id="stickyFooter">
