@@ -48,7 +48,11 @@ input.qty {
 	display:inline-block;
 	margin-left:3px;
 }
-button.btn-close,
+button.btn-close {
+	color:#000;
+	border:none;
+	background-color:transparent;
+}
 button.checkout {
 	color:#FFBA12;
 	background-color:#000;

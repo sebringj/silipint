@@ -1,0 +1,30 @@
+<h1>Order Receipt</h1>
+<p>Thank you for your purchase!</p>
+<p>You will receive an email receipt shortly.</p>
+<h2>Order Number {{ orderNumber }}</h2>
+<div class="row-fluid" style="text-align:left;">
+    <div class="span6">
+        <h3>Shipping Information</h3>
+        {{ shippingFirstName }} {{ shippingLastName }}<br/>
+        {{ shippingEmail }}<br/>
+        {{ shippingPhone }}<br/>
+        {{ shippingAddress1 }} 
+        {{ shippingAddress2 }}<br/>
+        {{ shippingCity }}<br/>
+        {{ shippingState }}, {{ shippingCountry }} {{ shippingPostalCode }}<br/>
+        {{ shippingType }}
+    </div>
+    <div class="span6" style="text-align:left;">
+        <h3>Payment Information</h3>
+        {{ paymentFirstName }} {{ paymentLastName }}<br/>
+        {{ paymentEmail }}<br/>
+        {{ paymentPhone }}<br/>
+        {{ paymentAddress1 }} 
+        {{ paymentAddress2 }}<br/>
+        {{ paymentCity }}<br/>
+        {{ paymentState }}, {{ paymentCountry }} {{ paymentPostalCode }}<br/>
+        {{ cardType }} ****{{ last4 }} exp {{ month }}/{{ year }}
+    </div>
+</div>
+<h3>Items Purchased</h3>
+<div class="order-items"></div>

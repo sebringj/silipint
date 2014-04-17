@@ -7,9 +7,9 @@
             <tr class="product-end" data-sku="[%=items[i].sku%]">
                 <td><a href="{{ item.productURL }}"><img class="cart-image" src="{{ item.images[0] }}"></a></td>
                 <td><span class="hidden-phone">{{ item.unitPrice | cur }}</span></td>
-                <td>x<input class="qty" type="text" value="{{ item.quantity }}" name="qty"></td>
+                <td><input class="qty" type="text" value="{{ item.quantity }}" name="qty"></td>
                 <td class="inline-subtotal">{{ (item.unitPrice * item.quantity) | cur }}</td>
-                <td class="trash"><button class="btn-close"><i class="fa fa-trash-o"></i></button></td>
+                <td class="trash"><button class="btn-close"><i class="fa fa-times"></i></button></td>
             </tr>
         {% endfor %}
         <tr class="subtotal">

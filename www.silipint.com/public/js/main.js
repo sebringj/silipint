@@ -348,13 +348,14 @@ hubsoft.handleLoginState();
 $('body').on('click','[data-add-to-cart]', function(){
 	var $this = $(this);
 	var sku = $this.data('sku');
-	console.log(sku);
+	console.log('sku: ' + sku);
 	var $container = $this.closest('[data-container]')
 	var quantity = parseInt( $container.find('[data-quantifier]').val() );
 	console.log(quantity);
 	hubsoft.cart.snapshot();
 	hubsoft.cart.set(sku,quantity);
 	$container.find('[data-status]').css({opacity:0});
+	
 	hubsoft.ready(function(){
 		hubsoft.validateCart(function(data){
 			if (!data.success) {

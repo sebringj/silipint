@@ -1,0 +1,25 @@
+<table class="checkout-cart table table-striped">
+    <tbody>
+        {% for item in items %}
+            <tr class="product-start"><td colspan="4">{{ item.productName }}</td></tr>
+            <tr class="product-end" data-sku="[%=items[i].sku%]">
+                <td><a href="[%=items[i].url%]"><img class="cart-image" src="[%=items[i].images[0]%]"></a></td>
+                <td><span class="hidden-phone">{{ item.unitPrice | cur }}</span></td>
+                <td>x{{ item.quantity }}</td>
+                <td class="inline-subtotal">{{ (item.unitPrice * item.quantity ) | cur }}</td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="4" class="subtotal"><strong>subtotal:</strong> {{ subtotal | cur }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="shipping"><strong>shipping:</strong> {{ shipping | cur }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="tax"><strong>tax:</strong> {{ tax | cur }}</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="total"><strong>total:</strong> {{ total | cur }}</td>
+        </tr>
+    </tbody>
+</table>

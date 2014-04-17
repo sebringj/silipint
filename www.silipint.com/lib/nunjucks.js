@@ -15,8 +15,8 @@ module.exports.set = function(app) {
 		env: env, 
 		include : [
 			/partials\/cart.html$/,
-			/partials\/states.html$/,
-			/partials\/provinces.html$/
+			/partials\/order-receipt.html$/,
+			/partials\/order-review.html$/
 		] 
 	});
 	

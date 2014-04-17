@@ -434,7 +434,9 @@ routeHandlers.cart = function(req, res) {
 };
 
 routeHandlers.checkout = function(req, res) {
-	res.json({ route: 'checkout', message : 'undefined' });
+	res.render('checkout.html', {
+		
+	});
 };
 
 routeHandlers.lightbox = function(req, res) {
