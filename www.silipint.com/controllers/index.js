@@ -434,8 +434,12 @@ routeHandlers.cart = function(req, res) {
 };
 
 routeHandlers.checkout = function(req, res) {
+	var years = []; var year = (new Date()).getFullYear();
+	for(var i = 0; i < 10; i++) {
+		years.push(year+i);
+	}
 	res.render('checkout.html', {
-		
+		years : years
 	});
 };
 

@@ -1,5 +1,5 @@
 {% macro Countries(name) %}    
-	<select name="{{ name }}" class="country" required>
+	<select class="form-control country" name="{{ name }}" required>
         <option value="US" selected="selected" data-displayfor="DB">United States of America</option>
         <option value="CA" data-displayfor="IB">Canada</option>
         <option value="AG">Antigua &amp; Barbuda</option>
@@ -74,7 +74,7 @@
 {% endmacro %}
 
 {% macro USStates(label) %}
-<select name="state" class="state" required>
+<select class="form-control state"  name="state" required>
     <option data-choose value="">{{ label }}</option>
     <option value="AL">Alabama</option>
     <option value="AK">Alaska</option>
@@ -138,7 +138,7 @@
 {% endmacro %}
 
 {% macro CanadaProvinces(label) %}
-    <select name="state" class="state" required>
+    <select class="form-control state"  name="state" required>
         <option data-choose value="">{{ label }}</option>
         <option value="AB">Alberta</option>
         <option value="BC">British Columbia</option>
@@ -154,5 +154,5 @@
 {% endmacro %}
 
 {% macro InternationalStates(label) %}
-	<input type="text" maxlength="4" class="state"  required name="state" placeholder="{{ label }}" />
+	<input  class="form-control"  type="text" maxlength="4" class="state"  required name="state" placeholder="{{ label }}" />
 {% endmacro %}
