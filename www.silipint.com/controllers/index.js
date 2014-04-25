@@ -56,12 +56,16 @@ module.exports.set = function(context) {
 };
 
 routeHandlers.refresh = function(req, res) {
-	for(var i in context.cache) {
-		if (context.cache.hasOwnProperty(i)) {
-			delete context.cache[i];
+	getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/refresh'}, function(status, data) {
+		if (globalContext.cache) {
+			for(var i in globalContext.cache) {
+				if (globalContext.cache.hasOwnProperty(i)) {
+					delete globalContext.cache[i];
+				}
+			}
 		}
-	}
-	res.end('cleared cache');
+		res.end('cleared cache');
+	});
 }
 
 routeHandlers.home = function(req, res) {
@@ -316,7 +320,7 @@ routeHandlers.landing = function(req, res) {
 			title : context.cache[pageID].title,
 			description : context.cache[pageID].description,
 			products : products,
-			lightbox : ( (req.path === '/customize') ? 'data-lightbox' : '' )
+			lightbox : ( (req.path === '/customize' || req.path === '/about-silicone' || req.path === '/about-silipint') ? 'data-lightbox' : '' )
 		});
 	}
 	if (req.cookies.kitgui) {
