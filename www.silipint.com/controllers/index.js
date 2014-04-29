@@ -432,8 +432,42 @@ routeHandlers.customize = function(req, res) {
 };
 
 routeHandlers.cart = function(req, res) {
-	res.render('cart.html', {
-		
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'cart';
+	function render() {
+		res.render('cart.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path
+			}, function(kg){
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	],function(err){
+		render();
 	});
 };
 
@@ -442,8 +476,44 @@ routeHandlers.checkout = function(req, res) {
 	for(var i = 0; i < 10; i++) {
 		years.push(year+i);
 	}
-	res.render('checkout.html', {
-		years : years
+	
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'checkout';
+	function render() {
+		res.render('checkout.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+			years : years
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path
+			}, function(kg){
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	],function(err){
+		render();
 	});
 };
 

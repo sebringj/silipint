@@ -357,7 +357,7 @@ $('body').on('click','[data-add-to-cart]', function(){
 	$container.find('[data-status]').css({opacity:0});
 	
 	hubsoft.ready(function(){
-		hubsoft.validateCart(function(data){sili
+		hubsoft.validateCart(function(data){
 			if (!data.success) {
 				hubsoft.cart.undo();
 				$container.find('[data-status]').text('out of stock').addClass('error');

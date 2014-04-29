@@ -23,7 +23,7 @@
             prefix = name.split('-')[0],
             displayfor;
         console.log($country.val());
-        $state = $country.closest('form').find('.state');
+        $state = $country.closest('fieldset').find('.state');
         if ($country.val() === 'US') {
             $state.replaceWith($('#us-states').html());
         } else if ($country.val() === 'CA') {
@@ -31,12 +31,12 @@
         } else {
             $state.replaceWith($('#international-states').html());
         }
-        $country.parent().find('.state').attr('name', prefix + '-state');
+        $country.closest('fieldset').find('.state').attr('name', prefix + '-state');
 
         if ($country.val() === 'US') {
-            $country.parent().find('.zipcode').attr('placeholder', 'zipcode');
+            $country.closest('fieldset').find('.zipcode').attr('placeholder', 'zipcode');
         } else {
-            $country.parent().find('.zipcode').attr('placeholder', 'postalcode');
+            $country.closest('fieldset').find('.zipcode').attr('placeholder', 'postalcode');
         }
 
         if (name === 'shipping-country' && hubsoft.shippingDataExists) {
@@ -127,10 +127,10 @@
 
     $('form.checkout').on('blur change keypress', 'input:visible,select:visible', function () {
         validate.apply(this);
-        $('.alert-error').slideUp('fast');
+        $('.alert-danger').slideUp('fast');
     });
 
-    $('.btn-go').click(function () {
+    $('.checkout-btn').click(function () {
         console.log('form submit');
         $('form.checkout').data('error', false);
         $('form.checkout').find('input:visible,select:visible').each(function () {
@@ -139,7 +139,7 @@
 
         var isError = $('form.checkout').data('error');
         if (isError) {
-            $('.alert-error.form-error').slideDown('fast');
+            $('.alert-danger.form-error').slideDown('fast');
             return;
         }
 
@@ -222,7 +222,7 @@
                 $('body,html').scrollTop(0);
                 hubsoft.cart.clearCookie();
             } else {
-                $('.alert-error.payment-error').slideDown('fast');
+                $('.alert-danger.payment-error').slideDown('fast');
             }
         });
     });
