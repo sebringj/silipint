@@ -23,7 +23,7 @@
             prefix = name.split('-')[0],
             displayfor;
         console.log($country.val());
-        $state = $country.parent().find('.state');
+        $state = $country.closest('form').find('.state');
         if ($country.val() === 'US') {
             $state.replaceWith($('#us-states').html());
         } else if ($country.val() === 'CA') {
@@ -42,6 +42,7 @@
         if (name === 'shipping-country' && hubsoft.shippingDataExists) {
             $('[name=shipping-method]').html(hubsoft.shippingOptions);
             displayfor = $country.find('option:selected').data('displayfor');
+			if (!displayfor) { return; }
             $('[name=shipping-method] option').each(function () {
                 var $option = $(this), df = $option.data('displayfor');
                 if (!df) { return; }

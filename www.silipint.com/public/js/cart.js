@@ -3,10 +3,11 @@
         hubsoft.getCartProducts(function (data) {
             var i, len, html, item;
             data.subtotal = 0;
-            if (data.items != null && data.items.length > 0) {
+            if (data.items && data.items.length) {
                 for (i = 0, len = data.items.length; i < len; i++) {
                     item = data.items[i];
-                    data.subtotal += (item.unitPrice * item.quantity);
+					if (item) { data.subtotal += (item.unitPrice * item.quantity); }
+					else { data.items.splice(i,1); }
                 }
                 html = silipint.nunjucks.render('partials/cart.html',data);
                 $('#cartList').html(html);
