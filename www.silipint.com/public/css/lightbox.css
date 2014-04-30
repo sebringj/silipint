@@ -19,7 +19,12 @@
 	background-color:rgba(135,135,135,0.8);
 }
 .lb .rt {
-	padding-left:40px;
+	width:50%;
+	float:right;
+}
+.lb .lt {
+	width:50%;
+	float:left;
 }
 .lb .images img {
 	display:block;
@@ -35,5 +40,13 @@
 	}
 	.lb .rt {
 		padding-bottom:60px;
+	}
+	.lb .col-sm-6.lt {
+		float:right;
+		width:100%;
+	}
+	.lb .col-sm-6.rt  {
+		float:right;
+		width:100%;
 	}
 }

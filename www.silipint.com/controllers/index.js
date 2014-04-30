@@ -612,6 +612,91 @@ routeHandlers.lightbox2 = function(req, res) {
 	});
 };
 
+routeHandlers.content = function(req, res){
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		res.render('content.html', {
+			layout : context.cache.layout,
+			path : 'http://' + config.domain + req.path,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : pageID + 'Title', editorType : 'inline' },
+			{ id : pageID + 'Description', editorType : 'html' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
+	});	
+}
+
+routeHandlers.faq = function(req, res){
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		res.render('faq.html', {
+			layout : context.cache.layout,
+			path : 'http://' + config.domain + req.path,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : pageID + 'Title', editorType : 'inline' },
+			{ id : pageID + 'Description', editorType : 'html' },
+			{ id : pageID + 'FAQs', editorType : 'faq-json' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
+	});	
+}
+
 routeHandlers.shareSili = function(req, res) {
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;

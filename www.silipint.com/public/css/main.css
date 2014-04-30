@@ -207,6 +207,9 @@ body.scrolled #header .logo {
 	color:#ffba11;
 	left:40px;
 	font-size:17px;
+	display:block;
+	text-decoration:none;
+	border:none;
 }
 body.scrolled #header .life-better-sili {
 	top:25px;
@@ -575,11 +578,13 @@ body.menuOpen #header .menu2 .more-sili .more {
 .cups .text1 {
 	margin:92px auto 62px auto;
 	color:#fff;
-	font-size:14px;
+	font-size:17px;
+	line-height:30px;
 }
 .cups .img {
 	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/large-cups.png);
 	background-position:center center;
+	background-size:contain;
 	background-repeat:no-repeat;
 	height:228px;
 }
@@ -593,7 +598,8 @@ body.menuOpen #header .menu2 .more-sili .more {
 	color:#fff;
 	font-size:14px;
 	white-space:nowrap;
-	padding-right:40px;
+	padding-right:80px;
+	margin-bottom:20px;
 }
 .cups .text2 .l .flourish {
 	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/newsletter-flurry.png);
@@ -686,6 +692,8 @@ body.menuOpen #header .menu2 .more-sili .more {
 	border-top:1px solid #fff;
 	border-bottom:1px solid #fff;
 	color:#fff;
+	font-size:17px;
+	line-height:30px;
 }
 .yellow-box .wrap-snap {
 	padding:40px;

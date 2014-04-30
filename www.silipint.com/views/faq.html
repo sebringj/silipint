@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/faq.css">
+	<link rel="stylesheet" href="/css/partials/sili-times.css">
+{% endblock %}
+
+{% block content %}
+	<div class="wrap-snap faq">
+		<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
+		<div class="{{ items[pageID + 'Description'].classNames }}">
+			{{ items[pageID + 'Description'].content | safe }}
+		</div>
+		<div class="faqs {{ items[pageID + 'FAQs'].classNames }}">
+			{% for faq in items[pageID + 'FAQs'].content %}
+				<div class="q">{{ faq.question | safe }}</div>
+				<div class="a">{{ faq.answer | safe }}</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	{% include "./partials/sili-times.html" %}
+{% endblock %}
+
+{% block foot %}
+	<script src="/js/partials/sili-times.js"></script>
+{% endblock %}

@@ -11,13 +11,14 @@
 	float:left;
 	padding-left:-20px;
 	background: #eaeaea; /* Old browsers */
-}
-.featured-products .bar .get-sili img {
-	margin-right:20px;
-	margin-top:15px;
-	width:100%;
-	max-width:100px;
-	height:auto;
+	color:#b3b3b3;
+	text-transform:uppercase;
+	font-size:30px;
+	font-weight:400;
+	position:relative;
+	padding-top:10px;
+	cursor:pointer;
+	letter-spacing:3px;
 }
 .featured-products .bar .navi {
 	width:70%;
@@ -27,7 +28,7 @@
 	white-space:nowrap;
 	overflow:hidden;
 	float:left;
-	background: #eaeaea; /* Old browsers */
+	background: #eaeaea;
 }
 @media (max-width:1060px) {
 	.featured-products .bar .get-sili {
@@ -74,7 +75,7 @@
 .featured-products .products-slider .product .img {
 	width:90%;
 	height:300px;
-	background-color:#efefef;
+	background-color:#fff;
 	margin:0 auto;
 	margin-top:90px;
 	background-position:center center;
@@ -82,7 +83,7 @@
 	font-size:50px;
 	text-align:center;
 	line-height:100px;
-	background-size:cover;
+	background-size:contain;
 	display:block;
 }
 .featured-products .products-slider .product .text {
@@ -134,15 +135,10 @@
 		padding-left:100px;
 	}
 	.featured-products .bar .get-sili {
-		width:120px;
-		margin-left:-120px;
-	}
-	.featured-products .bar .get-sili img {
-		margin:0 auto;
+		width:150px;
+		margin-left:-150px;
 		position:relative;
-		top:15px;
-		left:-9px;
-		width:70%;
+		left:50px;
 	}
 	.featured-products .bar .navi {
 		width:100%;
