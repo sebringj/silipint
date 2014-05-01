@@ -1,0 +1,10 @@
+.stores {
+	padding:40px 20px;
+}
+.stores .map {
+	width:100%;
+	height:400px;
+}
+.stores form {
+	margin-bottom:20px;
+}
