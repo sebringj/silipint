@@ -16,7 +16,9 @@ module.exports.set = function(app) {
 		include : [
 			/partials\/cart.html$/,
 			/partials\/order-receipt.html$/,
-			/partials\/order-review.html$/
+			/partials\/order-review.html$/,
+			/partials\/map-info-window.html$/,
+			/partials\/account.html$/
 		] 
 	});
 	

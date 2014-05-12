@@ -11,9 +11,9 @@ module.exports = {
 		clientid : 'silipint'
 	},
 	mailchimp : {
-		apikey : '[ FILL IN ]-us3',
+		apikey : 'aec1cb2fb245b91a097f611d03f2aee5-us4',
 		url : 'https://us3.api.mailchimp.com/2.0/',
-		listID : '[ FILL IN ]'
+		listID : '1f4b1438dc'
 	},
 	email : {
         user: 'noreply@emeraldcode.com',

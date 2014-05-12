@@ -49,7 +49,8 @@
 										<div class="{{ layout.items[link.key].classNames }}">
 										{% for item in layout.items[link.key].content %}
 											{% if loop.index == 1 %}{% else %}
-											<a class="subitem" href="{{ item.href }}"><span>{{ item.text  | safe }}</span></a>
+											<a class="subitem" href="{{ item.href }}">
+												<span>{{ item.text  | safe }}</span></a>
 											{% endif %}
 										{% endfor %}
 										</div>										
@@ -108,7 +109,8 @@
 					<div class="row sub-row sub-row{{ link }} {{ layout.items[link].classNames }}">
 						{% for item in layout.items[link].content %}
 							{% if loop.index == 1 %}{% else %}
-							<div class="col-xs-6"><a href="{{ item.href }}"><span>{{ item.text | safe }}</span></a></div>
+							<div class="col-xs-6"><a href="{{ item.href }}">
+								<span>{{ item.text | safe }}</span></a></div>
 							{% endif %}
 						{% endfor %}
 					</div>
@@ -122,8 +124,8 @@
 		</div>
 		<div id="stickyFooter">
 			<div class="wrap-snap">
-				<form>
-					<input placeholder="Enter your email for sales and other sili promotions.">
+				<form data-subscribe novalidate>
+					<input name="email" placeholder="Enter your email for sales and other sili promotions.">
 					<button>SIGN-UP</button>
 				</form>
 				<div class="copyright">&copy; <span id="copyrightYear"></span> Silipint. All Rights Reserved</div>
@@ -135,6 +137,23 @@
 					<a class="ut" href="http://www.youtube.com/silipint"></a>
 				</div>
 			</div>
+		</div>
+		<div class="modal fade" style="display:none" id="subscriptionConfirm">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title">Silipint Newsletter Confirmation</h4>
+		      </div>
+		      <div class="modal-body">
+				<p>Thank you for subscribing!</p>
+		        <p>Please check your email to confirm your newsletter subscription.</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
+		      </div>
+		    </div>
+		  </div>
 		</div>
 		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 		<script src="//api.hubsoft.ws/@js"></script>
@@ -148,7 +167,8 @@
         {% block foot %}
 
 		{% endblock %}
-		<script> var kitgui = { key: '{{ kitguiAccountKey }}', tabVisible: true }; </script>
+		<script> var kitgui = { key: '{{ kitguiAccountKey }}', tabVisible: false }; 
+			$('.copyright').click(function(){ kitgui.showTab(); }); </script>
 		<script src="/kitgui/js/kitgui.js"></script>
     </body>
 </html>

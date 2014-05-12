@@ -457,3 +457,18 @@ silipint.doForm = function(options, callback) {
 		$(this).removeClass('error').closest('form').find('.alert').slideUp('fast');
 	});
 };
+
+(function(){ // subscribe
+	$('body').on('submit','form[data-subscribe]', function(ev) {
+		ev.preventDefault();
+		var $this = $(this);
+		var email = $(this).find('input[name=email]').val();
+		
+		if (!silipint.regexs.email.test(email)) { return; }
+		$.post('/subscribe',{ email : email }, function(json){
+			$('#subscriptionConfirm').modal('show');
+			$this.find('[name=email]').val('');
+		},'json');
+		$('#subscriptionConfirm').modal('show');
+	});
+})();

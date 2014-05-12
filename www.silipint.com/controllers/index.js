@@ -13,6 +13,7 @@ var redirects = require('./redirects.js');
 var routeHandlers = {};
 
 module.exports.set = function(context) {
+	
 	globalContext = context;
 	var app = context.app, route, i, verb;
 	for(i = 0; i < routes.length; i++) {
@@ -33,16 +34,14 @@ module.exports.set = function(context) {
 	app.use(function(req, res, next) {
 		res.status(404);
 		if (req.accepts('html')) {
-			res.render('404.html', {
+			return res.render('404.html', {
 				title : '404',
 				description: 'The page you requested could not be found'
 			});
-			return;
 		}
 		// respond with json
 		if (req.accepts('json')) {
-			res.send({ error: 'Not found' });
-			return;
+			return res.send({ error: 'Not found' });
 		}
 		// default to plain-text. send()
 		res.type('txt').send('Not found');
@@ -416,7 +415,159 @@ routeHandlers.contactus = function(req, res) {
 };
 
 routeHandlers.account = function(req, res) {
-	res.json({ route: 'account', message : 'undefined' });
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'account';
+	function render() {
+		res.render('account.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		return render();
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path
+			}, function(kg){
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	],function(err){
+		render();
+	});
+};
+
+routeHandlers.signin = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'signin';
+	function render() {
+		res.render('sign-in.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		return render();
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path
+			}, function(kg){
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	],function(err){
+		render();
+	});
+};
+
+routeHandlers.signout = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'signout';
+	function render() {
+		res.render('sign-out.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		return render();
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path
+			}, function(kg){
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	],function(err){
+		render();
+	});
+};
+
+routeHandlers.forgotPassword = function(req, res){
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = utils.getPageId(req.path);
+	var navID = 'forgotpassword';
+	function render() {
+		res.render('forgot-password.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description,
+		});
+	}
+	if (req.cookies.kitgui || req.query.refresh) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		return render();
+	}
+	context.cache[pageID] = {};
+	async.parallel([
+		function(cb) {
+			kitgui.getContents({
+				basePath : config.kitgui.basePath,
+				host : config.kitgui.host,
+				pageID : pageID,
+				url : 'http://' + config.domain + req.path
+			}, function(kg){
+				context.cache[pageID].title = kg.seo.title;
+				context.cache[pageID].description = kg.seo.description;
+				cb();
+			});
+		}
+	],function(err){
+		render();
+	});
 };
 
 routeHandlers.findaretailer = function(req, res) {
@@ -855,6 +1006,14 @@ routeHandlers.postCustomerService = function(req, res) {
 		res.json(data);
 	});
 }
+
+routeHandlers.subscribe = function(req, res) {
+	globalContext.mailchimp.lists.subscribe({id: config.mailchimp.listID, email: {email:req.body.email}}, function(data) {
+    	res.json(data);
+	}, function(error) {
+        res.json({ err : error });
+	});
+};
 
 function htmlEncode(str) {
 	if (!str) { return ''; }

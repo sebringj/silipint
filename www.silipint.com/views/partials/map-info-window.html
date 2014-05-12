@@ -1,0 +1,9 @@
+<div class="marker">
+    <div class="name">{{ StoreName }}</div>
+    <div class="street">{{ Street }}</div>
+    <div class="city">{{ City }}</div>
+    <div class="phone">{{ PhoneNumber }}</div>
+	{% if StoreURL %}
+    	<a href="http://{{ StoreURL }}" class="storeurl">{{ StoreURL }}</a>
+	{% endif %}
+</div>

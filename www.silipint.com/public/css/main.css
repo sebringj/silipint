@@ -16,6 +16,9 @@ h1 { font-family: 'Oswald', sans-serif; }
 body.scrolled {
 	padding-top:75px;
 }
+#contentWrapper .page-content {
+	padding:20px;
+}
 #mobileMenu {
 	display:none;
 }
