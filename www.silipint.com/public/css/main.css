@@ -14,7 +14,7 @@ body {
 }
 h1 { font-family: 'Oswald', sans-serif; }
 body.scrolled {
-	padding-top:75px;
+
 }
 #contentWrapper .page-content {
 	padding:20px;
@@ -27,7 +27,6 @@ body.scrolled {
 	overflow:hidden;
 	transition: margin-left 0.3s ease;
 	-webkit-transition: margin-left 0.3s ease;
-	min-height:1200px;
 }
 .wrap-snap {
 	max-width:1200px;
@@ -63,8 +62,12 @@ body.menuOpen #pushUpMenu {
 	height:469px;
 }
 #pushUpMenu .set-height {
+	display:none;
+}
+body.menuOpen #pushUpMenu .set-height {
 	position:relative;
 	height:469px;
+	display:block;
 }
 #pushUpMenu .close {
 	background-image:url(/img/header-close-X.svg);
