@@ -231,8 +231,15 @@ routeHandlers.shop = function(req, res) {
 
 routeHandlers.collection = function(req, res) {
 	var cacheKey = utils.getPageId(req.path);
-	var pageID = utils.getPageId(req.path);
+	var page = 1; 
+	if (req.query.page) { page = parseInt(req.query.page); }
+	if (page > 1) { cacheKey += '-' + page; }
+	var pageID = cacheKey;
 	var navID = 'shop';
+	var limit = 16;
+	var pageCount;
+	
+	
 	function render() {
 		res.render('collection.html', {
 			layout : context.cache.layout,
@@ -242,7 +249,8 @@ routeHandlers.collection = function(req, res) {
 			items : context.cache[pageID].items,
 			title : context.cache[pageID].title,
 			description : context.cache[pageID].description,
-			products : context.cache[pageID].products
+			products : context.cache[pageID].products,
+			pages : context.cache[pageID].pages
 		});
 	}
 	if (req.cookies.kitgui || req.query.refresh) {
@@ -279,12 +287,31 @@ routeHandlers.collection = function(req, res) {
 		function(cb) {
 			getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/products?extras=1&tags=' + req.path.substr(1) }, function(status, data) {
 				if (data && data.products) {
-					/*for(var i = 0; i < data.products.length; i++) {
+					pageCount = Math.ceil(data.products.length / limit);
+					var products = [];
+					var start = (page - 1) * limit;
+					var max = page * limit;
+					for(var i = start; (i < data.products.length && i < max); i++) {
+						products.push(data.products[i]);
+						/*
 						if (data.products[i].tags && data.products[i].tags.length) {
-							data.products[i].productURL = data.products[i].tags.pop();
+							data.products[i].productURL = utils.getProductURL(data.products[i].tags);
 						}
-					}*/
-					context.cache[pageID].products = data.products;
+						*/
+					}
+					context.cache[pageID].products = products;
+					var pages = [];
+					for(var i = 0; i < pageCount; i++) {
+						if (i === 0) {
+							pages.push({ href : req.path, label : '1' });
+						} else {
+							pages.push({ href : req.path + '?page=' + (i+1), label : (i+1) });
+						}
+						if (page - 1 === i) {
+							pages[pages.length-1].isSelected = true;
+						}
+					}
+					context.cache[pageID].pages = pages;
 				} else {
 					context.cache[pageID].products = {};
 				}
@@ -360,9 +387,7 @@ routeHandlers.listing = function(req, res) {
 	function render() {
 		var products = [];
 		for(var i = 0; i < 40; i++) {
-			products.push({
-				index : (i+1),
-			});
+			products.push({ index : (i+1) });
 		}
 		res.render('listing.html', {
 			layout : context.cache.layout,

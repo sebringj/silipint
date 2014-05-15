@@ -1,10 +1,16 @@
 var config = require('config');
 
+var productURLPatterns = [
+	/oz$/,
+	/-set$/
+];
+
 module.exports = {
 	getLayoutData : getLayoutData,
 	getPageId : getPageId,
 	getNavId : getNavId,
-	fixForCDN : fixForCDN
+	fixForCDN : fixForCDN,
+	getProductURL : getProductURL
 };
 
 function getPageId(path) {
@@ -25,4 +31,16 @@ function fixForCDN(url) {
 	var parts = url.split('//')[1].split('/');
 	parts.splice(0,2);
 	return '//' + config.cdn + '/' + parts.join('/');
+}
+
+function getProductURL(tags) {
+	var i, j;
+	for(i = 0; i < tags.length; i++) {
+		for(j = 0; j < productURLPatterns.length; j++) {
+			if (productURLPatterns[j].test(tags[i])) {
+				return tags[i];
+			}
+		}
+	}
+	return '?????';
 }

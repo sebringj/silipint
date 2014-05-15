@@ -14,18 +14,22 @@
 		<span class="overlay">
 			<span class="line1">{{ product.description[2] | safe }}</span>
 			<span class="line2">{{ product.description[3] | safe }}</span>
-			<span class="price">{{ product.sizes[0].unitPrice | cur  }}</span>
+			<span class="price">{{ product.sizes[0].unitPrice | cur }}</span>
 		</span>
 	</a>
 {% endfor %}
 </div>
-{% if pages %}
+{% if pages.length > 1 %}
 <div class="page-bar">
 	<div class="wrap-snap">
-		<div class="next-prev"><a>NEXT</a> <span>|</span> <a>PREV</a></div>
+		<div class="next-prev"> <a data-prev>PREV</a> <span>|</span> <a data-next>NEXT</a></div>
 		<div class="pages">
 			{% for page in pages %}
-				<a href="{{ page.href }}">{{ page.label }}</a>
+				{% if page.isSelected %}
+					<a href="{{ page.href }}" data-selected>{{ page.label }}</a>
+				{% else %}
+					<a href="{{ page.href }}">{{ page.label }}</a>
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
@@ -37,6 +41,7 @@
 {% endblock %}
 
 {% block foot %}
+<script src="/js/plugins/async.js"></script>
 <script src="/js/shop.js"></script>
 <script src="/js/collection.js"></script>
 <script src="/js/partials/sili-times.js"></script>

@@ -12,9 +12,9 @@
 			<ol class="carousel-indicators">
 				{% for item in items.homeSlider.content %}
 				   {% if loop.first %}
-					<li data-target="#homeslider" class="active"></li>
+					<li data-target="#homeslider" data-slide-to="{{ loop.index-1 }}" class="active"></li>
 				   {% else %}
-				   	<li data-target="#homeslider"></li>
+				   	<li data-target="#homeslider" data-slide-to="{{ loop.index-1 }}" ></li>
 				   {% endif %}
 				{% endfor %}
 			</ol>
