@@ -90,5 +90,5 @@ module.exports = [
 	{ path : '/wine-bottle-stopper', method : 'collection' },
 	{ path : '/world-map-drinking-glasses-16oz', method : 'collection' },
 	{ path : '/refresh', method : 'refresh' },
-	{ path : /(oz|lid|pint|-detail)$/, method : 'detail' },
+	{ path : /(oz|-detail)$/, method : 'detail' },
 ];

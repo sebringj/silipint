@@ -274,6 +274,12 @@ if (history.pushState) {
 		});
 					
 		$('body').on('click','a[data-lightbox][href]', function(ev){
+			
+			if (/^https?:\/\//.test($(this).attr('href'))) { 
+				$(this).attr('target','_blank');
+				return true;
+			}
+			
 			ev.preventDefault();
 			pathBeforeLightBox = document.location.path;
 			$el = $(this);
