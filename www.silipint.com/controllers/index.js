@@ -130,10 +130,18 @@ routeHandlers.detail = function(req, res) {
 		if (!context.cache[pageID].seo.title) {
 			renderObj.seo.title = context.cache[pageID].product.pageTitle;
 			renderObj.title = context.cache[pageID].product.pageTitle;
+		} else {
+			renderObj.title = context.cache[pageID].seo.title;
 		}
 		if (!context.cache[pageID].seo.description) {
-			renderObj.seo.description = context.cache[pageID].metaDescription;
+			renderObj.seo.description = context.cache[pageID].product.metaDescription;
 			renderObj.description = context.cache[pageID].product.metaDescription;
+		} else {
+			renderObj.description = context.cache[pageID].seo.description;
+		}
+		
+		if (renderObj.title && renderObj.product) {
+			renderObj.product.productName = renderObj.title.replace(' | Silipint','');
 		}
 		
 		if (!renderObj.seo.title) {  renderObj.seo.title = '[fill in]'; }
@@ -180,6 +188,7 @@ routeHandlers.detail = function(req, res) {
 			}, function(kg){
 				context.cache[pageID].items = kg.items;
 				context.cache[pageID].seo = kg.seo;
+				
 				cb();
 			});
 		}
