@@ -16,11 +16,6 @@ module.exports.set = function(context) {
 	
 	globalContext = context;
 	var app = context.app, route, i, verb;
-	for(i = 0; i < routes.length; i++) {
-		route = routes[i];
-		verb = (route.verb) ? route.verb : 'get';
-		app[verb](route.path, routeHandlers[ route.method ]);	
-	}
 	for(i = 0; i < redirects.length; i++) {
 		redirect = redirects[i];
 		(function(redirect){
@@ -28,6 +23,11 @@ module.exports.set = function(context) {
 				res.redirect(301, redirect.redirect);
 			});
 		})(redirect);
+	}
+	for(i = 0; i < routes.length; i++) {
+		route = routes[i];
+		verb = (route.verb) ? route.verb : 'get';
+		app[verb](route.path, routeHandlers[ route.method ]);	
 	}
 	
 	// error pages
