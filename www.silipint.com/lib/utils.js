@@ -1,8 +1,7 @@
 var config = require('config');
 
 var productURLPatterns = [
-	/oz$/,
-	/-set$/
+	/oz$/
 ];
 
 module.exports = {
@@ -33,8 +32,9 @@ function fixForCDN(url) {
 	return '//' + config.cdn + '/' + parts.join('/');
 }
 
-function getProductURL(tags) {
+function getProductURL(product) {
 	var i, j;
+	var tags = product.tags;
 	for(i = 0; i < tags.length; i++) {
 		for(j = 0; j < productURLPatterns.length; j++) {
 			if (productURLPatterns[j].test(tags[i])) {
@@ -42,5 +42,5 @@ function getProductURL(tags) {
 			}
 		}
 	}
-	return '?????';
+	return product.productURL;
 }

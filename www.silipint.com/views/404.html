@@ -1,1 +1,20 @@
-404
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/content.css">
+{% endblock %}
+
+{% block content %}
+	<div class="wrap-snap content" style="text-align:center;padding-top:50px;padding-bottom:1000px">
+		<h1>You sili.</h1>
+		<div>
+			We could not find the page you requested.
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	{% include "./partials/sili-times.html" %}
+{% endblock %}
+
+{% block foot %}
+
+{% endblock %}

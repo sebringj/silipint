@@ -125,7 +125,9 @@ var t_4 = t_3[t_1];
 frame.set("item", t_4);
 output += "\n            <tr class=\"product-start\">\n                <td colspan=\"5\">";
 output += runtime.suppressValue(runtime.memberLookup((t_4),"productName", env.autoesc), env.autoesc);
-output += "</td>\n            </tr>\n            <tr class=\"product-end\" data-sku=\"[%=items[i].sku%]\">\n                <td><a href=\"";
+output += "</td>\n            </tr>\n            <tr class=\"product-end\" data-sku=\"";
+output += runtime.suppressValue(runtime.memberLookup((t_4),"sku", env.autoesc), env.autoesc);
+output += "\">\n                <td><a href=\"";
 output += runtime.suppressValue(runtime.memberLookup((t_4),"productURL", env.autoesc), env.autoesc);
 output += "\"><img class=\"cart-image\" src=\"";
 output += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_4),"images", env.autoesc)),0, env.autoesc), env.autoesc);
@@ -140,9 +142,9 @@ output += "</td>\n                <td class=\"trash\"><button class=\"btn-close\
 }
 }
 frame = frame.pop();
-output += "\n        <tr class=\"subtotal\">\n            <td colspan=\"4\" class=\"subtotal\"><strong>subtotal:</strong>";
+output += "\n\t\t<tr class=\"coupon-tr\">\n\t\t\t<td colspan=\"4\" class=\"coupon\">\n\t\t\t\t<form class=\"coupon-form\"><input type=\"text\" name=\"coupon\" class=\"form-control\" \n\t\t\t\tplaceholder=\"Coupon\">\n\t\t\t\t<button class=\"btn btn-warning\">Apply</button></form>\n\t\t\t</td>\n\t\t\t<td>&nbsp;</td>\n\t\t</tr>\n        <tr class=\"subtotal\">\n            <td colspan=\"4\" class=\"subtotal\">\n\t\t\t\t<strong>subtotal:</strong>";
 output += runtime.suppressValue(env.getFilter("cur").call(context, runtime.contextOrFrameLookup(context, frame, "subtotal")), env.autoesc);
-output += "</td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr>\n            <td colspan=\"4\" class=\"checkout\"><a href=\"/checkout\"><button class=\"checkout\">Checkout</button></a></td>\n            <td>&nbsp;</td>\n        </tr>\n    </tbody>\n</table>\n<div id=\"no-items\" style=\"display:none;\">\n    No Items in Cart\n</div>";
+output += "\n\t\t\t</td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr class=\"checkout-tr\">\n            <td colspan=\"4\" class=\"checkout\">\n\t\t\t\t<a href=\"/checkout\"><button class=\"checkout btn\">Checkout</button></a>\n\t\t\t</td>\n            <td>&nbsp;</td>\n        </tr>\n    </tbody>\n</table>\n<div id=\"no-items\" style=\"display:none;\">\n    No Items in Cart\n</div>";
 cb(null, output);
 ;
 } catch (e) {

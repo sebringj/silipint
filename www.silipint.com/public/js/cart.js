@@ -3,6 +3,7 @@
         hubsoft.getCartProducts(function (data) {
             var i, len, html, item;
             data.subtotal = 0;
+			console.log(data);
             if (data.items && data.items.length) {
                 for (i = 0, len = data.items.length; i < len; i++) {
                     item = data.items[i];
@@ -70,5 +71,30 @@
         }
     }).on('blur', '#cart input.qty', function (ev) {
         updateCart();
+    }).on('submit', '.coupon-form', function(ev) {
+		ev.preventDefault();
+		var $form = $(this);
+		var $input = $form.find('input');
+		$input.removeClass('error');
+		if ($.trim($input.val()) === '') {
+			return $input.addClass('error');
+		}
+    	hubsoft.setCoupon({
+			coupon : $input.val()
+    		}, function(data) {
+    			if (data.success) {
+    				$('#couponModal').find('.modal-body ').removeClass('error')
+					.text('Your coupon was applied for ' + data.percentOff + '% off!')
+					.end().modal('show');
+					$input.val('');
+					updateCart();
+    			} else {
+    				$('#couponModal').find('.modal-body p').addClass('error')
+					.text(data.message).end().modal('show');
+    			}
+    		}
+		);
+    }).on('focus', '.coupon-form input', function() {
+    	$(this).removeClass('error');
     });
 })();

@@ -1,3 +1,12 @@
+h1 {
+	margin-top:60px;
+}
+
+@media (max-width:768px) {
+    h1 {
+        margin-top: 20px;
+    }
+}
 .back-to-products {
     text-align:center;
     font-size:20px;
@@ -7,11 +16,11 @@
     padding:150px 0;
 }
 #cartList {
-    padding-top:80px;
+    padding-top:10px;
+	padding-bottom:40px;
 }
 #cart {
-    width:80%;
-    margin:40px auto;
+    margin:0 auto;
     margin-top:0;
 }
 #cart .product-start td {
@@ -34,8 +43,7 @@ td.trash,td.inline-subtotal,td.subtotal, td.checkout {
 td.trash {
     padding-right:10px;
 }
-.table-striped>tbody>tr:nth-child(odd)>td.subtotal,
-.table-striped>tbody>tr:nth-child(odd).subtotal>td{
+tr.subtotal td {
 	background-color:#FFBA12;
 	color:#000;
 }
@@ -53,15 +61,43 @@ button.btn-close {
 	border:none;
 	background-color:transparent;
 }
-button.checkout {
+button.checkout.btn {
 	color:#FFBA12;
 	background-color:#000;
-	padding:5px 10px;
-	border:none;
 	text-transform:uppercase;
+	border-radius:0;
 }
 @media (max-width:320px) {
     .back-to-products {
         margin-top:20px;
     }
+}
+td.coupon {
+	text-align:right;
+}
+td.coupon input.form-control {
+	display:inline-block;
+	width:80px;
+	vertical-align:middle;
+	border-radius:0;
+}
+.coupon button.btn {
+	background-color:#FFBA12;
+}
+td.checkout {
+	position:relative;
+}
+tr.checkout-tr td {
+	background-color:#fff !important;
+}
+input.error {
+	border:1px solid #f00;
+	color:#f00;
+}
+#couponModal .modal-body {
+	font-size:20px;
+	text-align:center;
+}
+#couponModal .modal-body p.error {
+	color:#f00;
 }

@@ -4,7 +4,7 @@
             <tr class="product-start">
                 <td colspan="5">{{ item.productName }}</td>
             </tr>
-            <tr class="product-end" data-sku="[%=items[i].sku%]">
+            <tr class="product-end" data-sku="{{ item.sku }}">
                 <td><a href="{{ item.productURL }}"><img class="cart-image" src="{{ item.images[0] }}"></a></td>
                 <td><span class="hidden-phone">{{ item.unitPrice | cur }}</span></td>
                 <td><input class="qty" type="text" value="{{ item.quantity }}" name="qty"></td>
@@ -12,12 +12,24 @@
                 <td class="trash"><button class="btn-close"><i class="fa fa-times"></i></button></td>
             </tr>
         {% endfor %}
+		<tr class="coupon-tr">
+			<td colspan="4" class="coupon">
+				<form class="coupon-form"><input type="text" name="coupon" class="form-control" 
+				placeholder="Coupon">
+				<button class="btn btn-warning">Apply</button></form>
+			</td>
+			<td>&nbsp;</td>
+		</tr>
         <tr class="subtotal">
-            <td colspan="4" class="subtotal"><strong>subtotal:</strong>{{ subtotal | cur }}</td>
+            <td colspan="4" class="subtotal">
+				<strong>subtotal:</strong>{{ subtotal | cur }}
+			</td>
             <td>&nbsp;</td>
         </tr>
-        <tr>
-            <td colspan="4" class="checkout"><a href="/checkout"><button class="checkout">Checkout</button></a></td>
+        <tr class="checkout-tr">
+            <td colspan="4" class="checkout">
+				<a href="/checkout"><button class="checkout btn">Checkout</button></a>
+			</td>
             <td>&nbsp;</td>
         </tr>
     </tbody>

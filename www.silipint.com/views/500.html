@@ -1,1 +1,20 @@
-500
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/content.css">
+{% endblock %}
+
+{% block content %}
+	<div class="wrap-snap content" style="text-align:center;padding-top:50px;padding-bottom:1000px">
+		<h1>Sili us.</h1>
+		<div>
+			Looks like an error occured while making your request. We'll have to fix that.
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	{% include "./partials/sili-times.html" %}
+{% endblock %}
+
+{% block foot %}
+
+{% endblock %}

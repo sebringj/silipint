@@ -3,6 +3,9 @@
 	font-weight:300;
 	letter-spacing:1px;
 }
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: 'Oswald', sans-serif; 
+}
 textarea, input { outline: none; }
 body {
 	margin:0;
@@ -976,4 +979,17 @@ form[role=form] textarea.error,
 form[role=form] select.error {
 	color:#f00;
 	border-color:#f00;
+}
+button.btn {
+	display:inline-block;
+	border-radius:0;
+	font-weight:200;
+	font-family: Oswald, sans-serif;
+	text-transform:uppercase;
+}
+button.btn.btn-warning {
+	background-color:#FFBA12;
+}
+.form-control {
+	border-radius:0;
 }

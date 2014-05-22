@@ -291,13 +291,12 @@ routeHandlers.collection = function(req, res) {
 					var products = [];
 					var start = (page - 1) * limit;
 					var max = page * limit;
-					for(var i = start; (i < data.products.length && i < max); i++) {
-						products.push(data.products[i]);
-						/*
+					var i;
+					for(i = start; (i < data.products.length && i < max); i++) {
 						if (data.products[i].tags && data.products[i].tags.length) {
-							data.products[i].productURL = utils.getProductURL(data.products[i].tags);
+							data.products[i].productURL = utils.getProductURL(data.products[i]);
 						}
-						*/
+						products.push(data.products[i]);
 					}
 					context.cache[pageID].products = products;
 					var pages = [];
