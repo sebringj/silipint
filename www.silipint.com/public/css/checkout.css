@@ -110,3 +110,8 @@ td.trash {
 	border: none;
 	text-transform: uppercase;
 }
+@media(max-width:768px) {
+	input[data-type="credit-card"].form-control {
+		margin-bottom:10px;
+	}
+}

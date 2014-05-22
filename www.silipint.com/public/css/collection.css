@@ -43,6 +43,11 @@
 	left:0;
 	top:0;
 }
+@media(max-width:480px) {
+	.products .product:hover .overlay {
+		display:none;
+	}	
+}
 .products .product .overlay span {
 	text-align:center;
 	font-size:14px;

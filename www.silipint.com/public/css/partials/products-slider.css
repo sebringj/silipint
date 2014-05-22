@@ -125,10 +125,12 @@
 .featured-products .products-slider .l-arrow {
 	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/carousel-left.png?v2);
 	left:10px;
+	z-index:2;
 }
 .featured-products .products-slider .r-arrow {
 	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/carousel-right.png?v2);
 	right:10px;
+	z-index:2;
 }
 @media (max-width:910px) {
 	.featured-products .bar {

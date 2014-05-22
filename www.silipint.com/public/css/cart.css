@@ -109,3 +109,15 @@ input.error {
 #couponModal .modal-body p.error {
 	color:#f00;
 }
+@media(max-width:320px) {
+	table#cart.table {
+		width:290px;
+	}
+	table#cart.table th,
+	table#cart.table td {
+		padding:5px 3px;
+	}
+    table#cart.table .product-end td {
+        padding-bottom:40px;
+    }
+}
