@@ -53,8 +53,7 @@ input.error, select.error {
 }
 
 .order-review-container, .order-items {
-    width: 80%;
-    max-width: 500px;
+    width: 100%;
     margin: 40px auto 0 auto;
 }
 
