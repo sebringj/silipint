@@ -117,7 +117,7 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-output += "<table id=\"cart\" class=\"table table-striped\">\n    <tbody>\n        ";
+output += "<h4 class=\"back-to-shopping\"><a href=\"/shop-sillipint-drinking-glasses\">Back to Shopping</a></h4>\n<table id=\"cart\" class=\"table table-striped\">\n    <tbody>\n        ";
 frame = frame.push();
 var t_3 = runtime.contextOrFrameLookup(context, frame, "items");
 if(t_3) {for(var t_1=0; t_1 < t_3.length; t_1++) {
@@ -144,7 +144,7 @@ output += "</td>\n                <td class=\"trash\"><button class=\"btn-close\
 frame = frame.pop();
 output += "\n\t\t<tr class=\"coupon-tr\">\n\t\t\t<td colspan=\"4\" class=\"coupon\">\n\t\t\t\t<form class=\"coupon-form\"><input type=\"text\" name=\"coupon\" class=\"form-control\" \n\t\t\t\tplaceholder=\"Coupon\">\n\t\t\t\t<button class=\"btn btn-warning\">Apply</button></form>\n\t\t\t</td>\n\t\t\t<td>&nbsp;</td>\n\t\t</tr>\n        <tr class=\"subtotal\">\n            <td colspan=\"4\" class=\"subtotal\">\n\t\t\t\t<strong>subtotal:</strong>";
 output += runtime.suppressValue(env.getFilter("cur").call(context, runtime.contextOrFrameLookup(context, frame, "subtotal")), env.autoesc);
-output += "\n\t\t\t</td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr class=\"checkout-tr\">\n            <td colspan=\"4\" class=\"checkout\">\n\t\t\t\t<a href=\"/checkout\"><button class=\"checkout btn\">Checkout</button></a>\n\t\t\t</td>\n            <td>&nbsp;</td>\n        </tr>\n    </tbody>\n</table>\n<div id=\"no-items\" style=\"display:none;\">\n    No Items in Cart\n</div>";
+output += "\n\t\t\t</td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr class=\"checkout-tr\">\n            <td colspan=\"4\" class=\"checkout\">\n\t\t\t\t<a href=\"/checkout\"><button class=\"checkout btn\">Checkout</button></a>\n\t\t\t</td>\n            <td>&nbsp;</td>\n        </tr>\n    </tbody>\n</table>\n<div id=\"no-items\" style=\"display:none;\">\n    No Items in Cart.\n</div>";
 cb(null, output);
 ;
 } catch (e) {

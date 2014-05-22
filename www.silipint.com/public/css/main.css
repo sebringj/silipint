@@ -993,3 +993,11 @@ button.btn.btn-warning {
 .form-control {
 	border-radius:0;
 }
+a {
+	color: #333;
+	text-decoration: none;
+}
+a:hover {
+	color:#555;
+	text-decoration:none;
+}

@@ -129,9 +129,11 @@ routeHandlers.detail = function(req, res) {
 		
 		if (!context.cache[pageID].seo.title) {
 			renderObj.seo.title = context.cache[pageID].product.pageTitle;
+			renderObj.title = context.cache[pageID].product.pageTitle;
 		}
 		if (!context.cache[pageID].seo.description) {
 			renderObj.seo.description = context.cache[pageID].metaDescription;
+			renderObj.description = context.cache[pageID].product.metaDescription;
 		}
 		
 		if (!renderObj.seo.title) {  renderObj.seo.title = '[fill in]'; }
