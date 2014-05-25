@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block head %}
+	<link rel="canonical" href="{{ canonical }}" />
 	<link rel="stylesheet" href="/css/product-detail.css" data-lightbox>
 {% endblock %}
 
@@ -74,9 +75,13 @@
 		</div>
 		<div class="section7 sl">
 			<div class="title">SIMILAR</div>
+			<div class="similar clearfix">
 			{% for item in product.relatedProducts %}
-			
+				<a href="{{ item.productURL }}" title="{{ item.productName }}" 
+				style="background-image:url('{{ item.images[0] }}')">
+				<img src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif"></a>
 			{% endfor %}
+			</div>
 		</div>
 	</div>
 </div>

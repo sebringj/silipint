@@ -150,6 +150,21 @@
 	border-top:1px solid #fff;
 	min-height:400px;
 }
+.similar {
+	font-size:0;
+	margin:20px 0;
+}	
+.similar a {
+	border:none;
+	width:50%;
+	float:left;
+	background-repeat:no-repeat;
+	background-size:contain;
+}
+.similar a img {
+	width:100%;
+	height:auto;
+}
 @media (max-width:890px) {
 	.product-detail .section4 iframe {
 		display:block;

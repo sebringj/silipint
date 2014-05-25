@@ -124,7 +124,8 @@ routeHandlers.detail = function(req, res) {
 			pageID : pageID,
 			items : context.cache[pageID].items,
 			product : context.cache[pageID].product,
-			seo : {}
+			seo : {},
+			canonical : context.cache[pageID].product.productURL
 		};
 		
 		renderObj.seo.title = context.cache[pageID].product.plogageTitle;
