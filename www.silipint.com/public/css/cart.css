@@ -1,5 +1,5 @@
-h1 {
-	margin-top:60px;
+.cart-page {
+	margin-top:20px;
 }
 .back-to-shopping {
 	text-align:center;
@@ -22,6 +22,7 @@ h1 {
 #no-items {
     text-align:center;
     padding:150px 0;
+	font-size:20px;
 }
 #cartList {
     padding-top:10px;

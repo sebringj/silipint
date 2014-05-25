@@ -102,6 +102,7 @@ if (history.pushState) {
 		var $el = null;
 		var scriptsExecuted = {};
 		var stylesLoaded = {};
+		var blockClick = false;
 		var methods = {
 			openLightBox : function(options, cb) {
 				if (!$('#lightbox').length) {
@@ -274,7 +275,7 @@ if (history.pushState) {
 		});
 					
 		$('body').on('click','a[data-lightbox][href]', function(ev){
-			
+			if (blockClick) { return; }
 			if (/^https?:\/\//.test($(this).attr('href'))) { 
 				$(this).attr('target','_blank');
 				return true;
@@ -304,6 +305,8 @@ if (history.pushState) {
 			});
 		}).on('click', '#lightbox .lightbox-content .lightbox-nav', function(ev){
 			ev.preventDefault();
+			if (blockClick) { return; }			
+			blockClick = true;
 			console.log('here');
 			var newIndex = -1;
 			var animation = 'left';
@@ -328,6 +331,7 @@ if (history.pushState) {
 				suppressStateChange = true;
 				if (animation === 'left') { animation = 'right'; } else { animation = 'left'; }
 				History.pushState({ method : 'openLightBox', path : path, title : title }, title, path);
+				blockClick = false;
 			});
 		});
 	})();

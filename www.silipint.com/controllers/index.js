@@ -127,18 +127,10 @@ routeHandlers.detail = function(req, res) {
 			seo : {}
 		};
 		
-		if (!context.cache[pageID].seo.title) {
-			renderObj.seo.title = context.cache[pageID].product.pageTitle;
-			renderObj.title = context.cache[pageID].product.pageTitle;
-		} else {
-			renderObj.title = context.cache[pageID].seo.title;
-		}
-		if (!context.cache[pageID].seo.description) {
-			renderObj.seo.description = context.cache[pageID].product.metaDescription;
-			renderObj.description = context.cache[pageID].product.metaDescription;
-		} else {
-			renderObj.description = context.cache[pageID].seo.description;
-		}
+		renderObj.seo.title = context.cache[pageID].product.plogageTitle;
+		renderObj.title = context.cache[pageID].product.pageTitle;
+		renderObj.seo.description = context.cache[pageID].product.metaDescription;
+		renderObj.description = context.cache[pageID].product.metaDescription;
 		
 		if (renderObj.title && renderObj.product) {
 			renderObj.product.productName = renderObj.title.replace(' | Silipint','');
@@ -176,7 +168,7 @@ routeHandlers.detail = function(req, res) {
 				cb();
 			}, function() {
 				cb();
-			});
+			}, function(err){ cb(); });
 		},
 		function(cb) {
 			kitgui.getContents({
@@ -381,6 +373,13 @@ routeHandlers.landing = function(req, res) {
 			{ id : pageID + 'YellowBox', editorType : 'html' }
 		]
 	}, function(kg){
+		for(var i in kg.items) {
+			if (kg.items.hasOwnProperty(i)) {
+				if(typeof kg.items[i].content === 'string') { 
+					kg.items[i].content = kg.items[i].content.trim();
+				}
+			}
+		}
 		context.cache[pageID] = {
 			items : kg.items,
 			title : kg.seo.title,

@@ -3,7 +3,7 @@
         hubsoft.getCartProducts(function (data) {
             var i, len, html, item;
             data.subtotal = 0;
-			console.log(data);
+			
             if (data.items && data.items.length) {
                 for (i = 0, len = data.items.length; i < len; i++) {
                     item = data.items[i];
@@ -13,11 +13,14 @@
                 html = silipint.nunjucks.render('partials/cart.html',data);
                 $('#cartList').html(html);
             }
-            if (!data.items || data.items == null || hubsoft.cart.items.length === 0) {
+            if (data.items == null || hubsoft.cart.items.length === 0) {
+				//if (!data.success) { hubsoft.cart.clearCookie(); }
                 $('#cartList').html(silipint.nunjucks.render('partials/cart.html',{ items: [] }));
                 $('#cart').fadeOut('fast', function () {
                     $('#no-items').fadeIn('fast');
                 });
+            } else {
+            	$('#cart').show();
             }
         });
     }

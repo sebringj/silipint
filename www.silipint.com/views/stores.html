@@ -6,10 +6,14 @@
 {% endblock %}
 
 {% block content %}
+<div class="h1Wrapper">
+	<div class="wrap-snap">
+		<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
+	</div>
+</div>
 	<div class="wrap-snap stores">
 		<div class="row">
 			<div class="col-sm-3">
-				<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
 				<div class="{{ items[pageID + 'Description'].classNames }}">
 					{{ items[pageID + 'Description'].content | safe }}
 				</div>
