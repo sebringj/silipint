@@ -114,21 +114,24 @@ td.trash {
 	}
 }
 
-::-webkit-input-placeholder {
+::-webkit-input-placeholder.form-control {
 	color:#000;
+ 	opacity:1;
 }
 
-:-moz-placeholder { /* Firefox 18- */
-	font-weight:bold;
+:-moz-placeholder.form-control { /* Firefox 18- */
 	color:#000;
+ 	opacity:1;
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
+::-moz-placeholder.form-control {  /* Firefox 19+ */
 	color:#000;
+ 	opacity:1;
 }
 
-:-ms-input-placeholder {  
+:-ms-input-placeholder.form-control {  
 	color:#000;
+ 	opacity:1;
 }
 
 select.form-control {
