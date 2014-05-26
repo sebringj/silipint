@@ -166,6 +166,15 @@ routeHandlers.detail = function(req, res) {
 				} else {
 					context.cache[pageID].product = {};
 				}
+				var i, images = context.cache[pageID].product.images;
+				if (images) {
+					for(i = 0; i < images.length; i++) {
+						if (!images[i]) {
+							images.splice(i,1);
+							i--;
+						}
+					}
+				}
 				cb();
 			}, function() {
 				cb();

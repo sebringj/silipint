@@ -25,10 +25,11 @@
 
 }
 .product-detail .section1 .main {
-	min-width:50%;
-	min-height:50px;
 	width:100%;
 	height:auto;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:center center;
 }
 .product-detail .section2 {
 	color:#999;
@@ -224,4 +225,19 @@
 	#lightbox .product-detail {
 		padding-top:20px;
 	}
+}
+.thumbs {
+	margin-bottom:20px;
+}
+.thumbs a {
+	width:25%;
+	display:block;
+	float:left;
+	background-repeat:no-repeat;
+	background-size:contain;
+	cursor:pointer;
+}
+.thumbs a img {
+	width:100%;
+	height:auto;
 }

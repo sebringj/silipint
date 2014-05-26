@@ -9,14 +9,20 @@
 <div class="wrap-snap">
 	<div class="product-detail" data-lightbox>
 		<div class="section1 sl">
-			<img class="main" src="{{ product.images[0] }}">
-			<div class="thumbs">
+			<div class="main" style="background-image:url('{{ product.images[0] }}')">
+				<img src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+			</div>
+			{% if product.images.length > 1 %}
+			<div class="thumbs clearfix">
 				{% for img in product.images %}
 					{% if img %}
-						<a class="thumb" style="background-image:url('{{ img }}')"></a>
+						<a class="thumb" style="background-image:url('{{ img }}')">
+							<img src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+						</a>
 					{% endif %}
 				{% endfor %}
 			</div>
+			{% endif %}
 		</div>
 		<div class="section2 sr">
 			<h1>{{ product.descriptions[2] | striptags }}</h1>
@@ -73,6 +79,7 @@
 				</div>
 			</div>
 		</div>
+		{% if product.relatedProducts.length > 0 %}
 		<div class="section7 sl">
 			<div class="title">SIMILAR</div>
 			<div class="similar clearfix">
@@ -83,6 +90,7 @@
 			{% endfor %}
 			</div>
 		</div>
+		{% endif %}
 	</div>
 </div>
 {% endblock %}
