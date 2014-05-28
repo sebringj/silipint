@@ -14,8 +14,8 @@
 			<a class="product" href="{{ product.productURL }}" data-lightbox>
 				<span class="img" style="background-image:url({{ product.images[0] }})"></span>
 				<span class="text">
-					<span class="text1">{{ product.description[2] | striptags }}</span>
-					<span class="text2">{{ product.description[3] | striptags }}</span>
+					<span class="text1">{{ product.descriptions[2] | striptags }}</span>
+					<span class="text2">{{ product.descriptions[3] | striptags }}</span>
 					<span class="text3">{{ product.sizes[0].unitPrice | cur }}</span>
 				</span>
 			</a>

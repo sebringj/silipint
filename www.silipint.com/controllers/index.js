@@ -128,10 +128,17 @@ routeHandlers.detail = function(req, res) {
 			canonical : context.cache[pageID].product.productURL
 		};
 		
-		renderObj.seo.title = context.cache[pageID].product.plogageTitle;
 		renderObj.title = context.cache[pageID].product.pageTitle;
-		renderObj.seo.description = context.cache[pageID].product.metaDescription;
 		renderObj.description = context.cache[pageID].product.metaDescription;
+		
+		if (context.cache[pageID].seo) {
+			if (context.cache[pageID].seo.title) {
+				renderObj.title = context.cache[pageID].seo.title;
+			}
+			if (context.cache[pageID].seo.description) {
+				renderObj.description = context.cache[pageID].seo.description;
+			}
+		}
 		
 		if (renderObj.title && renderObj.product) {
 			renderObj.product.productName = renderObj.title.replace(' | Silipint','');

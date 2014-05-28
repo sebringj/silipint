@@ -32,7 +32,7 @@ module.exports = [
 	{ path : '/sale', method : 'collection' },
 	{ path : '/sales', method : 'collection' },
 	{ path : '/sell-silipint', method : 'content' },
-	{ path : '/shop-sillipint-drinking-glasses', method : 'shop' },
+	{ path : '/shop-silipint-drinking-glasses', method : 'shop' },
 	{ path : '/shorty-cups', method : 'collection' },
 	{ path : '/shot-glasses', method : 'collection' },
 	{ path : '/sili-life', method : 'landing' },

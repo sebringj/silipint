@@ -9,3 +9,4 @@ $('body').off('.lightbox').on('click.lightbox','.top-tabs a', function(ev){
 $('body').off('click.productDetail').on('click.productDetail', '.thumbs .thumb', function(){
 	$('.product-detail .main').css('background-image', $(this).css('background-image'));
 });
+$('a[href="/shop-silipint-drinking-glasses"]').addClass('selected');
