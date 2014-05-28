@@ -52,7 +52,6 @@ function setLayoutCache(context) {
 			function(cb) {
 				getJSON({port:443, host:'api.instagram.com',path:'/v1/users/37417319/media/recent?client_id=4c559d14132d4106812179c7a223840d'}, function(status, data) {
 					context.cache.layout.instagram = data;
-					console.log(data);
 					cb();
 				}, function() {
 					cb();

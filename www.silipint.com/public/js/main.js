@@ -100,6 +100,7 @@ if (history.pushState) {
 		var suppressStateChange = false;
 		var scrollTopBeforeLightBox;
 		var $el = null;
+		var lastHref = '';
 		var scriptsExecuted = {};
 		var stylesLoaded = {};
 		var blockClick = false;
@@ -284,6 +285,7 @@ if (history.pushState) {
 			ev.preventDefault();
 			pathBeforeLightBox = document.location.path;
 			$el = $(this);
+			lastHref = $(this).attr('href');
 			methods.openLightBox({
 				path : $(this).attr('href')
 			}, function(title, path){
@@ -307,25 +309,52 @@ if (history.pushState) {
 			ev.preventDefault();
 			if (blockClick) { return; }			
 			blockClick = true;
-			console.log('here');
 			var newIndex = -1;
 			var animation = 'left';
-			if ($(this).hasClass('lightbox-right')) {
-				newIndex = $el.index() + 1;
-				if ($el.parent().find('[data-lightbox]:last').index() <= newIndex) {
-					newIndex = 0;
+			var index, i;
+			if (hubsoft.productURLs) {
+				console.log(lastHref);
+				for(i = 0; i < hubsoft.productURLs.length; i++) {
+					if (hubsoft.productURLs[i] === lastHref) {
+						index = i;
+						break;
+					}
 				}
-				animation = 'right';
-			} else {
-				if ($el.index() === 0) {
-					newIndex = ($el.parent().find('[data-lightbox]:last').index());				
+				if ($(this).hasClass('lightbox-right')) {
+					if (index+1 === hubsoft.productURLs.length) {
+						index = 0;
+					} else {
+						index++;
+					}
+					animation = 'right';
 				} else {
-					newIndex = $el.index() - 1;
+					if (index-1 < 0) {
+						index = hubsoft.productURLs.length - 1;
+					} else {
+						index--;
+					}
 				}
+				lastHref = hubsoft.productURLs[index];
+				console.log(lastHref);
+			} else {
+				if ($(this).hasClass('lightbox-right')) {
+					newIndex = $el.index() + 1;
+					if ($el.parent().find('[data-lightbox]:last').index() <= newIndex) {
+						newIndex = 0;
+					}
+					animation = 'right';
+				} else {
+					if ($el.index() === 0) {
+						newIndex = ($el.parent().find('[data-lightbox]:last').index());				
+					} else {
+						newIndex = $el.index() - 1;
+					}
+				}
+				$el = $el.parent().find('[data-lightbox]:eq('+ newIndex +')');
+				lastHref = $el.attr('href');
 			}
-			$el = $el.parent().find('[data-lightbox]:eq('+ newIndex +')');
 			methods.openLightBox({
-				path : $el.attr('href'),
+				path : lastHref,
 				animation : animation
 			}, function(title, path){
 				suppressStateChange = true;

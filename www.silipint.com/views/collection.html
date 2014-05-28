@@ -41,6 +41,7 @@
 {% endblock %}
 
 {% block foot %}
+<script>hubsoft.productURLs = {{ productURLs | stringify | safe }};</script>
 <script src="/js/plugins/async.js"></script>
 <script src="/js/shop.js"></script>
 <script src="/js/collection.js"></script>

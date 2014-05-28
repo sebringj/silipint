@@ -270,7 +270,8 @@ routeHandlers.collection = function(req, res) {
 			title : context.cache[pageID].title,
 			description : context.cache[pageID].description,
 			products : context.cache[pageID].products,
-			pages : context.cache[pageID].pages
+			pages : context.cache[pageID].pages,
+			productURLs : context.cache[pageID].productURLs
 		});
 	}
 	if (req.cookies.kitgui || req.query.refresh) {
@@ -312,6 +313,10 @@ routeHandlers.collection = function(req, res) {
 					var start = (page - 1) * limit;
 					var max = page * limit;
 					var i;
+					var productURLs = [];
+					for(i = 0; i < data.products.length; i++) {
+						productURLs.push(utils.getProductURL(data.products[i]));
+					}
 					for(i = start; (i < data.products.length && i < max); i++) {
 						if (data.products[i].tags && data.products[i].tags.length) {
 							data.products[i].productURL = utils.getProductURL(data.products[i]);
@@ -319,6 +324,7 @@ routeHandlers.collection = function(req, res) {
 						products.push(data.products[i]);
 					}
 					context.cache[pageID].products = products;
+					context.cache[pageID].productURLs = productURLs;
 					var pages = [];
 					for(var i = 0; i < pageCount; i++) {
 						if (i === 0) {

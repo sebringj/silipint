@@ -38,7 +38,7 @@ function getProductURL(product) {
 	for(i = 0; i < tags.length; i++) {
 		for(j = 0; j < productURLPatterns.length; j++) {
 			if (productURLPatterns[j].test(tags[i])) {
-				return tags[i];
+				return '/' + tags[i];
 			}
 		}
 	}
