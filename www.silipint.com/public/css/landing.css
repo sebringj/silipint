@@ -79,6 +79,12 @@
 	.sili-boxes a {
 		width:50%;
 	}
+	.sili-boxes a:hover span.over-text {
+		display:block;
+	}
+	.sili-boxes a:hover img.front {
+		display:block;
+	}
 }
 @media (max-width:480px) {
 	.sili-boxes a {

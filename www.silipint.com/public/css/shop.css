@@ -59,4 +59,15 @@
 	.showcase .item {
 		width:100%;
 	}
+	.showcase .item:hover .img2 {
+		display:none;
+		opacity:1;
+	}
+	.showcase .item:hover .img {
+		display:block;
+	}
+	.showcase .item:hover .text {
+		background-color:#ccc;
+		color:#fff;
+	}
 }

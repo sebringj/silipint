@@ -43,7 +43,7 @@
 	left:0;
 	top:0;
 }
-@media(max-width:480px) {
+@media(max-width:768px) {
 	.products .product:hover .overlay {
 		display:none;
 	}	

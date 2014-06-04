@@ -94,8 +94,11 @@
 	text-align:center;
 }
 @media (max-width:768px) {
-	.sili-times .box {
-		width:33.3%;
+	.sili-times .box:hover .front {
+		opacity:0;
+	}
+	.sili-times .box:hover .caption {
+		display:none;
 	}
 }
 @media (max-width:480px) {

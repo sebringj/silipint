@@ -240,6 +240,8 @@ hubsoft.doReviewOrder = function () {
                 data.subtotal += (item.unitPrice * item.quantity);
             }
             data.total = data.subtotal + hubsoft.tax + hubsoft.shipping;
+			data.tax = hubsoft.tax;
+			data.shipping = hubsoft.shipping;
 			html = silipint.nunjucks.render('partials/order-review.html', data);
             $('.order-review').html(html);
         } else {
@@ -311,6 +313,7 @@ hubsoft.ready(function () {
             hubsoft.tax = data.taxAmount;
             hubsoft.shipping = data.shippingAmount;
             hubsoft.doReviewOrder();
+			console.log(data);
         });
     }
 
