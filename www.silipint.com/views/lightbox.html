@@ -11,13 +11,6 @@
 	<div class="lb" data-lightbox>
 		<div class="wrap-snap">
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="images {{ items[pageID + 'Images'].classNames }}">
-						{% for item in items[pageID + 'Images'].content %}
-							<img src="{{ item.src }}" alt="{{ item.alt }}" class="img-responsive">
-						{% endfor %}
-					</div>
-				</div>
 				<div class="col-sm-6 rt">
 					<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
 					<div class="html {{ items[pageID + 'HTML1'].classNames }}">{{ items[pageID + 'HTML1'].content | safe }}</div>
@@ -31,6 +24,13 @@
 						        <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
 						    </a>
 						{% endif %}
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="images {{ items[pageID + 'Images'].classNames }}">
+						{% for item in items[pageID + 'Images'].content %}
+							<img src="{{ item.src }}" alt="{{ item.alt }}" class="img-responsive">
+						{% endfor %}
 					</div>
 				</div>
 			</div>

@@ -12,9 +12,13 @@
 	</div>
 </div>
 	<div class="wrap-snap customer-service">
-		<p class="{{ items[pageID + 'Description'].classNames }}">
-			{{ items[pageID + 'Description'].content | safe }}
-		</p>
+		<div class="row">
+			<div class="col-sm-offset-3 col-sm-6">
+				<p class="{{ items[pageID + 'Description'].classNames }}">
+					{{ items[pageID + 'Description'].content | safe }}
+				</p>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
 				<form role="form" novalidate>

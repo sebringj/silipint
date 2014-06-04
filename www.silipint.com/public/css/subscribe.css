@@ -1,0 +1,9 @@
+.page {
+	padding:20px;
+}
+.page form {
+	margin:20px 0;
+}
+.page form textarea {
+	min-height:150px;
+}

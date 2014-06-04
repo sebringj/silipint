@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+	<link rel="stylesheet" href="/css/subscribe.css">
+	<link rel="stylesheet" href="/css/partials/sili-times.css">
+{% endblock %}
+
+{% block content %}
+<div class="h1Wrapper">
+	<div class="wrap-snap">
+		<h1 class="{{ items[pageID + 'Title'].classNames }}">{{ items[pageID + 'Title'].content | safe }}</h1>
+	</div>
+</div>
+	<div class="wrap-snap page">
+		<div class="row">
+			<div class="col-sm-offset-3 col-sm-6">
+				<p class="{{ items[pageID + 'Description'].classNames }}">
+					{{ items[pageID + 'Description'].content | safe }}
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<form role="form" novalidate data-subscribe>
+				  <div class="form-group">
+				    <label for="f_email">Email address *</label>
+				    <input required type="email" required class="form-control" name="f_email" id="f_email" placeholder="Enter Email">
+				  </div>
+				  <div class="alert alert-danger" style="display:none"></div>
+				  <div class="alert alert-warning" style="display:none">Sending...</div>
+				  <button type="submit" class="btn btn-warning">SUBSCRIBE</button>
+				</form>
+				<div class="alert alert-success" style="display:none"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix sili-boxes {{ items[pageID + 'Collection'].classNames }}">
+	{% for item in items[pageID + 'Collection'].content %}
+		<a href="{{ item.url }}" data-lightbox class="clearfix" style="background-image:url('{{ item.imageURL }}')">
+			<span>{{ item.title }}</span>
+			<img class="back" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+			<img class="front" style="background-color:#{{ item.backgroundColor }}" 
+			src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
+		</a>
+	{% endfor %}
+	</div>
+	<div class="clearfix"></div>
+	{% include "./partials/yellow-box.html" %}
+	{% include "./partials/sili-times.html" %}
+{% endblock %}
+
+{% block foot %}
+	<script src="/js/partials/sili-times.js"></script>
+	<script src="/js/customer-service.js"></script>
+{% endblock %}

@@ -1064,11 +1064,53 @@ routeHandlers.postCustomerService = function(req, res) {
 	});
 }
 
-routeHandlers.subscribe = function(req, res) {
+routeHandlers.subscribePost = function(req, res) {
 	globalContext.mailchimp.lists.subscribe({id: config.mailchimp.listID, email: {email:req.body.email}}, function(data) {
     	res.json(data);
 	}, function(error) {
         res.json({ err : error });
+	});
+};
+
+routeHandlers.subscribe = function(req, res) {
+	var cacheKey = utils.getPageId(req.path);
+	var pageID = cacheKey;
+	var navID = utils.getNavId(req.path);
+	function render() {
+		res.render('subscribe.html', {
+			layout : context.cache.layout,
+			kitguiAccountKey : config.kitgui.accountKey,
+			pageID : pageID,
+			navID : navID,
+			items : context.cache[pageID].items,
+			title : context.cache[pageID].title,
+			description : context.cache[pageID].description
+		});
+	}
+	if (req.cookies.kitgui) {
+		delete context.cache[pageID];
+	}
+	if (context.cache[pageID]) {
+		render();
+		return;
+	}
+	kitgui.getContents({
+		basePath : config.kitgui.basePath,
+		host : config.kitgui.host,
+		pageID : pageID,
+		url : 'http://' + config.domain + req.path,
+		items : [
+			{ id : pageID + 'Title', editorType : 'inline' },
+			{ id : pageID + 'Description', editorType : 'html' },
+			{ id : pageID + 'YellowBox', editorType : 'html' }
+		]
+	}, function(kg){
+		context.cache[pageID] = {
+			items : kg.items,
+			title : kg.seo.title,
+			description : kg.seo.description
+		};
+		render();
 	});
 };
 
