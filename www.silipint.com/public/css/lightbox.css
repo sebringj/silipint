@@ -25,6 +25,10 @@
 	display:block;
 	margin-bottom:10px;
 }
+a, a:visited {
+	color:#FFBA11;
+	text-decoration:underline;
+}
 @media (max-width:768px) { 
 	.lb .images {
 		text-align:center;
