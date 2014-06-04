@@ -50,6 +50,12 @@
 	.sili-boxes a {
 		width:50%;
 	}
+	.sili-boxes a:hover img.front {
+		display:none;
+	}
+	.sili-boxes a:hover span {
+		display:none;
+	}
 }
 @media (max-width:480px) {
 	.sili-boxes a {
