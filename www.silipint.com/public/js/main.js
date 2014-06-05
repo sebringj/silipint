@@ -6,8 +6,9 @@ if ('ontouchstart' in document.documentElement) {
 }
 (function(){
 	var securePath = {'/cart':1,'/checkout':1,'/create-account':1,'/sign-in':1,'/forgot-password':1,'/account':1};
+	var secureHostName = {'www.silipint.com':1,'dev.silipint.com':1};
 	function checkPath(protocol, hostname, pathname) {
-		if (hostname !== 'localhost' && securePath[pathname] && protocol === 'http:') {
+		if (secureHostName[hostname] && securePath[pathname] && protocol === 'http:') {
 			document.location = 'https://' + hostname + pathname;
 		} else if (protocol === 'https:' && !securePath[pathname]) {
 			document.location = 'http://' + hostname + pathname;
@@ -16,7 +17,7 @@ if ('ontouchstart' in document.documentElement) {
 	checkPath(location.protocol, location.hostname, location.pathname);
 	
 	function handleHref(href) {
-		if (href.indexOf('http') === 0 || location.hostname === 'localhost') {
+		if (href.indexOf('http') === 0 || !secureHostName[location.hostname]) {
 			return { interupt : false, href : href };
 		} else if (location.protocol === 'http:' && securePath[href]) {
 			return { interupt : true, href : 'https://' + location.hostname + href };
