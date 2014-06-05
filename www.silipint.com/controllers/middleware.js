@@ -34,6 +34,7 @@ function setLayoutCache(context) {
 						{ id : 'productsSlider', editorType : 'links-json' }
 					]
 				}, function(kg){
+					if (!kg) { kg = { items : []}; }
 					context.cache.layout.items = kg.items;
 					context.cache.layout.topNav = [
 						{ key : 'topNavProductsLinks', icon : 'header-products-CUP.svg' }, 

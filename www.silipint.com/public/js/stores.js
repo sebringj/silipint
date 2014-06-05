@@ -1,6 +1,6 @@
 hubsoft.ready(function () {
 
-	var latlng, map, markersArray = [], locList = [], circleOverlay = null,
+	var latlng, map, markers = [], locList = [], circleOverlay = null,
 		map = new google.maps.Map($('.map')[0], {
 			mapTypeControl: false,
 			zoomControl: true,
@@ -15,16 +15,16 @@ hubsoft.ready(function () {
 		
         var dataLocation = window.localStorage['location'].split(';');
         
-		var loc = {
+		var currentLocation = {
 			lat : dataLocation[0],
 			lng : dataLocation[1]
 		};
 		
 		hubsoft.getDealerLocations({
-			lat : loc.lat,
-			lng : loc.lng,
+			lat : currentLocation.lat,
+			lng : currentLocation.lng,
 			radius : $('#within').val()
-		}, function(json){ handleLocations(loc, json); });		
+		}, function(json){ handleLocations(currentLocation, json); });		
 
     } else if (navigator.geolocation) {
 		
@@ -73,9 +73,9 @@ hubsoft.ready(function () {
         });
 	});
 
-	function handleLocations(loc, json) {
+	function handleLocations(currentLocation, json) {
 
-		$.each(markersArray, function(index, item){
+		$.each(markers, function(index, item){
 			item.setMap(null);
 		});
         if (circleOverlay) {
@@ -83,28 +83,37 @@ hubsoft.ready(function () {
             circleOverlay = null;
         }
 		
-		markersArray = [];
-		locList = [];
+		markers = [];
+		locations = [];
 		
-		$.each(json.locations, function(index, store){
-			locList.push(new google.maps.LatLng (store.Latitude, store.Longitude));
+		$.each(json.locations, function(index, location){
+			locations.push(new google.maps.LatLng (location.Latitude, location.Longitude));
 			var marker = new google.maps.Marker({
-				position : (new google.maps.LatLng(store.Latitude, store.Longitude)),
+				position : (new google.maps.LatLng(location.Latitude, location.Longitude)),
 				map : map,
-				title : store.StoreName
+				title : location.StoreName
 			});
 			marker.infowindow = new google.maps.InfoWindow({
 				content : silipint.nunjucks.render('partials/map-info-window.html', store)
 			});
-			markersArray.push(marker);
-			google.maps.event.addListener(marker, 'click', function () {
-				marker.infowindow.open(map, marker);
-			});
+			markers.push(marker);
+			(function(){
+				google.maps.event.addListener(marker, 'click', function () {
+					openLocation(marker);
+				});
+			})({ marker : marker, location : location });
 		});
 		
-        map.setCenter(new google.maps.LatLng(loc.lat, loc.lng));			
-		setCircle(loc.lat, loc.lng);
+        map.setCenter(new google.maps.LatLng(currentLocation.lat, currentLocation.lng));			
+		setCircle(currentLocation.lat, currentLocation.lng);
 		setBounds();
+	}
+	
+	function openLocation(marker) {
+		for(var i = 0; i < markers.length; i++) {
+			markers[i].infowindow.close();
+		}
+		marker.infowindow.open(map, marker);
 	}
 	
     function setCircle(lat, lng) {
@@ -124,12 +133,13 @@ hubsoft.ready(function () {
     }
 	
 	function setBounds() {
-		if (!locList.length < 2) {
+		if (!locations.length < 2) {
 			map.setZoom(7);
-			return; }
+			return; 
+		}
 		var bounds = new google.maps.LatLngBounds();
-		for (var i = 0; i < locList.length; i++) {
-			bounds.extend(locList[i]);
+		for (var i = 0; i < locations.length; i++) {
+			bounds.extend(locations[i]);
 		}
 		map.fitBounds(bounds);
 	}

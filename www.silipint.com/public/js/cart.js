@@ -30,7 +30,7 @@
         hubsoft.validateCart(function (data) {
             if (data.success) {
                 if (data.message) {
-                    alert(data.message);
+                    //alert(data.message);
                 }
             }
         });

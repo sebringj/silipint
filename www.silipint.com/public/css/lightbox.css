@@ -25,7 +25,7 @@
 	display:block;
 	margin-bottom:10px;
 }
-a, a:visited {
+.lb a, .lb a:visited {
 	color:#FFBA11;
 	text-decoration:underline;
 }

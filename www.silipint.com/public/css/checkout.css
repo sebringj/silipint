@@ -137,3 +137,7 @@ td.trash {
 select.form-control {
 
 }	
+#shippingMessage {
+	display:none;
+	margin-top:10px
+}

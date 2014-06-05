@@ -63,6 +63,7 @@
             val = $.trim($this.val()),
             isBlank = false,
             required = ($this.filter('[required]').length === 1);
+		
         if (required && val === '') {
             $this.addClass('error');
             $('form.checkout').data('error', true);
@@ -125,7 +126,7 @@
         }
     }
 
-    $('form.checkout').on('blur change keypress', 'input:visible,select:visible', function () {
+    $('form.checkout').on('click blur change keypress', 'input:visible,select:visible', function () {
         validate.apply(this);
         $('.alert-danger').slideUp('fast');
     });
@@ -263,8 +264,6 @@ hubsoft.ready(function () {
     hubsoft.doReviewOrder();
 
     hubsoft.getShippingOptions(function (data) {
-        console.log(data);
-
         var $shipping = $('select[name="shipping-method"]'),
             option,
             $select = $('<select>');
@@ -281,6 +280,7 @@ hubsoft.ready(function () {
     var checkingShipping = false;
     function checkIfShippingReady() {
         var shippingReady = true;
+		$('#shippingMessage').slideUp('fast');
         $('.shipping-group').find('input,select').each(function () {
             var $this = $(this),
                 val = $.trim($this.val());
@@ -292,6 +292,14 @@ hubsoft.ready(function () {
         });
         if (!shippingReady || checkingShipping) { console.log('shipping not ready'); return; }
         checkingShipping = true;
+		
+		hubsoft.validateCart({
+			shippingCode : $('[name=shipping-method]').val()
+		},function(data){
+			if (data.success && data.message) {
+				$('#shippingMessage').text(data.message).slideDown('fast');
+			}
+		});
 
         hubsoft.authShipping({
             firstName: $('[name=shipping-firstname]').val(),
