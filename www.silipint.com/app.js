@@ -50,7 +50,7 @@ d.run(function(){
 		key : fs.readFileSync('./wildcard.silipint.com.key').toString(),
 		cert : fs.readFileSync('./wildcard.silipint.com.crt').toString(),
 		ca : fs.readFileSync('./intermediate.crt').toString(),
-		passphrase : 'Abc123!~!'
+		passphrase : config.SSL.passphrase
 	},app).listen(securePort);
 
 	console.log('HTTP on port ' + port);
