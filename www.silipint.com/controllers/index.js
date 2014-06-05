@@ -69,10 +69,12 @@ routeHandlers.refresh = function(req, res) {
 
 routeHandlers.home = function(req, res) {
 	var pageID = 'home';
+	
+	var context = globalContext;
 
 	function render() {
 		res.render('index.html', {
-			layout : globalContext.cache.layout,
+			layout : context.cache.layout,
 			kitguiAccountKey : config.kitgui.accountKey,
 			pageID : pageID,
 			items : context.cache[pageID].items,
@@ -116,6 +118,7 @@ routeHandlers.home = function(req, res) {
 
 routeHandlers.detail = function(req, res) {
 	var pageID = utils.getPageId(req.path);
+	var context = globalContext;
 
 	function render() {
 		var renderObj = {
@@ -207,6 +210,7 @@ routeHandlers.detail = function(req, res) {
 }
 
 routeHandlers.shop = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = 'shop';
 	var navID = 'shop';
@@ -250,6 +254,7 @@ routeHandlers.shop = function(req, res) {
 };
 
 routeHandlers.collection = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var page = 1; 
 	if (req.query.page) { page = parseInt(req.query.page); }
@@ -352,6 +357,7 @@ routeHandlers.collection = function(req, res) {
 };
 
 routeHandlers.landing = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -413,6 +419,7 @@ routeHandlers.landing = function(req, res) {
 };
 
 routeHandlers.listing = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -472,6 +479,7 @@ routeHandlers.contactus = function(req, res) {
 };
 
 routeHandlers.account = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = utils.getPageId(req.path);
 	var navID = 'account';
@@ -511,6 +519,7 @@ routeHandlers.account = function(req, res) {
 };
 
 routeHandlers.signin = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = utils.getPageId(req.path);
 	var navID = 'signin';
@@ -550,6 +559,7 @@ routeHandlers.signin = function(req, res) {
 };
 
 routeHandlers.signout = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = utils.getPageId(req.path);
 	var navID = 'signout';
@@ -589,6 +599,7 @@ routeHandlers.signout = function(req, res) {
 };
 
 routeHandlers.forgotPassword = function(req, res){
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = utils.getPageId(req.path);
 	var navID = 'forgotpassword';
@@ -628,6 +639,7 @@ routeHandlers.forgotPassword = function(req, res){
 };
 
 routeHandlers.findaretailer = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -674,6 +686,7 @@ routeHandlers.customize = function(req, res) {
 };
 
 routeHandlers.cart = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = utils.getPageId(req.path);
 	var navID = 'cart';
@@ -718,7 +731,7 @@ routeHandlers.checkout = function(req, res) {
 	for(var i = 0; i < 10; i++) {
 		years.push(year+i);
 	}
-	
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = utils.getPageId(req.path);
 	var navID = 'checkout';
@@ -760,6 +773,7 @@ routeHandlers.checkout = function(req, res) {
 };
 
 routeHandlers.lightbox = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -808,6 +822,7 @@ routeHandlers.lightbox = function(req, res) {
 };
 
 routeHandlers.lightbox2 = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -855,6 +870,7 @@ routeHandlers.lightbox2 = function(req, res) {
 };
 
 routeHandlers.content = function(req, res){
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -897,6 +913,7 @@ routeHandlers.content = function(req, res){
 }
 
 routeHandlers.faq = function(req, res){
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -940,6 +957,7 @@ routeHandlers.faq = function(req, res){
 }
 
 routeHandlers.shareSili = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -983,6 +1001,7 @@ routeHandlers.shareSili = function(req, res) {
 
 routeHandlers.postSiliShare = function(req, res) {
 	var i, entries = [];
+	var context = globalContext;
 	entries.push('<h1>Sili Experience Submission</h1>');
 	for(i in req.body) {
 		if (i === 'f_vemail') { continue; }
@@ -1003,6 +1022,7 @@ routeHandlers.postSiliShare = function(req, res) {
 }
 
 routeHandlers.customerService = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);
@@ -1046,6 +1066,7 @@ routeHandlers.customerService = function(req, res) {
 
 routeHandlers.postCustomerService = function(req, res) {
 	var i, entries = [];
+	var context = globalContext;
 	entries.push('<h1>Customer Webform Inquery</h1>');
 	for(i in req.body) {
 		if (req.body.hasOwnProperty(i)) {
@@ -1073,6 +1094,7 @@ routeHandlers.subscribePost = function(req, res) {
 };
 
 routeHandlers.subscribe = function(req, res) {
+	var context = globalContext;
 	var cacheKey = utils.getPageId(req.path);
 	var pageID = cacheKey;
 	var navID = utils.getNavId(req.path);

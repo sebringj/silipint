@@ -125,6 +125,19 @@
             }
         }
     }
+	
+	$('[name=shipping-method]').change(function(){
+		$('#shippingMessage').slideUp('fast');
+		if ($(this).get(0).selectedIndex < 1) { return; }
+		hubsoft.validateCart({
+			shippingCode : $('[name=shipping-method]').val()
+		},function(data){
+			console.log(data);
+			if (data.message) {
+				$('#shippingMessage').text(data.message).slideDown('fast');
+			}
+		});		
+	});
 
     $('form.checkout').on('click blur change keypress', 'input:visible,select:visible', function () {
         validate.apply(this);
@@ -280,7 +293,6 @@ hubsoft.ready(function () {
     var checkingShipping = false;
     function checkIfShippingReady() {
         var shippingReady = true;
-		$('#shippingMessage').slideUp('fast');
         $('.shipping-group').find('input,select').each(function () {
             var $this = $(this),
                 val = $.trim($this.val());
@@ -292,14 +304,6 @@ hubsoft.ready(function () {
         });
         if (!shippingReady || checkingShipping) { console.log('shipping not ready'); return; }
         checkingShipping = true;
-		
-		hubsoft.validateCart({
-			shippingCode : $('[name=shipping-method]').val()
-		},function(data){
-			if (data.success && data.message) {
-				$('#shippingMessage').text(data.message).slideDown('fast');
-			}
-		});
 
         hubsoft.authShipping({
             firstName: $('[name=shipping-firstname]').val(),

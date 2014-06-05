@@ -5,6 +5,8 @@ var express = require('express'),
 	securePort = (process.env.SECUREPORT || 3004),
 	controllers = require('./controllers'),
 	http = require('http'),
+	https = require('https'),
+	fs = require('fs'),
 	path = require('path'),
 	cons = require('consolidate'),
 	nunjucks = require('./lib/nunjucks.js'),
@@ -12,13 +14,13 @@ var express = require('express'),
 	mcapi = require('mailchimp-api'),
 	middleware = require('./controllers/middleware.js'),
 	winston = require('winston'),
-	domain = require('domain'),
-	d = domain.create(),
 	context = {
 		app : app,
 		cache : cache,
 		mailchimp : (new mcapi.Mailchimp(config.mailchimp.apikey))
-	};
+	},
+	domain = require('domain'),
+	d = domain.create();
 	
 nunjucks.set(app);
 
@@ -29,11 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 middleware.set(context);
 app.use(app.router);
 app.use(express.favicon(__dirname + '/public/favicon.ico'));
-
 controllers.set(context);
-console.log('running on port ' + port);
-
-
 
 d.on('error', function(err){
 	winston.log('error',err);
@@ -44,19 +42,18 @@ d.on('error', function(err){
 d.run(function(){
 	
 	winston.add(winston.transports.File, { filename: 'winston.log' });
-	winston.remove(winston.transports.Console);
-	
 	winston.log('info','starting server at ' + (new Date()).toString() + '\r\n');
-	
-	http.createServer(app).listen(process.env.PORT || port);
+
+	http.createServer(app).listen(port);
+
 	https.createServer({
 		key : fs.readFileSync('./wildcard.silipint.com.key').toString(),
 		cert : fs.readFileSync('./wildcard.silipint.com.crt').toString(),
 		ca : fs.readFileSync('./intermediate.crt').toString(),
 		passphrase : 'Abc123!~!'
-	},app).listen(process.env.SECUREPORT || securePort);
+	},app).listen(securePort);
 
-	console.log('HTTP on port ' + (process.env.PORT || port));
-	console.log('HTTPS on port ' + (process.env.SecurePORT || securePort));	
-	
+	console.log('HTTP on port ' + port);
+	console.log('HTTPS on port ' + securePort);	
+
 });
