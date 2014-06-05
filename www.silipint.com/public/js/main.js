@@ -4,6 +4,43 @@ if ('ontouchstart' in document.documentElement) {
 } else {
 	app.quickClick = 'click';
 }
+(function(){
+	var securePath = {'/cart':1,'/checkout':1,'/create-account':1,'/sign-in':1,'/forgot-password':1,'/account':1};
+	function checkPath(protocol, hostname, pathname) {
+		if (hostname !== 'localhost' && securePath[pathname] && protocol === 'http:') {
+			document.location = 'https://' + hostname + pathname;
+		} else if (protocol === 'https:' && !securePath[pathname]) {
+			document.location = 'http://' + hostname + pathname;
+		}
+	}
+	checkPath(location.protocol, location.hostname, location.pathname);
+	
+	function handleHref(href) {
+		if (href.indexOf('http') === 0 || location.hostname === 'localhost') {
+			return { interupt : false, href : href };
+		} else if (location.protocol === 'http:' && securePath[href]) {
+			return { interupt : true, href : 'https://' + location.hostname + href };
+		} else if (location.protocol === 'https:' && !securePath[href]) {
+			return { interupt: true, href : 'http://' + location.hostname + href };
+		}
+		return { interupt : false, href : href };
+	}
+	
+	app.scriptRedirect = function(href) {
+		var obj = handleHref(href);
+		location = obj.href;
+	};
+	
+	if (location.hostname !== 'localhost') {
+		$('a[href]').on('click', function(ev){
+			var obj = handleHref($(this).attr('href'));
+			if ( obj.interupt ) {
+				ev.preventDefault();
+				location = obj.href;
+			}
+		});		
+	}
+})();
 (function($w){
 	// enable popout menu
 	$w.resize(function(){

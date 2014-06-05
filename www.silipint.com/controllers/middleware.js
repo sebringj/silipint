@@ -17,6 +17,9 @@ function setLayoutCache(context) {
 			return next();
 		}
 		context.cache.layout = {};
+		if (req.get('host').indexOf(config.domain) !== 0) {  
+			return res.redirect(301,'http://' + req.originalUrl);
+		}
 		async.parallel([
 			function(cb) {
 				kitgui.getContents({

@@ -94,7 +94,7 @@ hubsoft.ready(function () {
 				title : location.StoreName
 			});
 			marker.infowindow = new google.maps.InfoWindow({
-				content : silipint.nunjucks.render('partials/map-info-window.html', store)
+				content : silipint.nunjucks.render('partials/map-info-window.html', location)
 			});
 			markers.push(marker);
 			(function(){
