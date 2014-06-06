@@ -1,3 +1,4 @@
 */config/*
 *.crt
 *.key
+*.dns
