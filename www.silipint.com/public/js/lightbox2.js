@@ -1,4 +1,4 @@
-(function(){
+setTimeout(function(){
 	if(!$('.lb2').find('img').length) { return; }
 	
 	var $img = $('.lb2').find('img:first');
@@ -19,4 +19,4 @@
 			$('<img>',{ src : '//assets.pinterest.com/images/pidgets/pin_it_button.png' })
 		)
 	);
-})();
+},0);
