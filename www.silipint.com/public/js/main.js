@@ -248,10 +248,9 @@ if (history.pushState) {
 						console.log(scripts.length);
 						$.each(scripts, function(i,v){
 							var src = /src="([^"]+)"/i.exec(v);
-							if (scriptsExecuted[src[1]]) { loadBody(); return; }
+							if (!/data-alwaysload/.test(v) && scriptsExecuted[src[1]]) { loadBody(); return; }
 							if (src && src.length === 2) {
 								$.getScript(src[1], function(){
-									console.log('script executed');
 									scriptsExecuted[src[1]] = 1;
 									loadBody(); 
 								});
