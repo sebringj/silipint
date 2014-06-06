@@ -2,3 +2,5 @@
 *.crt
 *.key
 *.dns
+*.log
+*/node_modules/*
