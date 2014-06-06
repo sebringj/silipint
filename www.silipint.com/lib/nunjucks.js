@@ -18,6 +18,7 @@ module.exports.set = function(app) {
 			/partials\/order-receipt.html$/,
 			/partials\/order-review.html$/,
 			/partials\/map-info-window.html$/,
+			/partials\/map-results.html$/,
 			/partials\/account.html$/
 		] 
 	});

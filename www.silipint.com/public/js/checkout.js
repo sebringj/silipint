@@ -305,6 +305,7 @@ hubsoft.ready(function () {
         if (!shippingReady || checkingShipping) { console.log('shipping not ready'); return; }
         checkingShipping = true;
 
+		console.log('auth shipping')
         hubsoft.authShipping({
             firstName: $('[name=shipping-firstname]').val(),
             lastName: $('[name=shipping-lastname]').val(),
@@ -320,6 +321,18 @@ hubsoft.ready(function () {
             shippingMethod: $('[name=shipping-method]').val(),
             additionalInfo:($('[name=additional-info]').filter(':checked').length === 1),
         }, function (data) {
+			var message;
+			if (!data.success) {
+				if (data.message) {
+					if(data.message.indexOf(':') > -1) {
+						message = data.message.split(':')[1];
+					} else {
+						message = data.message;
+					}
+				}
+				console.log(message);
+				return $('#checkoutModal').find('.alert').text(message).show().end().modal('show');
+			}
             checkingShipping = false;
             hubsoft.shippingData = data;
             hubsoft.tax = data.taxAmount;
@@ -328,6 +341,10 @@ hubsoft.ready(function () {
 			console.log(data);
         });
     }
+	
+	$('#checkoutModal').on('hide.bs.modal',function(){
+		app.scriptRedirect('/cart');
+	});
 
     $('.shipping-group').on('blur', 'input,select', checkIfShippingReady);
 });

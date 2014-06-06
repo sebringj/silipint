@@ -28,11 +28,7 @@
     hubsoft.ready(function () {
         updateCart();
         hubsoft.validateCart(function (data) {
-            if (data.success) {
-                if (data.message) {
-                    //alert(data.message);
-                }
-            }
+			
         });
     });
 
@@ -57,16 +53,17 @@
                 hubsoft.cart.snapshot();
                 hubsoft.cart.set(sku, val);
                 hubsoft.validateCart(function (data) {
-                    if (data.success) {
-                        if (data.message) {
-                            alert(data.message);
-                        }
-                    } else {
-                        if (data.errors) {
-                            hubsoft.cart.undo();
-                            updateCart();
-                            alert(data.errors[0].message);
-                        }
+					var message;
+                    if (!data.success && data.errors && data.errors.length) {
+						if (data.errors[0].message) {
+							if(data.errors[0].message.indexOf(':') > -1) {
+								message = data.errors[0].message.split(':')[1];
+							} else {
+								message = data.errors[0].message;
+							}
+							console.log(message);
+							return $('#cartModal').find('.alert').text(message).show().end().modal('show');
+						}
                     }
                 });
             }

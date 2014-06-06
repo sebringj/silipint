@@ -1,9 +1,11 @@
 <div class="marker">
-    <div class="name">{{ StoreName }}</div>
-    <div class="street">{{ Street }}</div>
-    <div class="city">{{ City }}</div>
-    <div class="phone">{{ PhoneNumber }}</div>
-	{% if StoreURL %}
-    	<a href="http://{{ StoreURL }}" class="storeurl">{{ StoreURL }}</a>
+	<a target="_blank"  href="{{ location | googleDirections }}">
+    	<span class="name">{{ location.StoreName }}</span><br>
+    	<span class="street">{{ location.Street }}</span><br>
+    	<span class="city">{{ location.City }}</span>
+	</a><br>
+    <a class="phone" target="_blank" href="tel:{{ location.PhoneNumber }}">{{ location.PhoneNumber }}</a><br>
+	{% if location.StoreURL %}
+    	<a target="_blank" href="http://{{ StoreURL }}" class="storeurl">{{ location.StoreURL }}</a>
 	{% endif %}
 </div>

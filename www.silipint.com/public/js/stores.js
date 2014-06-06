@@ -1,6 +1,6 @@
 hubsoft.ready(function () {
 
-	var latlng, map, markers = [], locList = [], circleOverlay = null,
+	var latlng, map, markers = [], locations = [], circleOverlay = null,
 		map = new google.maps.Map($('.map')[0], {
 			mapTypeControl: false,
 			zoomControl: true,
@@ -87,14 +87,15 @@ hubsoft.ready(function () {
 		locations = [];
 		
 		$.each(json.locations, function(index, location){
-			locations.push(new google.maps.LatLng (location.Latitude, location.Longitude));
+			var loc = new google.maps.LatLng (location.Latitude, location.Longitude);
+			locations.push(loc);
 			var marker = new google.maps.Marker({
-				position : (new google.maps.LatLng(location.Latitude, location.Longitude)),
+				position : loc,
 				map : map,
 				title : location.StoreName
 			});
 			marker.infowindow = new google.maps.InfoWindow({
-				content : silipint.nunjucks.render('partials/map-info-window.html', location)
+				content : silipint.nunjucks.render('partials/map-info-window.html', { location: location } )
 			});
 			markers.push(marker);
 			(function(){
@@ -102,12 +103,21 @@ hubsoft.ready(function () {
 					openLocation(marker);
 				});
 			})({ marker : marker, location : location });
+			
 		});
+		
+		$('.results').html(silipint.nunjucks.render('partials/map-results.html',{ results : json.locations }));
 		
         map.setCenter(new google.maps.LatLng(currentLocation.lat, currentLocation.lng));			
 		setCircle(currentLocation.lat, currentLocation.lng);
 		setBounds();
 	}
+	
+	$('body').on('click','.results .result', function() {
+		var index = $(this).index();
+		openLocation(markers[index]);
+		$('html,body').animate({ scrollTop: $('.map-container').offset().top - $('#headerWrapper').height() }, 250);
+	});
 	
 	function openLocation(marker) {
 		for(var i = 0; i < markers.length; i++) {
@@ -133,15 +143,21 @@ hubsoft.ready(function () {
     }
 	
 	function setBounds() {
-		if (!locations.length < 2) {
-			map.setZoom(7);
-			return; 
-		}
+
 		var bounds = new google.maps.LatLngBounds();
 		for (var i = 0; i < locations.length; i++) {
 			bounds.extend(locations[i]);
 		}
 		map.fitBounds(bounds);
+		if (locations.length < 2) {
+			map.setZoom(13);
+			return; 
+		}
 	}
+	
+	$(window).resize(function(){
+		$('.map').css({ height: $(window).height() - 250 });
+		$('#resultsMenu').css({ maxHeight: $('.map').height()});		
+	}).trigger('resize');
 
 });

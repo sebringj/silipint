@@ -25,6 +25,21 @@
 				return str.replace(/(<([^>]+)>)/ig,'');
 			},
 			async : false
+		},
+		{
+			name : 'mi',
+			func : function(num) {
+				return num.toFixed(2);
+			},
+			async : false
+		},
+		{
+			name : 'googleDirections',
+			func : function(location) {
+				return 'http://maps.google.com/maps?daddr=' + 
+				encodeURIComponent('"'+ location.Street + ', ' + location.City + ', ' + location.StateCode + '"');
+			},
+			async : false
 		}
 	];
 	if (typeof exports === 'undefined') {

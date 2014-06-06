@@ -161,24 +161,60 @@ var lineno = null;
 var colno = null;
 var output = "";
 try {
-output += "<div class=\"marker\">\n    <div class=\"name\">";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "StoreName"), env.autoesc);
-output += "</div>\n    <div class=\"street\">";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "Street"), env.autoesc);
-output += "</div>\n    <div class=\"city\">";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "City"), env.autoesc);
-output += "</div>\n    <div class=\"phone\">";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "PhoneNumber"), env.autoesc);
-output += "</div>\n\t";
-if(runtime.contextOrFrameLookup(context, frame, "StoreURL")) {
-output += "\n    \t<a href=\"http://";
+output += "<div class=\"marker\">\n\t<a target=\"_blank\"  href=\"";
+output += runtime.suppressValue(env.getFilter("googleDirections").call(context, runtime.contextOrFrameLookup(context, frame, "location")), env.autoesc);
+output += "\">\n    \t<span class=\"name\">";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreName", env.autoesc), env.autoesc);
+output += "</span><br>\n    \t<span class=\"street\">";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"Street", env.autoesc), env.autoesc);
+output += "</span><br>\n    \t<span class=\"city\">";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"City", env.autoesc), env.autoesc);
+output += "</span>\n\t</a><br>\n    <a class=\"phone\" target=\"_blank\" href=\"tel:";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"PhoneNumber", env.autoesc), env.autoesc);
+output += "\">";
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"PhoneNumber", env.autoesc), env.autoesc);
+output += "</a><br>\n\t";
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc)) {
+output += "\n    \t<a target=\"_blank\" href=\"http://";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "StoreURL"), env.autoesc);
 output += "\" class=\"storeurl\">";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "StoreURL"), env.autoesc);
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc), env.autoesc);
 output += "</a>\n\t";
 ;
 }
 output += "\n</div>\n";
+cb(null, output);
+;
+} catch (e) {
+  cb(runtime.handleError(e, lineno, colno));
+}
+}
+return {
+root: root
+};
+})();
+})();
+(function() {(window.nunjucksPrecompiled = window.nunjucksPrecompiled || {})["partials/map-results.html"] = (function() {function root(env, context, frame, runtime, cb) {
+var lineno = null;
+var colno = null;
+var output = "";
+try {
+output += "<div class=\"results\">\n<table class=\"table table-striped\">\n";
+frame = frame.push();
+var t_3 = runtime.contextOrFrameLookup(context, frame, "results");
+if(t_3) {for(var t_1=0; t_1 < t_3.length; t_1++) {
+var t_4 = t_3[t_1];
+frame.set("result", t_4);
+output += "\n<tr class=\"result\">\n\t<td>";
+output += runtime.suppressValue(runtime.memberLookup((t_4),"StoreName", env.autoesc), env.autoesc);
+output += "</td>\n\t<td>";
+output += runtime.suppressValue(env.getFilter("mi").call(context, runtime.memberLookup((t_4),"Distance", env.autoesc)), env.autoesc);
+output += "mi</td>\n</tr>\n";
+;
+}
+}
+frame = frame.pop();
+output += "\n</table>\n</div>";
 cb(null, output);
 ;
 } catch (e) {

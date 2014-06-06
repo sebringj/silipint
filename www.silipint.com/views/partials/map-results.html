@@ -1,3 +1,10 @@
+<div class="results">
+<table class="table table-striped">
 {% for result in results %}
-	<div class="result">{{ result.StoreName }}</div>
+<tr class="result">
+	<td>{{ result.StoreName }}</td>
+	<td>{{ result.Distance | mi }}mi</td>
+</tr>
 {% endfor %}
+</table>
+</div>
