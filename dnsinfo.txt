@@ -1,7 +1,0 @@
-@	 A 69.162.233.4 	
-@	 MX (Priority 10)	 mx4.volusion.com 	
-@	 MX (Priority 10)	 mx3.volusion.com 	
-blog	 A	 184.168.37.1 	
-ftp	 CNAME	 @.silipint.com 	
-mail	 CNAME	 webmail.volusion.com 	
-www	 CNAME	 @.silipint.com 
