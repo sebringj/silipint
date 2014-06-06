@@ -176,7 +176,7 @@ output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLook
 output += "</a><br>\n\t";
 if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc)) {
 output += "\n    \t<a target=\"_blank\" href=\"http://";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "StoreURL"), env.autoesc);
+output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc), env.autoesc);
 output += "\" class=\"storeurl\">";
 output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc), env.autoesc);
 output += "</a>\n\t";
