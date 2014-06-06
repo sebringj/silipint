@@ -33,10 +33,13 @@
 			<div class="bg" data-container>
 				{% if product.sizes and product.sizes.length %}
 					{% if product.sizes[0].unitPrice < product.sizes[0].msrp %}
-						<span class="msrp">{{ product.sizes[0].msrp | cur }}</span>
+						<span class="msrp slash">{{ product.sizes[0].msrp | cur }}</span>
 						<span class="sale">On Sale</span>
+						<span class="unitprice sale">{{ product.sizes[0].unitPrice | cur }}</span>
+					{% else %}
+						<span class="unitprice">{{ product.sizes[0].unitPrice | cur }}</span>
 					{% endif %}
-					<span class="unitprice">{{ product.sizes[0].unitPrice | cur }}</span>
+					
 					{% if product.inStock %}
 						<span class="stock">In Stock</span>
 					{% else %}

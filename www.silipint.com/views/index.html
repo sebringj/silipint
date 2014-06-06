@@ -22,15 +22,17 @@
 				{% for item in items[pageID + 'Slider'].content %}
 					   {% if loop.first %}
 	   				    <div class="item active">
-	   				      <img src="{{ item.src }}" alt="{{ item.alt }}">
-	   				      <div class="carousel-caption">{{ item.caption }}</div>
-	   				    </div>
 					   {% else %}
-	   				    <div class="item">
-	   				      <img src="{{ item.src }}" alt="{{ item.alt }}">
-	   				      <div class="carousel-caption">{{ item.caption }}</div>
-	   				    </div>
+					   <div class="item">
 					   {% endif %}
+							{% if item.href %}
+								<a href="{{ item.href }}" 
+								target="{{ item.href | target }}"><img src="{{ item.src }}" alt="{{ item.alt }}"></a>
+							{% else %}
+								<img src="{{ item.src }}" alt="{{ item.alt }}">
+							{% endif %}
+	   				   	 <div class="carousel-caption">{{ item.caption }}</div>
+	   				   </div>
 				{% endfor %}
 			</div>
 		{% endif %}

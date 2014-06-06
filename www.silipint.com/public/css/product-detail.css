@@ -241,3 +241,6 @@
 	width:100%;
 	height:auto;
 }
+.sale { color:#f00; }
+.slash { text-decoration:line-through; }
+

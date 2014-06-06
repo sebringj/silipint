@@ -6,6 +6,6 @@
 	</a><br>
     <a class="phone" target="_blank" href="tel:{{ location.PhoneNumber }}">{{ location.PhoneNumber }}</a><br>
 	{% if location.StoreURL %}
-    	<a target="_blank" href="http://{{ location.StoreURL }}" class="storeurl">{{ location.StoreURL }}</a>
+    	<a target="_blank" href="{{ location.StoreURL | externalHref }}" class="storeurl">{{ location.StoreURL }}</a>
 	{% endif %}
 </div>

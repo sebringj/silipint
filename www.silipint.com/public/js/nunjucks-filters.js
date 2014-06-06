@@ -40,6 +40,26 @@
 				encodeURIComponent('"'+ location.Street + ', ' + location.City + ', ' + location.StateCode + '"');
 			},
 			async : false
+		},
+		{
+			name : 'target',
+			func : function(href) {
+				if (href && href.indexOf('http') === 0) {
+					return '_blank';
+				}
+				return '_self';
+			},
+			async : false
+		},
+		{
+			name : 'externalHref',
+			func : function(href) {
+				if (href && href.indexOf('http') === 0) {
+					return href;
+				}
+				return 'http://' + href;
+			},
+			async : false
 		}
 	];
 	if (typeof exports === 'undefined') {

@@ -175,8 +175,8 @@ output += "\">";
 output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"PhoneNumber", env.autoesc), env.autoesc);
 output += "</a><br>\n\t";
 if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc)) {
-output += "\n    \t<a target=\"_blank\" href=\"http://";
-output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc), env.autoesc);
+output += "\n    \t<a target=\"_blank\" href=\"";
+output += runtime.suppressValue(env.getFilter("externalHref").call(context, runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc)), env.autoesc);
 output += "\" class=\"storeurl\">";
 output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "location")),"StoreURL", env.autoesc), env.autoesc);
 output += "</a>\n\t";
