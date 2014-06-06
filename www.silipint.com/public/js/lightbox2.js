@@ -1,7 +1,7 @@
 setTimeout(function(){
-	if(!$('.lb2').find('img').length) { return; }
+	if(!$('.lb2').not('[data-set]').find('img').length) { return; }
 	
-	var $img = $('.lb2').find('img:first');
+	var $img = $('.lb2').attr('data-set','1').find('img:first');
 	$img.removeAttr('style');
 	$img.addClass('img-responsive');
 	
