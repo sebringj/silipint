@@ -15,13 +15,7 @@
 			<div class="social-icons">
 				<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html?url={{ path | urlencode }}" style="width:130px; height:20px;"></iframe>
 				<iframe src="//www.facebook.com/plugins/like.php?href={{ path | urlencode }}&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=true&amp;share=true&amp;height=21&amp;appId=232223003621871" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-				{% if items[pageID + 'Images'].content and  items[pageID + 'Images'].content.length > 0 %}
-					<a href="http://www.pinterest.com/pin/create/button/?url={{ path | urlencode }}&amp;media={{ items[pageID + 'Images'].content[0].src }}&amp;description=Next%20stop%3A%20Pinterest"
-				        data-pin-do="buttonPin"
-				        data-pin-config="above">
-				        <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
-				    </a>
-				{% endif %}
+<div class="pin-it-ph"></div>
 			</div>
 		</div>
 	</div>
@@ -29,4 +23,5 @@
 
 {% block foot %}
 	<script src="/js/listing.js"></script>
+	<script src="/js/lightbox2.js"></script>
 {% endblock %}
