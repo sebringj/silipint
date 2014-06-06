@@ -214,7 +214,12 @@ output += "mi</td>\n</tr>\n";
 }
 }
 frame = frame.pop();
-output += "\n</table>\n</div>";
+output += "\n</table>\n";
+if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "results")),"length", env.autoesc) == 0) {
+output += "\n\t<div class=\"alert alert-danger\">No Results</div>\n";
+;
+}
+output += "\n</div>";
 cb(null, output);
 ;
 } catch (e) {

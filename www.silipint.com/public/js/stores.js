@@ -143,7 +143,7 @@ hubsoft.ready(function () {
     }
 	
 	function setBounds() {
-
+		if (!locations.length) { return; }
 		var bounds = new google.maps.LatLngBounds();
 		for (var i = 0; i < locations.length; i++) {
 			bounds.extend(locations[i]);
