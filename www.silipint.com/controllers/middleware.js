@@ -10,6 +10,9 @@ module.exports.set = function(context){
 
 function setLayoutCache(context) {
 	context.app.use(function(req, res, next){
+		if (req.get('host').indexOf(config.domain) !== 0) {  
+			return res.redirect(301,'http://' + config.domain + req.originalUrl);
+		}
 		if (req.cookies.kitgui || req.query.refresh) {
 			delete context.cache.layout;
 		}
@@ -17,9 +20,6 @@ function setLayoutCache(context) {
 			return next();
 		}
 		context.cache.layout = {};
-		if (req.get('host').indexOf(config.domain) !== 0) {  
-			return res.redirect(301,'http://' + req.originalUrl);
-		}
 		async.parallel([
 			function(cb) {
 				kitgui.getContents({
