@@ -1,4 +1,4 @@
 #!/bin/bash
 rsync -r www.silipint.com root@silipint.emeraldcode.com:~/
-ssh root@silipint.emeraldcode.com "cd www.silipint.com; forever stopall; npm rebuild; NODE_ENV=dev SECUREPORT=443 PORT=80 forever start app.js;"
+ssh root@silipint.emeraldcode.com "cd www.silipint.com; forever stopall; npm rebuild; NODE_ENV=production SECUREPORT=443 PORT=80 forever start app.js;"
 

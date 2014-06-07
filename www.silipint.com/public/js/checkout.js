@@ -128,6 +128,7 @@
 	
 	$('[name=shipping-method]').change(function(){
 		$('#shippingMessage').slideUp('fast');
+		$('form.checkout').trigger('click');
 		if ($(this).get(0).selectedIndex < 1) { return; }
 		hubsoft.validateCart({
 			shippingCode : $('[name=shipping-method]').val()
@@ -346,5 +347,5 @@ hubsoft.ready(function () {
 		app.scriptRedirect('/cart');
 	});
 
-    $('.shipping-group').on('blur', 'input,select', checkIfShippingReady);
+    $('.shipping-group').on('blur focus change', 'input,select', checkIfShippingReady);
 });
