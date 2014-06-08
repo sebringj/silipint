@@ -118,4 +118,6 @@ module.exports = [
 	{ path : '/product-p/pnt-001-021.htm', redirect : '/sunflower-drinking-glass-16oz' },
 	{ path : '/16oz-Silipint-Sunglasses-p/pnt-001-023.htm', redirect : '/sunglassed-drinking-glass-16oz' },
 	{ path : '/product-p/pnt-001-018.htm', redirect : '/world-map-drinking-glasses-16oz' },
+	{ path : '/Best-Beer-Glasses-s/99.htm', redirect : '/' },
+	{ path : '/Customize-Drinkware-s/71.htm', redirect : '/customize' },
 ];

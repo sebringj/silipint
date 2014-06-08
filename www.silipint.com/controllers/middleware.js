@@ -13,6 +13,7 @@ function setLayoutCache(context) {
 		if (req.get('host').indexOf(config.domain) !== 0) {  
 			return res.redirect(301,'http://' + config.domain + req.originalUrl);
 		}
+		
 		if (req.cookies.kitgui || req.query.refresh) {
 			delete context.cache.layout;
 		}
