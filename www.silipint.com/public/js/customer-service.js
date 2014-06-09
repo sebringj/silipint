@@ -4,7 +4,7 @@ silipint.doForm({
 	requiredErrorMessage : 'Please correct the form.',
 	serverErrorMessage : 'An error occured while sending your form information. Please try again later.',
 	connectErrorMessage : 'Silipint is not reachable with your internet connection.',
-	successMessage : 'Thank you for input!',
+	successMessage : 'Thank you!',
 	successSelector : '.customer-service .alert-success',
 	url : '/customer-service'
 },function(data){

@@ -1067,7 +1067,7 @@ routeHandlers.customerService = function(req, res) {
 routeHandlers.postCustomerService = function(req, res) {
 	var i, entries = [];
 	var context = globalContext;
-	entries.push('<h1>Customer Webform Inquery</h1>');
+	entries.push('<h1>Customer Webform Inquiry</h1>');
 	for(i in req.body) {
 		if (req.body.hasOwnProperty(i)) {
 			entries.push('<strong>'+ htmlEncode(i.substr(2)) +'</strong>');
@@ -1077,7 +1077,7 @@ routeHandlers.postCustomerService = function(req, res) {
 	emailer.send({
 		to : config.email.to,
 		from : config.email.from,
-		subject : 'Customer Webform Inquery',
+		subject : 'Customer Webform Inquiry',
 		email : config.email.to,
 		html : entries.join('')
 	}, function(data){

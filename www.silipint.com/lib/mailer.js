@@ -6,7 +6,9 @@ emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[
 function getSmtpTransport() {
 	var nodemailer = require('nodemailer');
 	return nodemailer.createTransport('SMTP', {
-	    service : 'Gmail',
+	    host : config.email.host,
+		secureConnection : config.email.secureConnection,
+		port : config.email.port,
 	    auth: {
 	        user: config.email.user,
 	        pass: config.email.pass
