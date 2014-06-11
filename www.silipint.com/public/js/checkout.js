@@ -235,7 +235,56 @@
                 $('.checkout-page form, .checkout-page .order-review-container').hide();
                 $('.order-receipt-container').show();
                 $('body,html').scrollTop(0);
-                hubsoft.cart.clearCookie();
+				
+			    hubsoft.getCartProducts(function (data) {
+					if (!data.items || !data.items.length) { return; }
+					
+			        var i, html, item;
+			        data.subtotal = 0;
+			        data.total = 0;
+								        
+					var cartItems = [];
+		            for (i = 0; i < data.items.length; i++) {
+		                item = data.items[i];
+						cartItems.push([
+							'_addItem',
+							orderReceiptData.orderNumber,
+							item.sku,
+							item.productName,
+							'',
+							item.unitPrice,
+							item.quantity
+						]);
+		                data.subtotal += (item.unitPrice * item.quantity);
+		            }
+		            data.total = data.subtotal + hubsoft.tax + hubsoft.shipping;
+					data.tax = hubsoft.tax;
+					data.shipping = hubsoft.shipping;
+					
+					window._gaq = window._gaq || [];
+					
+					_gaq.push(['_setAccount', 'UA-21660623-1']);
+					_gaq.push(['_trackPageview']);
+					_gaq.push(['_addTrans',
+						orderReceiptData.orderNumber,
+						'Silipint',
+						data.total,
+						data.tax,
+						data.shipping,
+						orderReceiptData.paymentCity,
+						orderReceiptData.paymentState,
+						orderReceiptData.paymentCountry 
+					]);	
+					
+					for (i = 0; i < cartItems.length; i++) {
+						_gaq.push(cartItems[i]);
+					}
+					
+					_gaq.push(['_trackTrans']);
+					$.getScript('https://ssl.google-analytics.com/ga.js');
+					
+					hubsoft.cart.clearCookie();
+			    });
             } else {
                 $('.alert-danger.payment-error').slideDown('fast');
             }
