@@ -64,6 +64,8 @@ routeHandlers.refresh = function(req, res) {
 			}
 		}
 		res.end('cleared cache');
+	}, function() {
+		res.end('an error occured while clearing the cache');
 	});
 }
 
@@ -88,8 +90,6 @@ routeHandlers.home = function(req, res) {
 	}
 	if (context.cache[pageID]) {
 		return render();
-	} else {
-		context.cache[pageID] = {};
 	}
 	async.parallel([
 		function(cb) {
@@ -105,6 +105,7 @@ routeHandlers.home = function(req, res) {
 					{ id : pageID + 'CupsBottom', editorType : 'inline' }
 				]
 			}, function(kg){
+				context.cache[pageID] = {};
 				context.cache[pageID].items = kg.items;
 				context.cache[pageID].title = kg.seo.title;
 				context.cache[pageID].description = kg.seo.description;
