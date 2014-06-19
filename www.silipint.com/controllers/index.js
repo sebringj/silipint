@@ -56,14 +56,8 @@ module.exports.set = function(context) {
 
 routeHandlers.refresh = function(req, res) {
 	getJSON({port:443, host:'silipint.hubsoft.ws',path:'/api/v1/refresh'}, function(status, data) {
-		if (globalContext.cache) {
-			for(var i in globalContext.cache) {
-				if (globalContext.cache.hasOwnProperty(i)) {
-					delete globalContext.cache[i];
-				}
-			}
-		}
 		res.end('cleared cache');
+		process.exit(0);
 	}, function() {
 		res.end('an error occured while clearing the cache');
 	});
