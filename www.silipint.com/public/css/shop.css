@@ -71,3 +71,15 @@
 		color:#fff;
 	}
 }
+
+.img5 {
+    width:100%;
+    vertical-align:top;
+	opacity: 0.0
+}
+
+
+.item:hover img {
+opacity: 0.85;
+}
+

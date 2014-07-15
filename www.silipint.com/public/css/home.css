@@ -63,27 +63,36 @@
 	padding-bottom:0;
 	left:auto;
 	font-size:20px;
-	right:20%;
-	bottom:30px;
+	right:30%;
+	height: auto;
+	line-height: 57px;
 	color:#efefef;
 }
+
+.inline-caption {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+	}
+
+
 .carousel-indicators {
 	left:auto;
-	right:35px;
+	right:19%;
 	width:auto;
 	text-align:left;
 	bottom:23px;
 }
 .carousel-indicators li {
-	width:7px; height:7px;
-	border-radius:7px;
+	width:15px; height:15px;
+	border-radius:15px;
 	margin:0 1px;
 	padding:0;
 	border:1px solid #fff;
 }
 .carousel-indicators li.active {
-	width:7px; height:7px;
-	border-radius:7px;
+	width:15px; height:15px;
+	border-radius:15px;
 	margin:0 1px;
 	padding:0;
 	border:1px solid #fff;
@@ -146,6 +155,6 @@
 		right:auto;
 		left:50%;
 		text-align:center;
-		margin-left:-5%;
+		margin-left:-10%;
 	}
 }

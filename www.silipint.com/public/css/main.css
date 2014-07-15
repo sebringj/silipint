@@ -573,7 +573,33 @@ body.menuOpen #header .menu2 .more-sili .more {
 
 @media (max-width:320px) {
 	#header .blob {  }
+	#lightbox .lightbox-nav {
+	width:82px;
+	height:82px;
+	top:140px !important;
+	position:absolute;
+	background-color:rgba(255,255,255,0.5);
+	z-index:1000;
+	display:block;
+	cursor:pointer;
+	background-position:center center;
+	background-repeat:no-repeat;
+	}
+	#lightbox .lightbox-close {
+	width:60px;
+	height:60px;
+	top:20px;
+	right:0;
+	position:absolute;
+	background-color:rgba(125,125,125,0.5);
+	z-index:2000;
+	cursor:pointer;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/lightbox-close-X.png);
+	}
 }
+
 
 
 .cups {
@@ -586,9 +612,11 @@ body.menuOpen #header .menu2 .more-sili .more {
 }
 .cups .text1 {
 	margin:92px auto 62px auto;
+	padding-left: 44px;
+	padding-right: 30px;
 	color:#fff;
-	font-size:17px;
-	line-height:30px;
+	font-size:30px;
+	line-height:36px;
 }
 .cups .img {
 	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/large-cups.png);
@@ -701,8 +729,8 @@ body.menuOpen #header .menu2 .more-sili .more {
 	border-top:1px solid #fff;
 	border-bottom:1px solid #fff;
 	color:#fff;
-	font-size:17px;
-	line-height:30px;
+	font-size:30px;
+	line-height:36px;
 }
 .yellow-box .wrap-snap {
 	padding:40px;
@@ -933,7 +961,7 @@ body.lightboxed #contentWrapper {
 	top:50px;
 	width:100%;
 	height:100%;
-	background-color:rgba(0,0,0,0.5);
+	background-color:rgba(0,0,0,0.85);
 	z-index:100;
 }
 #lightbox {
@@ -972,7 +1000,7 @@ body.lightboxed #contentWrapper {
 #lightbox .lightbox-close {
 	width:60px;
 	height:60px;
-	top:100px;
+	top:40px;
 	right:0;
 	position:absolute;
 	background-color:rgba(125,125,125,0.5);
@@ -1084,3 +1112,30 @@ a:hover {
 		margin-left:-300%;
 	}
 }
+@media (max-width:320px) {
+	.lightbox-nav {
+	width:82px;
+	height:32px;
+	top:40px !important;
+	position:absolute;
+	background-color:rgba(255,255,255,0.5);
+	z-index:1000;
+	display:block;
+	cursor:pointer;
+	background-position:center center;
+	background-repeat:no-repeat;
+	}
+	.lightbox-close {
+	width:60px;
+	height:60px;
+	top:10px !important;
+	right:0;
+	position:absolute;
+	background-color:rgba(125,125,125,0.5);
+	z-index:2000;
+	cursor:pointer;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-image:url(//d1niwwqaddyuw4.cloudfront.net/img/lightbox-close-X.png);
+	}
+}	

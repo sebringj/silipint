@@ -12,10 +12,13 @@
 <div class="showcase clearfix {{ items[pageID + 'Collection'].classNames }}">
 	{% for item in items[pageID + 'Collection'].content %}
 		<a href="{{ item.href }}" class="item">
-			<img class="back" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
-			<img class="img2" style="background-image:url('{{ item.src2 | safe }}')" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
-			<img class="img" style="background-image:url('{{ item.src | safe }}')" src="//d1niwwqaddyuw4.cloudfront.net/img/sili-life-transparent.gif">
-			<span class="text">{{ item.alt }}</span>
+		
+			<div style="background-image:url('{{ item.src | safe }}'); background-size:contain;
+ background-position: top;">
+				<img class="img5" src="{{ item.src2 | safe }}" alt="" />
+					<span class="text">{{ item.alt }}</span>
+			</div>
+	
 		</a>
 	{% endfor %}
 </div>

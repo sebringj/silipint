@@ -61,7 +61,7 @@
 }
 .featured-products .products-slider .products {
 	width:100%;
-	overflow:scroll;
+	overflow:hidden;
 	-webkit-overflow-scrolling: touch;
 	margin:0 auto;
 }

@@ -41,7 +41,7 @@
 	white-space:nowrap;
 	margin-left:-1px;
 	margin-right:-1px;
-	overflow:scroll;
+	overflow:hidden;
 	-webkit-overflow-scrolling: touch;
 	width:100%;
 }
