@@ -6,7 +6,7 @@ OPTS = {
     port:   443,
     prefix: '/2.0/',
     method: 'POST',
-    headers: {'Content-Type': 'application/json', 'User-Agent': 'MailChimp-Node/2.0.4'}
+    headers: {'Content-Type': 'application/json', 'User-Agent': 'MailChimp-Node/2.0.6'}
 }
 
 class exports.Mailchimp
@@ -16,6 +16,7 @@ class exports.Mailchimp
         @users = new Users(this)
         @helper = new Helper(this)
         @mobile = new Mobile(this)
+        @conversations = new Conversations(this)
         @ecomm = new Ecomm(this)
         @neapolitan = new Neapolitan(this)
         @lists = new Lists(this)
@@ -23,6 +24,7 @@ class exports.Mailchimp
         @vip = new Vip(this)
         @reports = new Reports(this)
         @gallery = new Gallery(this)
+        @goal = new Goal(this)
 
         if @apikey == null then @apikey = process.env['MAILCHIMP_APIKEY']
 
@@ -190,12 +192,13 @@ class Templates
     @option params {Struct} types optional the types of templates to return
          - user {Boolean} Custom templates for this user account. Defaults to true.
          - gallery {Boolean} Templates from our Gallery. Note that some templates that require extra configuration are withheld. (eg, the Etsy template). Defaults to false.
-         - base {Boolean} Our "start from scratch" extremely basic templates. Defaults to false.
+         - base {Boolean} Our "start from scratch" extremely basic templates. Defaults to false. As of the 9.0 update, "base" templates are no longer available via the API because they are now all saved Drag & Drop templates.
     @option params {Struct} filters optional options to control how inactive templates are returned, if at all
          - category {String} optional for Gallery templates only, limit to a specific template category
          - folder_id {String} user templates, limit to this folder_id
          - include_inactive {Boolean} user templates are not deleted, only set inactive. defaults to false.
          - inactive_only {Boolean} only include inactive user templates. defaults to false.
+         - include_drag_and_drop {Boolean} Include templates created and saved using the new Drag & Drop editor. <strong>Note:</strong> You will not be able to edit or create new drag & drop templates via this API. This is useful only for creating a new campaign based on a drag & drop template.
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
     @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
     ###
@@ -497,6 +500,64 @@ string back that will explain our view on what is going on.
 class Mobile
     constructor: (@master) ->
 
+class Conversations
+    constructor: (@master) ->
+
+
+    ###
+    Retrieve conversation metadata, includes message data for the most recent message in the conversation
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {String} list_id optional the list id to connect to. Get by calling lists/list()
+    @option params {String} leid optional The member's 'leid', as found by calling lists/member-info()
+    @option params {String} campaign_id the campaign id to get content for (can be gathered using campaigns/list())
+    @option params {Int} start optional - control paging, start results at this offset, defaults to 0 (1st page of data)
+    @option params {Int} limit optional - control paging, number of results to return with each call, defaults to 25 (max=100)
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    list: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+        params["list_id"] ?= null
+        params["leid"] ?= null
+        params["campaign_id"] ?= null
+        params["start"] ?= 0
+        params["limit"] ?= 25
+
+        @master.call('conversations/list', params, onsuccess, onerror)
+
+    ###
+    Retrieve conversation messages
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {String} conversation_id the unique_id of the conversation to retrieve the messages for, can be obtained by calling converstaions/list().
+    @option params {Boolean} mark_as_read optional Whether or not the conversation ought to be marked as read (defaults to false).
+    @option params {Int} start optional - control paging, start results at this offset, defaults to 1st page of data (offset 0)
+    @option params {Int} limit optional - control paging, number of results to return with each call, defaults to 25 (max=100)
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    messages: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+        params["mark_as_read"] ?= false
+        params["start"] ?= 0
+        params["limit"] ?= 25
+
+        @master.call('conversations/messages', params, onsuccess, onerror)
+
+    ###
+    Retrieve conversation messages
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {String} conversation_id the unique_id of the conversation to retrieve the messages for, can be obtained by calling converstaions/list().
+    @option params {String} message the text of the message you want to send.
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    reply: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('conversations/reply', params, onsuccess, onerror)
 class Ecomm
     constructor: (@master) ->
 
@@ -521,8 +582,8 @@ class Ecomm
              - product_id {Int} the store's internal Id for the product. Lines that do no contain this will be skipped
              - sku {String} optional the store's internal SKU for the product. (max 30 bytes)
              - product_name {String} the product name for the product_id associated with this item. We will auto update these as they change (based on product_id)
-             - category_id {Int} the store's internal Id for the (main) category associated with this product. Our testing has found this to be a "best guess" scenario
-             - category_name {String} the category name for the category_id this product is in. Our testing has found this to be a "best guess" scenario. Our plugins walk the category heirarchy up and send "Root - SubCat1 - SubCat4", etc.
+             - category_id {Int} (required) the store's internal Id for the (main) category associated with this product. Our testing has found this to be a "best guess" scenario
+             - category_name {String} (required) the category name for the category_id this product is in. Our testing has found this to be a "best guess" scenario. Our plugins walk the category heirarchy up and send "Root - SubCat1 - SubCat4", etc.
              - qty {Double} optional the quantity of the item ordered - defaults to 1
              - cost {Double} optional the cost of a single item (ie, not the extended cost of the line) - defaults to 0
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
@@ -1023,10 +1084,7 @@ used.
 For the time being, the crazy segmenting condition documentation will continue to live over there.
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} list_id the list to test segmentation on - get lists using lists/list()
-    @option params {Struct} options with 1 or 2 keys:
-         - saved_segment_id {String} a saved segment id from lists/segments() - this will take precendence, otherwise the match+conditions are required.
-         - match {String} controls whether to use AND or OR when applying your options - expects "<strong>any</strong>" (for OR) or "<strong>all</strong>" (for AND)
-         - conditions {Array} of up to 5 structs for different criteria to apply while segmenting. Each criteria row must contain 3 keys - "<strong>field</strong>", "<strong>op</strong>", and "<strong>value</strong>" - and possibly a fourth, "<strong>extra</strong>", based on these definitions:
+    @option params {Struct} options See the campaigns/segment-test() call for details.
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
     @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
     ###
@@ -1044,7 +1102,7 @@ For the time being, the crazy segmenting condition documentation will continue t
     @option params {Struct} opts various options to update
          - name {String} a unique name per list for the segment - 100 byte maximum length, anything longer will throw an error
          - segment_opts {Object} for "saved" only, the standard segment match+conditions, just like campaigns/segment-test
-             - match {Object} "any" or "all"
+             - match {String} "any" or "all"
              - conditions {Array} structs for each condition, just like campaigns/segment-test
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
     @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
@@ -1142,12 +1200,18 @@ in order to be removed - this <strong>will not</strong> unsubscribe them from th
     Retrieve all of the Static Segments for a list.
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} id the list id to connect to. Get by calling lists/list()
+    @option params {Boolean} get_counts optional Retreiving counts for static segments can be slow, leaving them out can speed up this call. Defaults to 'true'.
+    @option params {Int} start optional - control paging, start results at this offset, defaults to 1st page of data (offset 0)
+    @option params {Int} limit optional - control paging, number of results to return with each call, returns all by default
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
     @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
     ###
     staticSegments: (params={}, onsuccess, onerror) ->
         [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
 
+        params["get_counts"] ?= true
+        params["start"] ?= 0
+        params["limit"] ?= null
 
         @master.call('lists/static-segments', params, onsuccess, onerror)
 
@@ -1155,12 +1219,12 @@ in order to be removed - this <strong>will not</strong> unsubscribe them from th
     Subscribe the provided email to a list. By default this sends a confirmation email - you will not see new members until the link contained in it is clicked!
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} id the list id to connect to. Get by calling lists/list()
-    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. Providing multiples and will use the first we see in this same order.
+    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
          - email {String} an email address - for new subscribers obviously this should be used
          - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
          - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
-    @option params {Struct} merge_vars optional merges for the email (FNAME, LNAME, <a href="http://kb.mailchimp.com/article/where-can-i-find-my-lists-merge-tags target="_blank">etc.</a>) (see examples below for handling "blank" arrays). Note that a merge field can only hold up to 255 bytes. Also, there are a few "special" keys:
-         - new-email {String} set this to change the email address. This is only respected on calls using update_existing or when passed to listUpdateMember().
+    @option params {Struct} merge_vars optional merges for the email (FNAME, LNAME, <a href="http://kb.mailchimp.com/article/where-can-i-find-my-lists-merge-tags" target="_blank">etc.</a>) (see examples below for handling "blank" arrays). Note that a merge field can only hold up to 255 bytes. Also, there are a few "special" keys:
+         - new-email {String} set this to change the email address. This is only respected on calls using update_existing or when passed to lists/update.
          - groupings {Array} of Interest Grouping structs. Each should contain:
              - id {Int} Grouping "id" from lists/interest-groupings (either this or name must be present) - this id takes precedence and can't change (unlike the name)
              - name {String} Grouping "name" from lists/interest-groupings (either this or id must be present)
@@ -1200,7 +1264,7 @@ in order to be removed - this <strong>will not</strong> unsubscribe them from th
     Unsubscribe the given email address from the list
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} id the list id to connect to. Get by calling lists/list()
-    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. Providing multiples and will use the first we see in this same order.
+    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
          - email {String} an email address
          - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
          - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
@@ -1224,7 +1288,7 @@ in order to be removed - this <strong>will not</strong> unsubscribe them from th
 consider using lists/batch-subscribe() with the update_existing and possible replace_interests parameter.
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} id the list id to connect to. Get by calling lists/list()
-    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. Providing multiples and will use the first we see in this same order.
+    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
          - email {String} an email address
          - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
          - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
@@ -1335,7 +1399,7 @@ class Campaigns
     @option params {String} cid the campaign id to get content for (can be gathered using campaigns/list())
     @option params {Struct} options various options to control this call
          - view {String} optional one of "archive" (default), "preview" (like our popup-preview) or "raw"
-         - email {Object} optional if provided, view is "archive" or "preview", the campaign's list still exists, and the requested record is subscribed to the list. the returned content will be populated with member data populated. a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. Providing multiples and will use the first we see in this same order.
+         - email {Object} optional if provided, view is "archive" or "preview", the campaign's list still exists, and the requested record is subscribed to the list. the returned content will be populated with member data populated. a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
              - email {String} an email address
              - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
              - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
@@ -1372,7 +1436,7 @@ class Campaigns
          - analytics {Object} optional - one or more of these keys set to the tag to use - that can be any custom text (up to 50 bytes)
              - google {String} for Google Analytics  tracking
              - clicktale {String} for ClickTale  tracking
-             - gooal {String} for Goo.al tracking
+             - gooal {String} for Goal tracking (the extra 'o' in the param name is not a typo)
          - auto_footer {Boolean} optional Whether or not we should auto-generate the footer for your content. Mostly useful for content from URLs or Imports
          - inline_css {Boolean} optional Whether or not css should be automatically inlined when this campaign is sent, defaults to false.
          - generate_text {Boolean} optional Whether of not to auto-generate your Text content from the HTML content. Note that this will be ignored if the Text part of the content passed is not empty, defaults to false.
@@ -1546,7 +1610,7 @@ class Campaigns
     ###
     Resume sending an AutoResponder or RSS campaign
     @param {Object} params the hash of the parameters to pass to the request
-    @option params {String} cid the id of the campaign to pause
+    @option params {String} cid the id of the campaign to resume
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
     @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
     ###
@@ -1591,7 +1655,7 @@ class Campaigns
         @master.call('campaigns/schedule-batch', params, onsuccess, onerror)
 
     ###
-    Allows one to test their segmentation rules before creating a campaign using them
+    Allows one to test their segmentation rules before creating a campaign using them.
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} list_id the list to test segmentation on - get lists using lists/list()
     @option params {Struct} options with 1 or 2 keys:
@@ -1786,7 +1850,7 @@ suited for display in customized reports pages. Note: some messages will contain
 Messages over 30 days old are subject to being removed
     @param {Object} params the hash of the parameters to pass to the request
     @option params {String} cid the campaign id to pull bounces for (can be gathered using campaigns/list())
-    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. Providing multiples and will use the first we see in this same order.
+    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
          - email {String} an email address - this is recommended for this method
          - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
          - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
@@ -2057,6 +2121,7 @@ class Gallery
          - sort_by {String} optional field to sort by - one of size, time, name - defaults to time
          - sort_dir {String} optional field to sort by - one of asc, desc - defaults to desc
          - search_term {String} optional a term to search for in names
+         - folder_id {Int} optional to return files that are in a specific folder.  id returned by the list-folders call
     @param {Function} onsuccess an optional callback to execute when the API call is successfully made
     @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
     ###
@@ -2066,5 +2131,133 @@ class Gallery
         params["opts"] ?= []
 
         @master.call('gallery/list', params, onsuccess, onerror)
+
+    ###
+    Return a list of the folders available to the file gallery
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {Struct} opts various options for controlling returned data
+         - start {Int} optional for large data sets, the page number to start at - defaults to 1st page of data  (page 0)
+         - limit {Int} optional for large data sets, the number of results to return - defaults to 25, upper limit set at 100
+         - search_term {String} optional a term to search for in names
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    listFolders: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+        params["opts"] ?= []
+
+        @master.call('gallery/list-folders', params, onsuccess, onerror)
+
+    ###
+    Adds a folder to the file gallery
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {String} name the name of the folder to add (255 character max)
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    addFolder: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('gallery/add-folder', params, onsuccess, onerror)
+
+    ###
+    Remove a folder
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {Int} folder_id the id of the folder to remove, as returned by the listFolders call
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    removeFolder: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('gallery/remove-folder', params, onsuccess, onerror)
+
+    ###
+    Add a file to a folder
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {Int} file_id the id of the file you want to add to a folder, as returned by the list call
+    @option params {Int} folder_id the id of the folder to add the file to, as returned by the listFolders call
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    addFileToFolder: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('gallery/add-file-to-folder', params, onsuccess, onerror)
+
+    ###
+    Remove a file from a folder
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {Int} file_id the id of the file you want to remove from the folder, as returned by the list call
+    @option params {Int} folder_id the id of the folder to remove the file from, as returned by the listFolders call
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    removeFileFromFolder: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('gallery/remove-file-from-folder', params, onsuccess, onerror)
+
+    ###
+    Remove all files from a folder (Note that the files are not deleted, they are only removed from the folder)
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {Int} folder_id the id of the folder to remove the file from, as returned by the listFolders call
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    removeAllFilesFromFolder: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('gallery/remove-all-files-from-folder', params, onsuccess, onerror)
+class Goal
+    constructor: (@master) ->
+
+
+    ###
+    Retrieve goal event data for a particular list member. Note: only unique events are returned. If a user triggers
+a particular event multiple times, you will still only receive one entry for that event.
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {String} list_id the list id to connect to. Get by calling lists/list()
+    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
+         - email {String} an email address
+         - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
+         - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
+    @option params {Int} start optional - control paging of lists, start results at this list #, defaults to 1st page of data  (page 0)
+    @option params {Int} limit optional - control paging of lists, number of lists to return with each call, defaults to 25 (max=100)
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    events: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+        params["start"] ?= 0
+        params["limit"] ?= 25
+
+        @master.call('goal/events', params, onsuccess, onerror)
+
+    ###
+    This allows programmatically trigger goal event collection without the use of front-end code.
+    @param {Object} params the hash of the parameters to pass to the request
+    @option params {String} list_id the list id to connect to. Get by calling lists/list()
+    @option params {Struct} email a struct with one of the following keys - failing to provide anything will produce an error relating to the email address. If multiple keys are provided, the first one from the following list that we find will be used, the rest will be ignored.
+         - email {String} an email address
+         - euid {String} the unique id for an email address (not list related) - the email "id" returned from listMemberInfo, Webhooks, Campaigns, etc.
+         - leid {String} the list email id (previously called web_id) for a list-member-info type call. this doesn't change when the email address changes
+    @option params {String} campaign_id the campaign id to get content for (can be gathered using campaigns/list())
+    @option params {String} event The name of the event or the URL visited
+    @param {Function} onsuccess an optional callback to execute when the API call is successfully made
+    @param {Function} onerror an optional callback to execute when the API call errors out - defaults to throwing the error as an exception
+    ###
+    recordEvent: (params={}, onsuccess, onerror) ->
+        [params, onsuccess, onerror] = @master.parseArgs params, onsuccess, onerror
+
+
+        @master.call('goal/record-event', params, onsuccess, onerror)
 
 
