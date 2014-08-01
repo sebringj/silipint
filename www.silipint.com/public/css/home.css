@@ -61,6 +61,7 @@
 }
 .carousel-caption {
 	padding-bottom:0;
+	padding-left: 30px;
 	left:auto;
 	font-size:20px;
 	right:30%;
